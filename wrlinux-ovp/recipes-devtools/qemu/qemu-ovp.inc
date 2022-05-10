@@ -18,7 +18,6 @@ SRC_URI += " \
 
 PACKAGECONFIG[spice] = "--enable-spice,--disable-spice,spice,"
 PACKAGECONFIG[linux-aio] = "--enable-linux-aio,--disable-linux-aio,libaio,"
-PACKAGECONFIG[xfsctl] = "--enable-xfsctl,--disable-xfsctl,xfsprogs,"
 PACKAGECONFIG[glusterfs] = "--enable-glusterfs,--disable-glusterfs,glusterfs,"
 PACKAGECONFIG[attr] = "--enable-attr,--disable-attr,attr,"
 PACKAGECONFIG[virtfs] = "--enable-virtfs --enable-attr,--disable-virtfs,attr libcap-ng,"
@@ -31,10 +30,10 @@ PACKAGECONFIG[snappy] = "--enable-snappy,--disable-snappy,snappy,"
 # disable gl support for kvm
 PACKAGECONFIG[gl] = ",,,"
 
-PACKAGECONFIG_COMMON = "libcap-ng linux-aio xfsctl attr \
+PACKAGECONFIG_COMMON = "libcap-ng linux-aio attr \
                   virtfs fdt glusterfs \
                   vhost pie alsa kvm \
-                 " 
+                 "
 PACKAGECONFIG ?= " ${PACKAGECONFIG_COMMON}"
 
 # This is making sure qemu-native independs on spice-native

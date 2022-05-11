@@ -1,4 +1,4 @@
-From 08a1b1eb5e72ca7de30a90e144149e2c6be44ce2 Mon Sep 17 00:00:00 2001
+From 9d8b6088b19252997e2153f6c29d9ba2260f04aa Mon Sep 17 00:00:00 2001
 From: Thomas Gleixner <tglx@linutronix.de>
 Date: Fri, 21 May 2021 17:33:41 +0800
 Subject: [PATCH] qemu-kvm: Add options to pin and prioritize vcpus
@@ -7,17 +7,19 @@ Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Yang Shi <yang.shi@windriver.com>
 Signed-off-by: Paul Barrette <paul.barrette@windriver.com>
 Signed-off-by: Michael Barabanov <michael.barabanov@windriver.com>
-Rebase to v6.2.0
+Rebase to v7.0.0
 Signed-off-by: He Zhe <zhe.he@windriver.com>
 ---
- accel/kvm/kvm-accel-ops.c | 144 ++++++++++++++++++++++++++++++++++++++
- include/sysemu/cpus.h     |   2 +
- qemu-options.hx           |   7 ++
- softmmu/vl.c              |   5 ++
- 4 files changed, 158 insertions(+)
+ accel/kvm/kvm-accel-ops.c     | 144 ++++++++++++++++++++++++++++++++++
+ include/exec/poison.h         |   1 -
+ include/sysemu/cpus.h         |   2 +
+ qemu-options.hx               |   7 ++
+ scripts/make-config-poison.sh |   1 +
+ softmmu/vl.c                  |   5 ++
+ 6 files changed, 159 insertions(+), 1 deletion(-)
 
 diff --git a/accel/kvm/kvm-accel-ops.c b/accel/kvm/kvm-accel-ops.c
-index 7516c67a3..5563a978d 100644
+index c4244a23c6..0c2ab6eaf2 100644
 --- a/accel/kvm/kvm-accel-ops.c
 +++ b/accel/kvm/kvm-accel-ops.c
 @@ -23,6 +23,148 @@
@@ -178,8 +180,20 @@ index 7516c67a3..5563a978d 100644
      /* signal CPU creation */
      cpu_thread_signal_created(cpu);
      qemu_guest_random_seed_thread_part2(cpu->random_seed);
+diff --git a/include/exec/poison.h b/include/exec/poison.h
+index 9f1ca3409c..6b3b93f847 100644
+--- a/include/exec/poison.h
++++ b/include/exec/poison.h
+@@ -86,7 +86,6 @@
+ #pragma GCC poison CONFIG_HAX
+ #pragma GCC poison CONFIG_HVF
+ #pragma GCC poison CONFIG_LINUX_USER
+-#pragma GCC poison CONFIG_KVM
+ #pragma GCC poison CONFIG_SOFTMMU
+ #pragma GCC poison CONFIG_WHPX
+ #pragma GCC poison CONFIG_XEN
 diff --git a/include/sysemu/cpus.h b/include/sysemu/cpus.h
-index 868f1192d..4005562c1 100644
+index b5c87d48b3..0f0100e645 100644
 --- a/include/sysemu/cpus.h
 +++ b/include/sysemu/cpus.h
 @@ -48,6 +48,8 @@ void cpu_synchronize_all_post_reset(void);
@@ -192,10 +206,10 @@ index 868f1192d..4005562c1 100644
  /* vl.c */
  /* *-user doesn't have configurable SMP topology */
 diff --git a/qemu-options.hx b/qemu-options.hx
-index ae2c6dbbf..5bae1d54a 100644
+index 796229c433..a5a1c2e61a 100644
 --- a/qemu-options.hx
 +++ b/qemu-options.hx
-@@ -1019,6 +1019,13 @@ DEFHEADING()
+@@ -1075,6 +1075,13 @@ DEFHEADING()
  
  DEFHEADING(Block device options:)
  
@@ -209,11 +223,23 @@ index ae2c6dbbf..5bae1d54a 100644
  DEF("fda", HAS_ARG, QEMU_OPTION_fda,
      "-fda/-fdb file  use 'file' as floppy disk 0/1 image\n", QEMU_ARCH_ALL)
  DEF("fdb", HAS_ARG, QEMU_OPTION_fdb, "", QEMU_ARCH_ALL)
+diff --git a/scripts/make-config-poison.sh b/scripts/make-config-poison.sh
+index d222a04304..a352f10570 100755
+--- a/scripts/make-config-poison.sh
++++ b/scripts/make-config-poison.sh
+@@ -9,6 +9,7 @@ fi
+ exec sed -n \
+   -e' /CONFIG_TCG/d' \
+   -e '/CONFIG_USER_ONLY/d' \
++  -e '/CONFIG_KVM/d' \
+   -e '/^#define / {' \
+   -e    's///' \
+   -e    's/ .*//' \
 diff --git a/softmmu/vl.c b/softmmu/vl.c
-index 620a1f136..fb83b935d 100644
+index 488cc4d09e..8b25a421cd 100644
 --- a/softmmu/vl.c
 +++ b/softmmu/vl.c
-@@ -3411,6 +3411,11 @@ void qemu_init(int argc, char **argv, char **envp)
+@@ -3419,6 +3419,11 @@ void qemu_init(int argc, char **argv, char **envp)
                  machine_parse_property_opt(qemu_find_opts("smp-opts"),
                                             "smp", optarg);
                  break;
@@ -226,5 +252,5 @@ index 620a1f136..fb83b935d 100644
                  vnc_parse(optarg);
                  break;
 -- 
-2.17.1
+2.25.1
 

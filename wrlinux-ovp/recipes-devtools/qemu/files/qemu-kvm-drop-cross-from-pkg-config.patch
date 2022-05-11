@@ -22,8 +22,8 @@ diff --git a/configure b/configure
 index 0d26c47d..02647107 100755
 --- a/configure
 +++ b/configure
-@@ -376,7 +376,7 @@ ld="${LD-${cross_prefix}ld}"
- nm="${NM-${cross_prefix}nm}"
+@@ -428,7 +428,7 @@ ld="${LD-${cross_prefix}ld}"
+ smbd="$SMBD"
  strip="${STRIP-${cross_prefix}strip}"
  windres="${WINDRES-${cross_prefix}windres}"
 -pkg_config_exe="${PKG_CONFIG-${cross_prefix}pkg-config}"

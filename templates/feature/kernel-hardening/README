@@ -16,20 +16,22 @@ at the end of this document.
 
 1. Stack overflow
 -----------------
-CONFIG_STACKPROTECTOR turns on the "stack-protector" GCC feature. This
+stack protector turns on the "stack-protector" GCC feature. This
 feature puts, at the beginning of functions, a canary value on the stack just
 before the return address, and validates the value just before actually
 returning.  Stack based buffer overflows (that need to overwrite this return
 address) now also overwrite the canary, which gets detected and the attack is
 then neutralized via a kernel panic.
 
-It supports two level of stack protection respectively:
+It supports three levels of stack protection respectively:
 
-CONFIG_STACKPROTECTOR_REGULAR - -fstack-protector
+CONFIG_STACKPROTECTOR - -fstack-protector
 Functions will have the stack-protector canary logic added if they have an
 8-byte or larger character array on the stack.
+
 On an x86 "defconfig" build, this feature adds canary checks to about 3% of all
-kernel functions, which increases kernel code size by about 0.3%.
+kernel functions, which increases kernel code size by about 0.3%. There
+are no official measurements for other architectures.
 
 CONFIG_STACKPROTECTOR_STRONG - -fstack-protector-strong
 Functions will have the stack-protector canary logic added in any of the
@@ -41,7 +43,17 @@ following conditions:
 - uses register local variables
 
 On an x86 "defconfig" build, this feature adds canary checks to about 20% of
-all kernel functions, which increases the kernel code size by about 2%.
+all kernel functions, which increases the kernel code size by about 2%. There
+are no official measurements for other architectures.
+
+CONFIG_STACKPROTECTOR_PER_TASK - arm/arm64 only
+Due to the fact that GCC uses an ordinary symbol reference from which to load
+the value of the stack canary, this value can only change at reboot time on SMP
+systems, and all tasks running in the kernel's address space are forced to use
+the same canary value for the entire duration that the system is up.
+
+Enable this option to switch to a different method that uses a different canary
+value for each task.
 
 2. Heap overflow
 ----------------
@@ -67,7 +79,8 @@ allocator against heap overflows.
 One trivial way to eliminate many syscalls for 64-bit systems is building
 without CONFIG_COMPAT.
 
-CONFIG_X86_VSYSCALL_EMULATION enables emulation of the legacy vsyscall page.
+CONFIG_X86_VSYSCALL_EMULATION - x86 only
+This option enables emulation of the legacy vsyscall page.
 Disabling it is roughly equivalent to booting with vsyscall=none, except that
 it will also disable the helpful warning if a program tries to use a vsyscall.
 With this option set to N, offending programs will just segfault, citing
@@ -78,6 +91,21 @@ used even with newer programs if set to N.
 
 Disabling this option saves about 7K of kernel size and possibly 4K of additional
 runtime pagetable memory.
+
+CONFIG_LEGACY_VSYSCALL_EMULATE - x86 only
+The kernel traps and emulates calls into the fixed vsyscall address mapping.
+This makes the mapping non-executable, but it still contains readable known
+contents, which could be used in certain rare security vulnerability exploits.
+This configuration is recommended when using legacy userspace that still uses
+vsyscalls along with legacy binary instrumentation tools that require code to
+be readable. This option is purposely disabled to remove a possible target,
+since modern libc no longer needs a fixed-position mapping in userspace.
+
+CONFIG_LEGACY_VSYSCALL_NONE - x86 only
+There will be no vsyscall mapping at all. This will eliminate any risk of ASLR
+bypass due to the vsyscall fixed address mapping. Attempts to use the vsyscalls
+will be reported to dmesg, so that either old or malicious userspace programs
+can be identified.
 
 4. Information exposure
 -----------------------
@@ -103,6 +131,21 @@ makes exploits relying on predictable memory locations less reliable.
 
 Some userspace applications or kernel features which relies on the kernel
 address information may have issues with randomized addresses.
+
+On arm64, it is the bootloader's job to provide entropy, by passing a random u64
+value in /chosen/kaslr-seed at kernel entry. When booting via the UEFI stub, it
+will invoke the firmware's EFI_RNG_PROTOCOL implementation (if available) to
+supply entropy to the kernel proper. In addition, it will randomize the physical
+location of the kernel Image as well. Here is an example to manually pass
+kaslr-seed on uboot.
+
+- Make sure dtb is loaded in RAM
+- Set a different kaslr-seed every boot
+fdt addr $fdt_addr
+fdt print /chosen
+fdt resize 1024
+fdt set /chosen kaslr-seed <0xfeedbeef 0xc0def00d>
+- Boot the target
 
 6. Direct kernel overwrite
 --------------------------

@@ -1,0 +1,11 @@
+This template adds lapack (Linear Algebra PACKage)
+to the filesystem.
+
+To use this template, add the following to your setup line:
+
+    --templates feature/lapack
+
+#@TYPE: Wrtemplate
+#@NAME: lapack
+#@DESCRIPTION: Add LAPACK to the image
+

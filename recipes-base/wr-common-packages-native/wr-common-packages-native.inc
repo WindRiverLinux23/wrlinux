@@ -13,6 +13,7 @@ DEPENDS = "\
     bc-native \
     bison-native \
     bmap-tools-native \
+    boost-build-native \
     btrfs-tools-native \
     bzip2-native \
     ca-certificates-native \
@@ -82,7 +83,6 @@ DEPENDS = "\
     libcap-ng-native \
     libcheck-native \
     libcomps-native \
-    libcroco-native \
     libdnf-native \
     libdrm-native \
     libepoxy-native \

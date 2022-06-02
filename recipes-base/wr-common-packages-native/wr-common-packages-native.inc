@@ -177,6 +177,8 @@ DEPENDS = "\
     python3-mako-native \
     python3-markupsafe-native \
     python3-native \
+    python3-pycryptodome-native \
+    python3-pyelftools-native \
     python3-pygments-native \
     python3-setuptools-native \
     python3-six-native \

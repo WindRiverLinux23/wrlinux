@@ -8,8 +8,8 @@ Template feature/run-container
 Template feature/run-container provides ability to build and include container
 images in rootfs images. It builds container images along with building host
 image such as wrlinux-image-std by bitbake mechanism multiconfig. Then create
-docker images from container images during first boot time and run them
-afterwards.
+docker image tar archives with OCI image tools sloci-image and skopeo. It loads
+the image tar archives during first boot and start them afterwards.
 
 In this template, it defines multiconfigs:
 
@@ -100,13 +100,14 @@ $ cp -r $THIS_TEMPLATE_PATH/files/multiconfig conf/
 
 4. Build and boot host image set in WR_HOST_IMAGES
 
-It calls command runqemu to boot qemu images. Because variable 'TMPDIR' is set in reference multiconfig config file wr-host.conf and runqemu can't detect it automatically, image file path must be appended to runqemu parameters.
+It calls command runqemu to boot qemu images.
 
 $ bitbake mc:wr-host:wrlinux-image-std
-$ runqemu qemux86-64 kvm nographic qemuparams='-m 2048' tmp-host-glibc/deploy/images/qemux86-64/wrlinux-image-std-qemux86-64.ext4
+$ MULTICONFIG=wr-host runqemu qemux86-64 kvm nographic qemuparams='-m 2048'
 
 
-5 Check docker images created and started according to config of WR_CONTAINER_NAMES and WR_CONTAINER_PRIORITIES
+5 Check docker images whether have been created and started according to config
+  of WR_CONTAINER_NAMES and WR_CONTAINER_PRIORITIES
 
 root@qemux86-64:~# docker ps
 CONTAINER ID    IMAGE                  COMMAND        CREATED           STATUS          PORTS    NAMES
@@ -124,11 +125,3 @@ bash-5.0# ps
 bash-5.0# ls /mnt/
 containerd  wr-containers
 bash-5.0#
-
-
-Known Issue
-===========
-Because command docker is just a client for interacting with the daemon
-dockerd, it is impossible to create docker images with 'docker import' during
-do_rootfs. Then it may cost a lot of time depends on how many containers have
-been configured.

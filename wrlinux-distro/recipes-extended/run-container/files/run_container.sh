@@ -141,8 +141,9 @@ do
 	else
 		image_id=`docker images $container_name --format {{.ID}}`
 		if [ -z "$image_id" ]; then
-			container_path=`ls -1 ${container_dir}/${container_name}*.tar.bz2 | head -1`
-			docker import ${container_path} ${container_name}
+			docker load -i ${container_dir}/${container_name}.tar |
+				sed 's/Loaded image ID: sha256://' |
+				xargs -i docker tag {} ${container_name}
 			if [ $? -ne 0 ]; then
 				echo "Failed to import image $container_name"
 				exit 2

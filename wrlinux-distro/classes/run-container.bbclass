@@ -20,6 +20,10 @@ python check_container_config () {
     common = set(containers.split()).intersection(set(host_images.split()))
     if common:
         bb.fatal('Recipe(s) %s not allowed set both in WR_CONTAINER_NAMES and WR_HOST_IMAGES.' % ' '.join(common))
+
+    if (d.getVar('BB_CURRENT_MC') == 'wr-host' and
+        not d.getVar('CNTR_TMPDIR')):
+        bb.fatal("Please set CNTR_TMPDIR for multiconfig 'wr-host'.")
 }
 
 addhandler check_container_config
@@ -34,9 +38,10 @@ python () {
     host = d.getVar('WR_HOST_IMAGES').split()
     if pn in host:
         d.appendVar('IMAGE_INSTALL', ' run-container')
+        d.appendVar('DEPENDS', ' sloci-image-native skopeo-native')
 
         containers = d.getVar('WR_CONTAINER_NAMES').split()
-        d.appendVarFlag('do_rootfs', 'mcdepends', ' '.join(['multiconfig:wr-host:wr-container:%s:do_image_complete' % c for c in containers]))
+        d.appendVarFlag('do_rootfs', 'mcdepends', ' '.join(['multiconfig:wr-host:wr-container:%s:do_rootfs' % c for c in containers]))
 
         d.appendVar('ROOTFS_POSTPROCESS_COMMAND', ' rootfs_install_container;')
 }
@@ -44,10 +49,13 @@ python () {
 rootfs_install_container () {
     install -d ${IMAGE_ROOTFS}${CONTAINER_DEST_ON_HOST}
 
+    cntr_path=${WORKDIR}/containers
+    mkdir -p ${cntr_path}
     for container in ${WR_CONTAINER_NAMES}
     do
-        image=`ls -1t ${TOPDIR}/tmp-container${TCLIBCAPPEND}/deploy/images/${MACHINE}/${container}*tar.bz2 | head -1`
-        install ${image} ${IMAGE_ROOTFS}${CONTAINER_DEST_ON_HOST}
+        rootfs="${CNTR_TMPDIR}${TCLIBCAPPEND}/work/${MULTIMACH_TARGET_SYS}/${container}/*/rootfs"
+        sloci-image -m ${HOST_ARCH} $rootfs $cntr_path/$container
+        skopeo copy oci:$cntr_path/$container docker-archive:${IMAGE_ROOTFS}${CONTAINER_DEST_ON_HOST}/$container.tar
     done
 
     install -d ${IMAGE_ROOTFS}/etc/wr-containers
@@ -57,3 +65,5 @@ rootfs_install_container () {
     echo "${WR_CONTAINER_PRIORITIES}" >> ${IMAGE_ROOTFS}/etc/wr-containers/containers_to_run.txt
     echo -n "${CONTAINER_DEST_ON_HOST}" >> ${IMAGE_ROOTFS}/etc/wr-containers/containers_to_run.txt
 }
+
+do_rootfs[cleandirs] = "${WORKDIR}/containers"

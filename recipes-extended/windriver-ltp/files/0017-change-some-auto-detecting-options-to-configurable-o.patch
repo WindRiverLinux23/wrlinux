@@ -19,15 +19,19 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 
 Rebase on 20200515
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+
+Rebase on 20220612.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- configure.ac | 60 ++++++++++++++++++++++++++++++++++++++++++++++++----
+ configure.ac | 60 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++----
  1 file changed, 56 insertions(+), 4 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 1d3ea58d0..8a09b237e 100644
+index 81cba98c2..d2d0427a8 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -289,15 +289,68 @@ fi
+@@ -351,14 +351,67 @@ fi
  
  AC_CONFIG_COMMANDS([syscalls.h], [cd ${ac_top_srcdir}/include/lapi/syscalls; ./regen.sh])
  
@@ -94,14 +98,13 @@ index 1d3ea58d0..8a09b237e 100644
  LTP_CHECK_BUILTIN_CLEAR_CACHE
 -LTP_CHECK_CAPABILITY_SUPPORT
  LTP_CHECK_CC_WARN_OLDSTYLE
- LTP_CHECK_CLONE_SUPPORTS_7_ARGS
 -LTP_CHECK_CRYPTO
  LTP_CHECK_FORTIFY_SOURCE
  LTP_CHECK_KERNEL_DEVEL
  LTP_CHECK_KEYUTILS_SUPPORT
-@@ -306,7 +359,6 @@ LTP_CHECK_LINUX_PTRACE
+@@ -366,7 +419,6 @@ LTP_CHECK_LIBMNL
+ LTP_CHECK_LINUX_PTRACE
  LTP_CHECK_LINUXRANDOM
- LTP_CHECK_MREMAP_FIXED
  LTP_CHECK_NOMMU_LINUX
 -LTP_CHECK_SELINUX
  LTP_CHECK_SYNC_ADD_AND_FETCH

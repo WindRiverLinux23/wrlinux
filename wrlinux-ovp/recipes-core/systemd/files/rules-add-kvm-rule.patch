@@ -19,10 +19,14 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
 Update context of the patch on 20220329
 
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+
+Update context of the patch on 20220614.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
  rules.d/99-kvm.rules | 1 +
- rules.d/meson.build  | 3 ++-
- 2 files changed, 3 insertions(+), 1 deletion(-)
+ rules.d/meson.build  | 1 +
+ 2 files changed, 1 insertions(+), 0 deletion(-)
  create mode 100644 rules.d/99-kvm.rules
 
 diff --git a/rules.d/99-kvm.rules b/rules.d/99-kvm.rules
@@ -33,19 +37,17 @@ index 0000000000..c2f7317aac
 @@ -0,0 +1 @@
 +KERNEL=="kvm", GROUP="kvm", MODE="0660"
 diff --git a/rules.d/meson.build b/rules.d/meson.build
-index e6533e001a..37e76acff1 100644
+index 8d2878a36d..71d9939a5b 100644
 --- a/rules.d/meson.build
 +++ b/rules.d/meson.build
-@@ -27,7 +27,8 @@ rules = files(
-         '75-probe_mtd.rules',
-         '78-sound-card.rules',
-         '80-net-setup-link.rules',
--        '81-net-dhcp.rules')
-+        '81-net-dhcp.rules',
-+        '99-kvm.rules')
+@@ -28,6 +28,7 @@ rules = [
+                '78-sound-card.rules',
+                '80-net-setup-link.rules',
+                '81-net-dhcp.rules',
++               '99-kvm.rules',
+               )],
  
- if conf.get('HAVE_KMOD') == 1
-         rules += files('80-drivers.rules')
+         [files('80-drivers.rules'),
 -- 
 2.33.0
 

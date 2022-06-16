@@ -1,4 +1,4 @@
-From 82eeb7da67b14add30645d2d2c1740f9a4b43723 Mon Sep 17 00:00:00 2001
+From 3cba492243969f90ebc9428837347f00cd7fce1d Mon Sep 17 00:00:00 2001
 From: Hongxu Jia <hongxu.jia@windriver.com>
 Date: Mon, 10 Aug 2020 07:30:27 -0700
 Subject: [PATCH] add a interface to skip automount devtmpfs to /dev/ path
@@ -27,12 +27,15 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 
 Rebase to systemd 248
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
+
+Rebase to systemd 251
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
  src/shared/mount-setup.c | 10 +++++++++-
  1 file changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/src/shared/mount-setup.c b/src/shared/mount-setup.c
-index 915b1016b8..2452b1ab21 100644
+index 975c027f47..7aa2cc8c4d 100644
 --- a/src/shared/mount-setup.c
 +++ b/src/shared/mount-setup.c
 @@ -61,13 +61,15 @@ typedef struct MountPoint {
@@ -63,8 +66,8 @@ index 915b1016b8..2452b1ab21 100644
 +}
 +
  bool mount_point_ignore(const char *path) {
- 
-         const char *i;
+         /* These are API file systems that might be mounted by other software, we just list them here so that
+          * we know that we should ignore them. */
 -- 
-2.17.1
+2.25.1
 

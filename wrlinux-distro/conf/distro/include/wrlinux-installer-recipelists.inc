@@ -3,14 +3,12 @@ RECIPE_LIST_LAYERS:remove = "meta-anaconda"
 # Recipes allowed for meta-openembedded/meta-gnome
 WRL_RECIPES:gnome-layer += "\
     keybinder \
-    libgnomekbd \
     libnma \
     libtimezonemap \
     libuser \
     metacity \
     network-manager-applet \
     usermode \
-    libgtop \
     gtk4 \
 "
 
@@ -28,11 +26,9 @@ WRL_RECIPES:meta-python += "\
     python3-pydbus \
     python3-pykickstart \
     python3-pyparted \
-    python3-pytz \
     python3-pyudev \
     python3-requests-file \
     python3-requests-ftp \
-    python3-setuptools-scm \
     python3-systemd \
     python3-wrapt \
 "

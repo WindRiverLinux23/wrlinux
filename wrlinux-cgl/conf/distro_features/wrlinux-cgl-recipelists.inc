@@ -52,10 +52,7 @@ WRL_RECIPES_META_NETWORKING = " \
     ippool \
     ipvsadm \
     iscsi-initiator-utils \
-    libldb \
     libmaxminddb \
-    libtdb \
-    libtevent \
     ndpi \
     netkit-rsh \
     netkit-telnet \
@@ -73,7 +70,6 @@ WRL_RECIPES_META_NETWORKING = " \
     tunctl \
     vblade \
     vlan \
-    vsftpd \
 "
 
 # For meta-openembedded/meta-oe
@@ -81,20 +77,16 @@ WRL_RECIPES:openembedded-layer += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'cgl', '${WRL_RECIPES_META_OE}', '', d)}  \
 "
 WRL_RECIPES_META_OE = " \
-    c-ares \
     crash \
-    doxygen \
     edac-utils \
     indent \
     ipmitool \
     libnet \
     libparse-yapp-perl \
     libqb \
-    postgresql \
     pps-tools \
     smartmontools \
     zabbix \
-    zstd \
 "
 
 # For meta-openembedded/meta-perl

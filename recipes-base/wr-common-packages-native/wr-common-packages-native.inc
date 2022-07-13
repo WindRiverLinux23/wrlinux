@@ -69,6 +69,7 @@ DEPENDS = "\
     gtk+3-native \
     gtk-doc-native \
     harfbuzz-native \
+    icon-naming-utils-native \
     icu-native \
     intltool-native \
     itstool-native \
@@ -123,7 +124,11 @@ DEPENDS = "\
     libxfixes-native \
     libxft-native \
     libxi-native \
+    libxml-namespacesupport-perl-native \
     libxml-parser-perl-native \
+    libxml-sax-base-perl-native \
+    libxml-sax-perl-native \
+    libxml-simple-perl-native \
     libxml2-native \
     libxrandr-native \
     libxrender-native \

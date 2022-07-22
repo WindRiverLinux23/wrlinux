@@ -159,6 +159,7 @@ PACKAGES = "\
 RRECOMMENDS:${PN}-dbg = ""
 
 RDEPENDS:libstdc++-8-dev = ""
+RRECOMMENDS:libstdc++-8-dev = ""
 
 # include python debugging scripts
 FILES:${PN}-dbg += "\

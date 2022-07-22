@@ -179,6 +179,7 @@ PACKAGES = "\
 "
 
 RDEPENDS:${PN}-dev = ""
+RRECOMMENDS:${PN}-dev = ""
 DEBIANNAME:${PN}-dev = "libgcc-8-dev"
 
 # All libgcc source is marked with the exception.

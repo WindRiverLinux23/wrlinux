@@ -32,7 +32,7 @@ PACKAGECONFIG[gl] = ",,,"
 
 PACKAGECONFIG_COMMON = "libcap-ng linux-aio attr \
                   virtfs fdt glusterfs \
-                  vhost pie alsa kvm \
+                  vhost pie alsa kvm slirp \
                  "
 PACKAGECONFIG ?= " ${PACKAGECONFIG_COMMON}"
 

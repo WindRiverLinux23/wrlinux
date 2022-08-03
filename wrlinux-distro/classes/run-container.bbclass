@@ -31,7 +31,8 @@ check_container_config[eventmask] = "bb.event.ConfigParsed"
 
 # handle settings of hosts
 python () {
-    if d.getVar('BB_CURRENT_MC') != 'wr-host':
+    if d.getVar('BB_CURRENT_MC') == 'wr-container':
+        d.appendVar('IMAGE_FSTYPES', ' tar.gz')
         return
 
     pn = d.getVar('PN')
@@ -41,7 +42,7 @@ python () {
         d.appendVar('DEPENDS', ' sloci-image-native skopeo-native')
 
         containers = d.getVar('WR_CONTAINER_NAMES').split()
-        d.appendVarFlag('do_rootfs', 'mcdepends', ' '.join(['multiconfig:wr-host:wr-container:%s:do_rootfs' % c for c in containers]))
+        d.appendVarFlag('do_rootfs', 'mcdepends', ' '.join(['multiconfig:wr-host:wr-container:%s:do_image_complete' % c for c in containers]))
 
         d.appendVar('ROOTFS_POSTPROCESS_COMMAND', ' rootfs_install_container;')
 }
@@ -53,8 +54,12 @@ rootfs_install_container () {
     mkdir -p ${cntr_path}
     for container in ${WR_CONTAINER_NAMES}
     do
-        rootfs="${CNTR_TMPDIR}${TCLIBCAPPEND}/work/${MULTIMACH_TARGET_SYS}/${container}/*/rootfs"
-        sloci-image -m ${HOST_ARCH} $rootfs $cntr_path/$container
+        cntr_image_path=$(ls -1t ${CNTR_TMPDIR}${TCLIBCAPPEND}/deploy/images/${MACHINE}/${container}*tar.gz | head -1)
+        cntr_image=$(basename $cntr_image_path)
+
+        # duplicate .tar.gz image which will be unpacked by gzip
+        cp $cntr_image_path $cntr_path
+        sloci-image -m ${HOST_ARCH} $cntr_path/$cntr_image $cntr_path/$container
         skopeo copy oci:$cntr_path/$container docker-archive:${IMAGE_ROOTFS}${CONTAINER_DEST_ON_HOST}/$container.tar
     done
 

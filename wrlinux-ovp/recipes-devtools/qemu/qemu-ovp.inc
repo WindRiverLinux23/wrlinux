@@ -14,6 +14,7 @@ CFLAGS:append = " -I${STAGING_INCDIR}/glib-2.0 -I${STAGING_LIBDIR}/glib-2.0/incl
 SRC_URI += " \
         file://qemu-kvm-drop-cross-from-pkg-config.patch \
         file://0001-qemu-kvm-Add-options-to-pin-and-prioritize-vcpus.patch \
+        file://0001-qemu-vcpu-avoid-using-ifdef-CONFIG_KVM-in-common-cod.patch \
 "
 
 PACKAGECONFIG[spice] = "--enable-spice,--disable-spice,spice,"

@@ -4,7 +4,7 @@ Limitation
    is i.86|x86_64
    (Set MACHINE = "qemux86-64|qemux86|intel-x86-64" in the build)
 
-2) The target installer based on fedora 26, so it requires:
+2) The target installer based on fedora 34, so it requires:
    - systemd as init manager
    - python3
    - dnf2/rpm4 pakcage management
@@ -199,9 +199,6 @@ Building the target installer
    add packages that you will like to install, but if you do, you must ensure
    that the added packages are in the target build (target_build).
 
-   To do this, use the file /.buildstamp after the installation and edit it
-   for later installs.
-
 6. Perform the kickstart installation
    The installer can support kickstart installs. To do this, use the ks file
    from /root/anaconda-ks.cfg after the installation and edit it for later
@@ -290,17 +287,14 @@ Building the target installer
          to tftp download dir.
 
          We must add param "LABEL=initrd-install" to PXE config file.
-         There is an example in examples/pxe/pxelinux.cfg/default.initramfs
 
     10.3 initrd boot with kickstart
          Based on 10.2 initrd boot, we should prepare a kickstart file on
          web server, and add param "ks=http://webserver_ip/anaconda-ks.cfg"
          to PXE config file.
-         There is an example in examples/pxe/pxelinux.cfg/default.initramfs_ks
 
     10.4 nfs boot
-         About PXE config file, there is an example in
-         examples/pxe/pxelinux.cfg/default.nfs
+         Add params "root=/dev/nfs nfsroot=server_ip:/nfs/path" to PXE config file.
 
 11. Download file from http/ftp server to target image
     Add key in kickstart to support downloading file from http/ftp
@@ -336,8 +330,8 @@ Building the target installer
     2. Next, place the mirror list file on the web server.
 
     3. When starting anaconda, choose to add an http repository, input the URL
-       of the mirror list, be sure to select 'This URL refers to a mirror list'
-       checkbox. Then click the 'Done' button to add the mirror list.
+       of the mirror list, and select "URL type:" with "mirrorlist". Then click
+       the 'Done' button to add the mirror list.
 
 14 UEFI-based PXE
     The main difference between BIOS-based and UEFI-based on PXE is the former
@@ -358,7 +352,7 @@ Building the target installer
     $ bitbake grub-efi -cmkpxeimage
 
     3 Copy UEFI-base PXE image to tftp download dir
-    $ cp tmp-glibc/deploy/images/qemux86-64/grub-efi-bootx64.efi /srv/tftpboot/boot
+    $ cp tmp-glibc/deploy/images/qemux86-64/bootx64.efi /srv/tftpboot/boot
 
     4. Update the DHCP server config
     $ vi /etc/dhcp/dhcpd.conf

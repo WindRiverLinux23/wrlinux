@@ -37,9 +37,9 @@ do_install:append() {
     if [ -n "${GLIBC_GETLOADER64}" ]; then
         loader64_dir=$(dirname ${GLIBC_GETLOADER64})
         install -d ${D}$loader64_dir
-        lnr ${D}${GLIBC_GETLOADER} ${D}${GLIBC_GETLOADER64}
+        ln --relative --symbolic ${D}${GLIBC_GETLOADER} ${D}${GLIBC_GETLOADER64}
         if ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','true','false',d)}; then
-            lnr ${D}$loader64_dir ${D}/lib64
+            ln --relative --symbolic ${D}$loader64_dir ${D}/lib64
         fi
     fi
 }

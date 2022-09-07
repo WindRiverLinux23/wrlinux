@@ -57,7 +57,6 @@ CGL4_TESTCASE=$tmp
 # prepare kernel testcase 
 KERNEL_TESTCASE="\
 	scripts/coredump_test.sh \
-	scripts/cyclic-test \
 	scripts/tmpfs.sh \
 	scripts/bonding.sh \
 	testcase/std.10.0 \

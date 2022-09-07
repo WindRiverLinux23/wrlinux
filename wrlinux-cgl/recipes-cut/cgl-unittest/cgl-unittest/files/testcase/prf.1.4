@@ -58,11 +58,4 @@ then
 	error "hres_active is not 1"
 fi
 
-$TOPDIR/scripts/cyclic-test | tee /tmp/prf.1.4.log
-
-FAILNUM=`cat /tmp/prf.1.4.log | grep  FAIL | wc -l`
-if [ $FAILNUM -ne 0 ]
-then
-	error "runtest.sh"
-fi
 result PASSED

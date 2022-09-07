@@ -19,7 +19,6 @@ PACKAGES = "${PN}"
 ALLOW_EMPTY:${PN} = "1"
 
 RDEPENDS:${PN} = "\
-        cyclictest \
         gen-coredump \
         ipsec-test \
         libevent \

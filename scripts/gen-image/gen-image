@@ -827,7 +827,7 @@ class GenImage(object):
                             os.makedirs(self.handoff_dir_ws)
                         shutil.copy(tarname_path, self.handoff_dir_ws)
 
-        logger.info('Deploy files: %s and WRLinux-lts-22-Images-%s' % (os.path.join(self.handoff_dir, self.machine), self.machine))
+        logger.info('Deploy files: %s and %s-%s' % (os.path.join(self.handoff_dir, self.machine), self.handoff_name, self.machine))
 
     def ip_review(self):
         logger.info('Generating sources for IP review')

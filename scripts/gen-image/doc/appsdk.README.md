@@ -889,7 +889,7 @@ by command 'skopeo copy', it will be used by docker load
         dst: /var/docker-images/
         mode: 644
     - file:
-        src: http://pek-lpgtest7302.wrs.com/buildarea1/SharedImage/LINCD_STD_BINARY/intel-x86-64/latest/dist/intel-x86-64/container-full-intel-x86-64/wrlinux-image-full-intel-x86-64.tar.bz2
+        src: http://XXXX/intel-x86-64/latest/dist/intel-x86-64/container-full-intel-x86-64/wrlinux-image-full-intel-x86-64.tar.bz2
         dst: /var/docker-images/
         mode: 644
 ```

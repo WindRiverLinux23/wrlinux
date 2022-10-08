@@ -167,7 +167,10 @@ SANITY_TESTED_DISTROS ?= " \
             fedora-32 \n \
             fedora-33 \n \
             fedora-34 \n \
+            fedora-36 \n \
             opensuseleap-15.0 \n \
+            opensuseleap-15.3 \n \
+            rhel-7.8 \n \
             rhel-8.0 \n \
             rhel-8.2 \n \
             rhel-8.4 \n \

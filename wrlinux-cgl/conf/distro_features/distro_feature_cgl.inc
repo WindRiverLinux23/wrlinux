@@ -27,7 +27,4 @@ KERNEL_FEATURES:append:df-cgl = " \
                                  cgl/features/quota/quota.scc \
                                  "
 
-# set PREFERRED_VERSION_monit to 4.9 as monit 4.9 is under GPLv2 license
-PREFERRED_VERSION_monit:df-cgl ?= "4.%"
-
 require wrlinux-cgl-recipelists.inc

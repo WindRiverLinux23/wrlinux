@@ -1,6 +1,0 @@
-Enable the Simple Authentication and Security Layer (SASL) framework support.
-
-#@TYPE: Wrtemplate
-#@NAME: sals
-#@DESCRIPTION: Enable 'sasl' support
-

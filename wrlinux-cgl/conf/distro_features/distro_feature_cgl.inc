@@ -11,7 +11,6 @@ KERNEL_FEATURES:append:df-cgl = " \
                                  features/nfsd/nfsd-enable.scc \
                                  features/ecryptfs/ecryptfs.scc \
                                  features/aufs/aufs-enable.scc  \
-                                 features/ipmi/ipmi.scc \
                                  features/vrf/vrf.scc \
                                  cgl/cfg/dmm.scc \
                                  cgl/cfg/fs/ocfs2.scc \

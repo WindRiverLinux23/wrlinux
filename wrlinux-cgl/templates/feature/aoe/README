@@ -1,5 +1,0 @@
-Add ATA over Ethernet support to the system and related images.
-
-#@TYPE: Wrtemplate
-#@NAME: aoe
-#@DESCRIPTION: Enable ATA over Ethernet

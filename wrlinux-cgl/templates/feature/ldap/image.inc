@@ -1,5 +1,0 @@
-IMAGE_INSTALL += "openldap"
-IMAGE_INSTALL += "openldap-bin"
-IMAGE_INSTALL += "openldap-slapd"
-IMAGE_INSTALL += "libnet-ldap-perl"
-IMAGE_INSTALL += "python3-ldap"

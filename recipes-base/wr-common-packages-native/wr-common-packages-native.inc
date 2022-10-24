@@ -141,7 +141,6 @@ DEPENDS = "\
     lz4-native \
     lzip-native \
     lzo-native \
-    lzop-native \
     m4-native \
     make-native \
     makedepend-native \
@@ -223,6 +222,7 @@ DEPENDS = "\
     tcl-native \
     texinfo-dummy-native \
     tzcode-native \
+    u-boot-s32-tools-native \
     u-boot-tools-native \
     unifdef-native \
     unzip-native \

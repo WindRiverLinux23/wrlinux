@@ -163,6 +163,7 @@ KERNEL_VERSION_SANITY_SKIP = "1"
 SANITY_TESTED_DISTROS ?= " \
             ubuntu-18.04 \n \
             ubuntu-20.04 \n \
+            ubuntu-22.04 \n \
             fedora-31 \n \
             fedora-32 \n \
             fedora-33 \n \

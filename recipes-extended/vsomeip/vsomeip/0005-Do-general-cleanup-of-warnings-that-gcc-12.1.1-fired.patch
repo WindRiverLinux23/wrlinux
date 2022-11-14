@@ -1,0 +1,298 @@
+From cc3b2e03b36f2c1e61428c08d872305eb4404ad8 Mon Sep 17 00:00:00 2001
+From: Stephen Smoogen <ssmoogen@redhat.com>
+Date: Wed, 3 Aug 2022 18:15:42 -0400
+Subject: [PATCH 2/2] Do general cleanup of warnings that gcc-12.1.1 fired up.
+
+Signed-off-by: Stephen Smoogen <ssmoogen@redhat.com>
+
+Upstream-Status: Backport
+[https://github.com/COVESA/vsomeip/pull/367]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../configuration/src/configuration_impl.cpp       |  6 +++---
+ .../endpoints/src/endpoint_manager_base.cpp        |  2 +-
+ .../endpoints/src/endpoint_manager_impl.cpp        | 10 +++++-----
+ .../endpoints/src/server_endpoint_impl.cpp         |  2 +-
+ implementation/routing/src/eventgroupinfo.cpp      |  4 ++--
+ implementation/routing/src/remote_subscription.cpp |  2 +-
+ .../routing/src/routing_manager_impl.cpp           |  8 ++++----
+ .../routing/src/routing_manager_stub.cpp           |  2 +-
+ implementation/security/src/policy.cpp             |  5 +++--
+ implementation/security/src/security_impl.cpp      | 14 +++++++-------
+ .../src/service_discovery_impl.cpp                 |  2 +-
+ 11 files changed, 29 insertions(+), 28 deletions(-)
+
+diff --git a/implementation/configuration/src/configuration_impl.cpp b/implementation/configuration/src/configuration_impl.cpp
+index 90f1a7b..dc05f83 100644
+--- a/implementation/configuration/src/configuration_impl.cpp
++++ b/implementation/configuration/src/configuration_impl.cpp
+@@ -2551,7 +2551,7 @@ void configuration_impl::trim(std::string &_s) {
+         std::find_if(
+             _s.begin(),
+             _s.end(),
+-            std::not1(std::ptr_fun(isspace))
++            std::not1(std::function<bool(int)>(isspace))
+         )
+     );
+ 
+@@ -2559,7 +2559,7 @@ void configuration_impl::trim(std::string &_s) {
+         std::find_if(
+             _s.rbegin(),
+             _s.rend(),
+-            std::not1(std::ptr_fun(isspace))).base(),
++            std::not1(std::function<bool(int)>(isspace))).base(),
+             _s.end()
+     );
+ }
+@@ -3972,7 +3972,7 @@ configuration_impl::load_overlay(const std::string &_name) {
+         its_input.insert(its_overlay);
+         read_data(its_input, its_elements, its_failed, false);
+ 
+-        for (const auto f : its_failed)
++        for (const auto& f : its_failed)
+             VSOMEIP_ERROR << "Reading configuration data from " << f << " failed!";
+ 
+         is_overlay_ = true;
+diff --git a/implementation/endpoints/src/endpoint_manager_base.cpp b/implementation/endpoints/src/endpoint_manager_base.cpp
+index 6c63e4f..a79ae48 100644
+--- a/implementation/endpoints/src/endpoint_manager_base.cpp
++++ b/implementation/endpoints/src/endpoint_manager_base.cpp
+@@ -158,7 +158,7 @@ endpoint_manager_base::log_client_states() const {
+ 
+     {
+         std::lock_guard<std::mutex> its_lock(local_endpoint_mutex_);
+-        for (const auto e : local_endpoints_) {
++        for (const auto& e : local_endpoints_) {
+             size_t its_queue_size = e.second->get_queue_size();
+             if (its_queue_size > VSOMEIP_DEFAULT_QUEUE_WARN_SIZE) {
+                 its_client_queue_sizes.push_back(
+diff --git a/implementation/endpoints/src/endpoint_manager_impl.cpp b/implementation/endpoints/src/endpoint_manager_impl.cpp
+index 38dabf7..a82a173 100644
+--- a/implementation/endpoints/src/endpoint_manager_impl.cpp
++++ b/implementation/endpoints/src/endpoint_manager_impl.cpp
+@@ -983,9 +983,9 @@ endpoint_manager_impl::log_client_states() const {
+         its_client_endpoints = client_endpoints_by_ip_;
+     }
+ 
+-    for (const auto its_address : its_client_endpoints) {
+-        for (const auto its_port : its_address.second) {
+-            for (const auto its_reliability : its_port.second) {
++    for (const auto& its_address : its_client_endpoints) {
++        for (const auto& its_port : its_address.second) {
++            for (const auto& its_reliability : its_port.second) {
+                 size_t its_queue_size = its_reliability.second->get_queue_size();
+                 if (its_queue_size > VSOMEIP_DEFAULT_QUEUE_WARN_SIZE)
+                     its_client_queue_sizes.push_back(
+@@ -1040,8 +1040,8 @@ endpoint_manager_impl::log_server_states() const {
+         its_server_endpoints = server_endpoints_;
+     }
+ 
+-    for (const auto its_port : its_server_endpoints) {
+-        for (const auto its_reliability : its_port.second) {
++    for (const auto& its_port : its_server_endpoints) {
++        for (const auto& its_reliability : its_port.second) {
+             size_t its_queue_size = its_reliability.second->get_queue_size();
+             if (its_queue_size > VSOMEIP_DEFAULT_QUEUE_WARN_SIZE)
+                 its_client_queue_sizes.push_back(
+diff --git a/implementation/endpoints/src/server_endpoint_impl.cpp b/implementation/endpoints/src/server_endpoint_impl.cpp
+index 46e2397..cfb5ea1 100644
+--- a/implementation/endpoints/src/server_endpoint_impl.cpp
++++ b/implementation/endpoints/src/server_endpoint_impl.cpp
+@@ -757,7 +757,7 @@ size_t server_endpoint_impl<Protocol>::get_queue_size() const {
+ 
+     {
+         std::lock_guard<std::mutex> its_lock(mutex_);
+-        for (const auto q : queues_) {
++        for (const auto& q : queues_) {
+             its_queue_size += q.second.second.size();
+         }
+     }
+diff --git a/implementation/routing/src/eventgroupinfo.cpp b/implementation/routing/src/eventgroupinfo.cpp
+index 3b3a808..e25459c 100644
+--- a/implementation/routing/src/eventgroupinfo.cpp
++++ b/implementation/routing/src/eventgroupinfo.cpp
+@@ -390,10 +390,10 @@ eventgroupinfo::send_initial_events(
+     }
+ 
+     // Send events
+-    for (const auto its_event : its_reliable_events)
++    for (const auto& its_event : its_reliable_events)
+         its_event->notify_one(VSOMEIP_ROUTING_CLIENT, _reliable);
+ 
+-    for (const auto its_event : its_unreliable_events)
++    for (const auto& its_event : its_unreliable_events)
+         its_event->notify_one(VSOMEIP_ROUTING_CLIENT, _unreliable);
+ }
+ 
+diff --git a/implementation/routing/src/remote_subscription.cpp b/implementation/routing/src/remote_subscription.cpp
+index 939e0d1..daec6f9 100644
+--- a/implementation/routing/src/remote_subscription.cpp
++++ b/implementation/routing/src/remote_subscription.cpp
+@@ -135,7 +135,7 @@ std::set<client_t>
+ remote_subscription::get_clients() const {
+     std::lock_guard<std::mutex> its_lock(mutex_);
+     std::set<client_t> its_clients;
+-    for (const auto its_item : clients_)
++    for (const auto& its_item : clients_)
+         its_clients.insert(its_item.first);
+     return its_clients;
+ }
+diff --git a/implementation/routing/src/routing_manager_impl.cpp b/implementation/routing/src/routing_manager_impl.cpp
+index 74e556c..1913344 100644
+--- a/implementation/routing/src/routing_manager_impl.cpp
++++ b/implementation/routing/src/routing_manager_impl.cpp
+@@ -2436,14 +2436,14 @@ void routing_manager_impl::del_routing_info(service_t _service, instance_t _inst
+         std::set<std::tuple<
+             service_t, instance_t, eventgroup_t, client_t> > its_invalid;
+ 
+-        for (const auto its_state : remote_subscription_state_) {
++        for (const auto& its_state : remote_subscription_state_) {
+             if (std::get<0>(its_state.first) == _service
+                     && std::get<1>(its_state.first) == _instance) {
+                 its_invalid.insert(its_state.first);
+             }
+         }
+ 
+-        for (const auto its_key : its_invalid)
++        for (const auto& its_key : its_invalid)
+             remote_subscription_state_.erase(its_key);
+     }
+ 
+@@ -4347,7 +4347,7 @@ bool routing_manager_impl::insert_event_statistics(service_t _service, instance_
+             // check list for entry with least counter value
+             uint32_t its_min_count(0xFFFFFFFF);
+             auto its_tuple_to_discard = std::make_tuple(0xFFFF, 0xFFFF, 0xFFFF);
+-            for (const auto it : message_statistics_) {
++            for (const auto& it : message_statistics_) {
+                 if (it.second.counter_ < its_min_count) {
+                     its_min_count = it.second.counter_;
+                     its_tuple_to_discard = it.first;
+@@ -4389,7 +4389,7 @@ void routing_manager_impl::statistics_log_timer_cbk(boost::system::error_code co
+         std::stringstream its_log;
+         {
+             std::lock_guard<std::mutex> its_lock(message_statistics_mutex_);
+-            for (const auto s : message_statistics_) {
++            for (const auto& s : message_statistics_) {
+                 if (s.second.counter_ / (its_interval / 1000) >= its_min_freq) {
+                     uint16_t its_subscribed(0);
+                     std::shared_ptr<event> its_event = find_event(std::get<0>(s.first), std::get<1>(s.first), std::get<2>(s.first));
+diff --git a/implementation/routing/src/routing_manager_stub.cpp b/implementation/routing/src/routing_manager_stub.cpp
+index 72668ea..8e1563b 100644
+--- a/implementation/routing/src/routing_manager_stub.cpp
++++ b/implementation/routing/src/routing_manager_stub.cpp
+@@ -2257,7 +2257,7 @@ routing_manager_stub::send_requester_policies(const std::unordered_set<client_t>
+     pending_security_update_id_t its_policy_id;
+ 
+     // serialize the policies and send them...
+-    for (const auto p : _policies) {
++    for (const auto& p : _policies) {
+         std::vector<byte_t> its_policy_data;
+         if (p->serialize(its_policy_data)) {
+             std::vector<byte_t> its_message;
+diff --git a/implementation/security/src/policy.cpp b/implementation/security/src/policy.cpp
+index 4babd06..c36ccca 100644
+--- a/implementation/security/src/policy.cpp
++++ b/implementation/security/src/policy.cpp
+@@ -203,6 +203,7 @@ policy::deserialize_id_item_list(const byte_t * &_data, uint32_t &_size,
+         uint32_t its_current_size(_size);
+ 
+         uint16_t its_low, its_high;
++	its_low = its_high = 0;
+         its_result = deserialize_id_item(_data, _size, its_low, its_high);
+         if (its_result == false)
+             return (false);
+@@ -305,7 +306,7 @@ policy::serialize(std::vector<byte_t> &_data) const {
+     uint32_t its_requests_size(0);
+     serialize_u32(its_requests_size, _data);
+ 
+-    for (const auto its_request : requests_) {
++    for (const auto& its_request : requests_) {
+         for (auto its_service = its_request.first.lower();
+                 its_service <= its_request.first.upper();
+                 its_service++) {
+@@ -316,7 +317,7 @@ policy::serialize(std::vector<byte_t> &_data) const {
+             uint32_t its_instances_size(0);
+             serialize_u32(its_instances_size, _data);
+ 
+-            for (const auto i : its_request.second) {
++            for (const auto& i : its_request.second) {
+                 boost::icl::interval_set<instance_t> its_instances;
+                 its_instances.insert(i.first);
+                 serialize_interval_set(its_instances, _data);
+diff --git a/implementation/security/src/security_impl.cpp b/implementation/security/src/security_impl.cpp
+index 12bb9db..6cb68eb 100644
+--- a/implementation/security/src/security_impl.cpp
++++ b/implementation/security/src/security_impl.cpp
+@@ -470,7 +470,7 @@ security_impl::update_security_policy(uint32_t _uid, uint32_t _gid,
+     }
+ 
+     if (its_matching_policy) {
+-        for (const auto r : _policy->requests_) {
++        for (const auto& r : _policy->requests_) {
+             service_t its_lower, its_upper;
+             get_bounds(r.first, its_lower, its_upper);
+             for (auto s = its_lower; s <= its_upper; s++) {
+@@ -479,7 +479,7 @@ security_impl::update_security_policy(uint32_t _uid, uint32_t _gid,
+                 its_matching_policy->requests_ += std::make_pair(its_service, r.second);
+             }
+         }
+-        for (const auto o : _policy->offers_) {
++        for (const auto& o : _policy->offers_) {
+             service_t its_lower, its_upper;
+             get_bounds(o.first, its_lower, its_upper);
+             for (auto s = its_lower; s <= its_upper; s++) {
+@@ -1081,8 +1081,8 @@ security_impl::get_requester_policies(const std::shared_ptr<policy> _policy,
+     }
+ 
+     std::lock_guard<std::mutex> its_lock(_policy->mutex_);
+-    for (const auto o : _policy->offers_) {
+-        for (const auto p : its_policies) {
++    for (const auto& o : _policy->offers_) {
++        for (const auto& p : its_policies) {
+             if (p == _policy)
+                 continue;
+ 
+@@ -1091,7 +1091,7 @@ security_impl::get_requester_policies(const std::shared_ptr<policy> _policy,
+             auto its_policy = std::make_shared<policy>();
+             its_policy->credentials_ = p->credentials_;
+ 
+-            for (const auto r : p->requests_) {
++            for (const auto& r : p->requests_) {
+                 // o represents an offer by a service interval and its instances
+                 // (a set of intervals)
+                 // r represents a request by a service interval and its instances
+@@ -1110,7 +1110,7 @@ security_impl::get_requester_policies(const std::shared_ptr<policy> _policy,
+                     auto its_service_max = std::min(its_r_upper, its_o_upper);
+ 
+                     for (const auto i : o.second) {
+-                        for (const auto j : r.second) {
++                        for (const auto& j : r.second) {
+                             for (const auto k : j.second) {
+                                 instance_t its_i_lower, its_i_upper, its_k_lower, its_k_upper;
+                                 get_bounds(i, its_i_lower, its_i_upper);
+@@ -1151,7 +1151,7 @@ security_impl::get_clients(uid_t _uid, gid_t _gid,
+         std::unordered_set<client_t> &_clients) const {
+ 
+     std::lock_guard<std::mutex> its_lock(ids_mutex_);
+-    for (const auto i : ids_) {
++    for (const auto& i : ids_) {
+         if (i.second.first == _uid && i.second.second == _gid)
+             _clients.insert(i.first);
+     }
+diff --git a/implementation/service_discovery/src/service_discovery_impl.cpp b/implementation/service_discovery/src/service_discovery_impl.cpp
+index 0fc6190..d09bd24 100644
+--- a/implementation/service_discovery/src/service_discovery_impl.cpp
++++ b/implementation/service_discovery/src/service_discovery_impl.cpp
+@@ -248,7 +248,7 @@ service_discovery_impl::subscribe(
+                 if (!its_subscription->is_selective() && is_selective) {
+                     its_subscription->set_selective(true);
+                     its_subscription->remove_client(VSOMEIP_ROUTING_CLIENT);
+-                    for (const auto e : _info->get_events()) {
++                    for (const auto& e : _info->get_events()) {
+                         for (const auto c : e->get_subscribers(_eventgroup)) {
+                             its_subscription->add_client(c);
+                         }
+-- 
+2.25.1
+

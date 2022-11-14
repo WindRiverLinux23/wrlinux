@@ -148,6 +148,7 @@ SKIP_RECIPE[libucontext] ?= "only glibc is supported for wrlinux"
 SKIP_RECIPE[musl] ?= "only glibc is supported for wrlinux"
 SKIP_RECIPE[musl-obstack] ?= "only glibc is supported for wrlinux"
 SKIP_RECIPE[musl-utils] ?= "only glibc is supported for wrlinux"
+SKIP_RECIPE[libc-test] ?= "only glibc is supported for wrlinux"
 SKIP_RECIPE[newlib] ?= "only glibc is supported for wrlinux"
 
 # do_kernel_version_sanity_check in oe-core checks if the defined version in

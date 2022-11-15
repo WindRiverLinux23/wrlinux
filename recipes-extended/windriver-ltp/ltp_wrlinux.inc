@@ -50,6 +50,10 @@ do_install(){
 	cd ${S}/testcases/open_posix_testsuite/
 	oe_runmake DESTDIR=${D} SKIP_IDCHECK=1 install
 
+	# Put open_posix_testuite cases to our expected place
+	cp -r ${D}/opt/ltp/testcases/open_posix_testsuite/* ${D}/opt/open_posix_testsuite/
+	rm -rf ${D}/opt/ltp/testcases/open_posix_testsuite/
+
 	# Install wrLinux_posix
 	cp ${WORKDIR}/README ${S}/testcases/open_posix_testsuite/wrLinux_posix/
 	cp -r ${S}/testcases/open_posix_testsuite/wrLinux_posix ${D}/opt/open_posix_testsuite/

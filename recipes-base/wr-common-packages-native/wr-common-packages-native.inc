@@ -3,9 +3,7 @@ DEPENDS = "\
     acl-native \
     acpica-native \
     alsa-lib-native \
-    at-spi2-atk-native \
     at-spi2-core-native \
-    atk-native \
     attr-native \
     autoconf-archive-native \
     autoconf-native \

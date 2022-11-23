@@ -165,17 +165,15 @@ SANITY_TESTED_DISTROS ?= " \
             ubuntu-18.04 \n \
             ubuntu-20.04 \n \
             ubuntu-22.04 \n \
-            fedora-31 \n \
-            fedora-32 \n \
-            fedora-33 \n \
-            fedora-34 \n \
             fedora-36 \n \
-            opensuseleap-15.0 \n \
-            opensuseleap-15.3 \n \
+            fedora-37 \n \
+            opensuseleap-15.4 \n \
             rhel-7.8 \n \
             rhel-8.0 \n \
             rhel-8.2 \n \
             rhel-8.4 \n \
+            rhel-9.0 \n \
             sled-15 \n \
+            sled-15.4 \n \
             centos-7 \n \
             "

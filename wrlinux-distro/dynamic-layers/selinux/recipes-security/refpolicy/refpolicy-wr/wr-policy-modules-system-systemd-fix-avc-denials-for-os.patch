@@ -1,0 +1,118 @@
+From 903a7316fd0bfa66679743e79546a64b3ba679ef Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Tue, 1 Nov 2022 12:44:59 +0800
+Subject: [PATCH] policy/modules/system/systemd: fix avc denials for
+ ostree-system-generator
+
+Fixes:
+avc:  denied  { create } for  pid=300 comm="ostree-system-g"
+name="ostree-booted"
+scontext=system_u:system_r:systemd_generator_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:var_run_t:s0 tclass=file permissive=0
+
+avc:  denied  { read } for  pid=300 comm="ostree-system-g" name="ostree"
+dev="sdb3" ino=24762
+scontext=system_u:system_r:systemd_generator_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:default_t:s0 tclass=lnk_file permissive=0
+
+avc:  denied  { read } for  pid=239 comm="ostree-system-g" name="1"
+dev="sda3" ino=16
+scontext=system_u:system_r:systemd_generator_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:unlabeled_t:s0 tclass=lnk_file permissive=0
+
+Upstream-Status: Inappropriate [ostree specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ policy/modules/kernel/files.if   | 20 ++++++++++++++++++++
+ policy/modules/kernel/kernel.if  | 18 ++++++++++++++++++
+ policy/modules/system/systemd.te |  3 +++
+ 3 files changed, 41 insertions(+)
+
+diff --git a/policy/modules/kernel/files.if b/policy/modules/kernel/files.if
+index b308eefd9..093f30d0d 100644
+--- a/policy/modules/kernel/files.if
++++ b/policy/modules/kernel/files.if
+@@ -7077,6 +7077,26 @@ interface(`files_rw_runtime_files',`
+ 	rw_files_pattern($1, var_run_t, var_run_t)
+ ')
+ 
++########################################
++## <summary>
++##	Create generic runtime files.
++## </summary>
++## <param name="domain">
++##	<summary>
++##	Domain allowed access.
++##	</summary>
++## </param>
++#
++interface(`files_create_runtime_files',`
++	gen_require(`
++		type var_t, var_run_t;
++	')
++
++	allow $1 var_run_t:lnk_file read_lnk_file_perms;
++	list_dirs_pattern($1, var_t, var_run_t)
++	create_files_pattern($1, var_run_t, var_run_t)
++')
++
+ ########################################
+ ## <summary>
+ ##	Delete generic runtime symlinks.
+diff --git a/policy/modules/kernel/kernel.if b/policy/modules/kernel/kernel.if
+index 18002e67d..a8e1dcf39 100644
+--- a/policy/modules/kernel/kernel.if
++++ b/policy/modules/kernel/kernel.if
+@@ -2894,6 +2894,24 @@ interface(`kernel_dontaudit_read_unlabeled_files',`
+ 	dontaudit $1 unlabeled_t:file { getattr read };
+ ')
+ 
++########################################
++## <summary>
++##	Read unlabeled symbolic links.
++## </summary>
++## <param name="domain">
++##	<summary>
++##	Domain allowed access.
++##	</summary>
++## </param>
++#
++interface(`kernel_read_unlabeled_symlinks',`
++	gen_require(`
++		type unlabeled_t;
++	')
++
++	allow $1 unlabeled_t:lnk_file read_lnk_file_perms;
++')
++
+ ########################################
+ ## <summary>
+ ##	Delete unlabeled symbolic links.
+diff --git a/policy/modules/system/systemd.te b/policy/modules/system/systemd.te
+index 218d09352..d91269657 100644
+--- a/policy/modules/system/systemd.te
++++ b/policy/modules/system/systemd.te
+@@ -445,9 +445,11 @@ dev_write_sysfs_dirs(systemd_generator_t)
+ dev_read_urand(systemd_generator_t)
+ 
+ files_read_etc_files(systemd_generator_t)
++files_create_runtime_files(systemd_generator_t)
+ files_search_runtime(systemd_generator_t)
+ files_list_boot(systemd_generator_t)
+ files_read_boot_files(systemd_generator_t)
++files_read_default_symlinks(systemd_generator_t)
+ files_search_all_mountpoints(systemd_generator_t)
+ files_list_usr(systemd_generator_t)
+ 
+@@ -475,6 +477,7 @@ kernel_read_kernel_sysctls(systemd_generator_t)
+ kernel_dontaudit_getattr_proc(systemd_generator_t)
+ kernel_getattr_unlabeled_dirs(systemd_generator_t)
+ kernel_read_unlabeled_files(systemd_generator_t)
++kernel_read_unlabeled_symlinks(systemd_generator_t)
+ files_read_boot_symlinks(systemd_generator_t)
+ files_check_write_runtime_dirs(systemd_generator_t)
+ files_rw_runtime_files(systemd_generator_t)
+-- 
+2.25.1
+

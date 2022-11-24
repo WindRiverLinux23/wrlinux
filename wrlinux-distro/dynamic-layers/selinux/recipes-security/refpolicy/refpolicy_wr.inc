@@ -43,6 +43,7 @@ OSTREE_POLICY_PATCHES = "\
         file://wr-policy-modules-system-systemd-allow-systemd_tmpfiles.patch \
         file://wr-policy-modules-admin-ostree-fix-ostree-unlock.patch \
         file://wr-policy-modules-admin-ostree-fix-ostree-upgrade.patch \
+        file://wr-policy-modules-system-systemd-fix-avc-denials-for-os.patch \
         "
 
 SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ostree', '${OSTREE_POLICY_PATCHES}', '', d)}"

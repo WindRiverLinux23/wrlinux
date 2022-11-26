@@ -28,7 +28,6 @@ IMAGE_INSTALL += " \
    libvirt-libvirtd \
    socat \
    openvswitch \
-   hwloc \
    aufs-util \
    packagegroup-ovp-debug \
    packagegroup-ovp-lttng-toolchain \

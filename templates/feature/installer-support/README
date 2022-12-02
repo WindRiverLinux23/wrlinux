@@ -115,8 +115,12 @@ Building the target installer
    4.2 Use qemu for testing
        Build target installer with machine of qemux86-64
 
+       Populate sysroots to provides native qemu utils:
+       $ bitbake qemu-system-native
+       $ bitbake build-sysroots
+
        Create the qemu disk:
-       $ <build-topdir>/tmp-glibc/sysroots-components/x86_64/qemu-system-native/usr/bin/qemu-img create -f qcow hd0.vdisk 5000M
+       $ ./tmp-glibc/sysroots/x86_64/usr/bin/qemu-img create -f qcow hd0.vdisk 5000M
 
        Start qemu with installer image:
        $ runqemu qemux86-64 wrlinux-image-installer iso slirp qemuparams="-drive file=hd0.vdisk,if=virtio,format=qcow"

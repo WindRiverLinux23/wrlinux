@@ -42,7 +42,7 @@ TOOLCHAIN_OUTPUTNAME:pn-uninative-tarball = "${SDK_ARCH}-nativesdk-libc"
 ESDK_CLASS_INHERIT_DISABLE:append = " packagefeed-stability"
 
 # Override these in wrlinux based distros to modify DISTRO_*
-WRLINUX_DEFAULT_DISTRO_FEATURES = "largefile multiarch pulseaudio virtualization"
+WRLINUX_DEFAULT_DISTRO_FEATURES = "largefile multiarch pulseaudio kvm virtualization"
 WRLINUX_DEFAULT_EXTRA_RDEPENDS = "packagegroup-core-boot"
 WRLINUX_DEFAULT_EXTRA_RRECOMMENDS = "kernel-module-af-packet"
 

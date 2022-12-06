@@ -37,22 +37,23 @@ tcontext=system_u:object_r:tmpfs_t:s0 tclass=dir permissive=0
 Upstream-Status: Pending
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+
+Rebase for refpolicy 2.20221101.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- policy/modules/services/radius.te | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ policy/modules/services/radius.te | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/policy/modules/services/radius.te b/policy/modules/services/radius.te
-index 4a9366a1c..76dd67ed4 100644
+index 8ac766c39..a086c1b00 100644
 --- a/policy/modules/services/radius.te
 +++ b/policy/modules/services/radius.te
-@@ -32,9 +32,9 @@ files_type(radiusd_var_lib_t)
- # Local policy
- #
+@@ -34,7 +34,7 @@ files_type(radiusd_var_lib_t)
  
--allow radiusd_t self:capability { chown dac_override fsetid kill setgid setuid sys_resource sys_tty_config };
-+allow radiusd_t self:capability { chown dac_override dac_read_search fsetid kill setgid setuid sys_resource sys_tty_config };
+ allow radiusd_t self:capability { chown dac_override dac_read_search fsetid kill setgid setuid sys_resource sys_tty_config };
  dontaudit radiusd_t self:capability sys_tty_config;
--allow radiusd_t self:process { getsched setrlimit setsched sigkill signal };
+-allow radiusd_t self:process { getcap getsched setrlimit setsched sigkill signal };
 +allow radiusd_t self:process { getcap getsched setrlimit setsched sigkill signal execmem ptrace };
  allow radiusd_t self:fifo_file rw_fifo_file_perms;
  allow radiusd_t self:unix_stream_socket { accept listen };

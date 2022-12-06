@@ -27,32 +27,19 @@ permissive=0
 Upstream-Status: Pending
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+
+Remove sections which have been applied in 2.20221101.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- policy/modules/admin/logwatch.te | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ policy/modules/admin/logwatch.te | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/policy/modules/admin/logwatch.te b/policy/modules/admin/logwatch.te
-index 5d3e7d5a4..2cfc26390 100644
+index ae02e39b0..a6e884839 100644
 --- a/policy/modules/admin/logwatch.te
 +++ b/policy/modules/admin/logwatch.te
-@@ -38,7 +38,7 @@ role system_r types logwatch_mail_t;
- #
- 
- allow logwatch_t self:capability { dac_override dac_read_search setgid };
--allow logwatch_t self:process signal;
-+allow logwatch_t self:process { signal getsched };
- allow logwatch_t self:fifo_file rw_fifo_file_perms;
- allow logwatch_t self:unix_stream_socket { accept listen };
- 
-@@ -46,6 +46,7 @@ manage_dirs_pattern(logwatch_t, logwatch_cache_t, logwatch_cache_t)
- manage_files_pattern(logwatch_t, logwatch_cache_t, logwatch_cache_t)
- 
- allow logwatch_t logwatch_lock_t:file manage_file_perms;
-+manage_files_pattern(logwatch_t, logwatch_lock_t, logwatch_lock_t)
- files_lock_filetrans(logwatch_t, logwatch_lock_t, file)
- 
- manage_dirs_pattern(logwatch_t, logwatch_tmp_t, logwatch_tmp_t)
-@@ -186,6 +187,8 @@ dev_read_rand(logwatch_mail_t)
+@@ -186,6 +186,8 @@ dev_read_rand(logwatch_mail_t)
  dev_read_urand(logwatch_mail_t)
  dev_read_sysfs(logwatch_mail_t)
  

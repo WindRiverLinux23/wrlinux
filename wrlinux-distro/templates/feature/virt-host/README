@@ -1,0 +1,6 @@
+This template enables qemu and some common kernel features used when building
+a host designed to support various guest images
+
+#@TYPE: Wrtemplate
+#@NAME: virt-host
+#@DESCRIPTION: Enable kernel options and related components for hosting guests

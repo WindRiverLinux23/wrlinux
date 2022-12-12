@@ -1,4 +1,4 @@
-From e7b8636fa45a0d443b5385906ed126bc6c12979e Mon Sep 17 00:00:00 2001
+From edb0b20f5b37a67c998d15291f5b841e7467c306 Mon Sep 17 00:00:00 2001
 From: Liwei Song <liwei.song@windriver.com>
 Date: Thu, 2 Jan 2020 17:39:36 +0800
 Subject: [PATCH] system/locallogin.te: allow login read symlink file
@@ -9,7 +9,7 @@ AVC avc:  denied  { read } for  pid=512 comm="login" name="root"
 dev="sda3" ino=869 scontext=system_u:system_r:local_login_t:s0-s15:c0.c1023
 tcontext=system_u:object_r:default_t:s0 tclass=lnk_file permissive=0
 
-Upstream-Status: Pending
+Upstream-Status: Inappropriate [ostree specific]
 
 Signed-off-by: Liwei Song <liwei.song@windriver.com>
 ---
@@ -17,10 +17,10 @@ Signed-off-by: Liwei Song <liwei.song@windriver.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/policy/modules/system/locallogin.te b/policy/modules/system/locallogin.te
-index 109980e79..ee80cdfe7 100644
+index 7728de804..75602e3b3 100644
 --- a/policy/modules/system/locallogin.te
 +++ b/policy/modules/system/locallogin.te
-@@ -104,6 +104,8 @@ files_read_world_readable_sockets(local_login_t)
+@@ -108,6 +108,8 @@ files_read_world_readable_sockets(local_login_t)
  # for when /var/mail is a symlink
  files_read_var_symlinks(local_login_t)
  
@@ -30,5 +30,5 @@ index 109980e79..ee80cdfe7 100644
  
  storage_dontaudit_getattr_fixed_disk_dev(local_login_t)
 -- 
-2.17.1
+2.25.1
 

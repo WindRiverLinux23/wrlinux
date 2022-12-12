@@ -1,4 +1,4 @@
-From a1b9b18927f8b1389424f28fbc276ab1556dffd6 Mon Sep 17 00:00:00 2001
+From 00be74d987114f071f86e374e3b1504d31a06bb8 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Mon, 3 Aug 2020 10:51:49 +0800
 Subject: [PATCH] policy/modules/system/mount: allow mount command to mount any
@@ -17,10 +17,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/policy/modules/system/mount.te b/policy/modules/system/mount.te
-index 3d8748f5c..2102c9748 100644
+index 71b2b56c5..686da5150 100644
 --- a/policy/modules/system/mount.te
 +++ b/policy/modules/system/mount.te
-@@ -10,7 +10,7 @@ policy_module(mount, 1.25.0)
+@@ -10,7 +10,7 @@ policy_module(mount)
  ## Allow the mount command to mount any directory or file.
  ## </p>
  ## </desc>
@@ -30,5 +30,5 @@ index 3d8748f5c..2102c9748 100644
  attribute_role mount_roles;
  roleattribute system_r mount_roles;
 -- 
-2.17.1
+2.25.1
 

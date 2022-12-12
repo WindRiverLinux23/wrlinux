@@ -1,0 +1,33 @@
+From a6a9002de9eb570b35b19c6bf06263de348ab21e Mon Sep 17 00:00:00 2001
+From: Liwei Song <liwei.song@windriver.com>
+Date: Wed, 8 Jan 2020 05:48:58 +0000
+Subject: [PATCH] file_contexts.subs_dist: set aliases for ostree directories
+
+Set aliases for /usr/etc, /var/home and /var/rootdirs/*.
+
+Upstream-Status: Inappropriate [ostree specific]
+
+Signed-off-by: Liwei Song <liwei.song@windriver.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ config/file_contexts.subs_dist | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/config/file_contexts.subs_dist b/config/file_contexts.subs_dist
+index f80499ebf..9ba16c626 100644
+--- a/config/file_contexts.subs_dist
++++ b/config/file_contexts.subs_dist
+@@ -49,3 +49,10 @@
+ # The genhomedircon.py will expand /root home directory to /home/root
+ # Add an aliase for it
+ /root /home/root
++
++/usr/etc /etc
++/var/home /home
++/var/rootdirs/root /root
++/var/rootdirs/mnt /mnt
++/var/rootdirs/media /media
++/var/rootdirs/opt /opt
+-- 
+2.25.1
+

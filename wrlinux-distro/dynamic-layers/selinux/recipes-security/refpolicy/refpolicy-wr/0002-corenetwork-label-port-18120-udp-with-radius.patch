@@ -1,0 +1,31 @@
+From 7eb9934299097068f0cca939f732a3b0ea4632bf Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Sun, 16 Oct 2022 12:19:38 +0800
+Subject: [PATCH] corenetwork: label port 18120 udp with radius
+
+The inner-tunnel authentication method uses port 18120.
+See: /etc/raddb/sites-enabled/inner-tunnel
+
+Upstream-Status: Inappropriate [wrlinux specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ policy/modules/kernel/corenetwork.te.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/policy/modules/kernel/corenetwork.te.in b/policy/modules/kernel/corenetwork.te.in
+index 2bc259678..abeec374c 100644
+--- a/policy/modules/kernel/corenetwork.te.in
++++ b/policy/modules/kernel/corenetwork.te.in
+@@ -239,7 +239,7 @@ network_port(puppet, tcp, 8140, s0)
+ network_port(pxe, udp,4011,s0)
+ network_port(pyzor, udp,24441,s0)
+ network_port(radacct, udp,1646,s0, udp,1813,s0)
+-network_port(radius, udp,1645,s0, udp,1812,s0)
++network_port(radius, udp,1645,s0, udp,1812,s0, udp,18120,s0)
+ network_port(radsec, tcp,2083,s0)
+ network_port(razor, tcp,2703,s0)
+ network_port(redis, tcp,6379,s0, tcp,26379,s0)
+-- 
+2.25.1
+

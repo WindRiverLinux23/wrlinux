@@ -1,4 +1,4 @@
-From 467b126363ec71ac22e49e1cb0773b0576055338 Mon Sep 17 00:00:00 2001
+From 14db2d321d9ed0c52842cae8c096fbc25bfcd5da Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Tue, 4 Aug 2020 13:19:35 +0800
 Subject: [PATCH] policy/modules/system/userdomain: allow domain read home link
@@ -21,10 +21,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  1 file changed, 14 insertions(+)
 
 diff --git a/policy/modules/system/userdomain.if b/policy/modules/system/userdomain.if
-index de6e0196a..37dde6b12 100644
+index 8b39e13e1..4b477fbda 100644
 --- a/policy/modules/system/userdomain.if
 +++ b/policy/modules/system/userdomain.if
-@@ -1765,6 +1765,7 @@ interface(`userdom_getattr_user_home_dirs',`
+@@ -1779,6 +1779,7 @@ interface(`userdom_getattr_user_home_dirs',`
  		type user_home_dir_t;
  	')
  
@@ -32,7 +32,7 @@ index de6e0196a..37dde6b12 100644
  	allow $1 user_home_dir_t:dir getattr_dir_perms;
  	files_search_home($1)
  ')
-@@ -1802,6 +1803,7 @@ interface(`userdom_search_user_home_dirs',`
+@@ -1816,6 +1817,7 @@ interface(`userdom_search_user_home_dirs',`
  		type user_home_dir_t;
  	')
  
@@ -40,7 +40,7 @@ index de6e0196a..37dde6b12 100644
  	allow $1 user_home_dir_t:dir search_dir_perms;
  	files_search_home($1)
  ')
-@@ -1847,6 +1849,7 @@ interface(`userdom_list_user_home_dirs',`
+@@ -1861,6 +1863,7 @@ interface(`userdom_list_user_home_dirs',`
  		type user_home_dir_t;
  	')
  
@@ -48,7 +48,7 @@ index de6e0196a..37dde6b12 100644
  	allow $1 user_home_dir_t:dir list_dir_perms;
  	files_search_home($1)
  ')
-@@ -1884,6 +1887,7 @@ interface(`userdom_create_user_home_dirs',`
+@@ -1898,6 +1901,7 @@ interface(`userdom_create_user_home_dirs',`
  		type user_home_dir_t;
  	')
  
@@ -56,7 +56,7 @@ index de6e0196a..37dde6b12 100644
  	allow $1 user_home_dir_t:dir create_dir_perms;
  ')
  
-@@ -1902,6 +1906,7 @@ interface(`userdom_manage_user_home_dirs',`
+@@ -1916,6 +1920,7 @@ interface(`userdom_manage_user_home_dirs',`
  		type user_home_dir_t;
  	')
  
@@ -64,7 +64,7 @@ index de6e0196a..37dde6b12 100644
  	allow $1 user_home_dir_t:dir manage_dir_perms;
  ')
  
-@@ -1920,6 +1925,7 @@ interface(`userdom_relabelto_user_home_dirs',`
+@@ -1953,6 +1958,7 @@ interface(`userdom_relabelto_user_home_dirs',`
  		type user_home_dir_t;
  	')
  
@@ -72,7 +72,7 @@ index de6e0196a..37dde6b12 100644
  	allow $1 user_home_dir_t:dir relabelto;
  ')
  
-@@ -1982,6 +1988,7 @@ interface(`userdom_user_home_domtrans',`
+@@ -2015,6 +2021,7 @@ interface(`userdom_user_home_domtrans',`
  	')
  
  	domain_auto_transition_pattern($1, user_home_t, $2)
@@ -80,7 +80,7 @@ index de6e0196a..37dde6b12 100644
  	allow $1 user_home_dir_t:dir search_dir_perms;
  	files_search_home($1)
  ')
-@@ -2466,6 +2473,7 @@ interface(`userdom_manage_user_home_content_files',`
+@@ -2517,6 +2524,7 @@ interface(`userdom_manage_user_home_content_files',`
  	')
  
  	manage_files_pattern($1, user_home_t, user_home_t)
@@ -88,7 +88,7 @@ index de6e0196a..37dde6b12 100644
  	allow $1 user_home_dir_t:dir search_dir_perms;
  	files_search_home($1)
  ')
-@@ -2506,6 +2514,7 @@ interface(`userdom_manage_user_home_content_symlinks',`
+@@ -2557,6 +2565,7 @@ interface(`userdom_manage_user_home_content_symlinks',`
  	')
  
  	manage_lnk_files_pattern($1, user_home_t, user_home_t)
@@ -96,7 +96,7 @@ index de6e0196a..37dde6b12 100644
  	allow $1 user_home_dir_t:dir search_dir_perms;
  	files_search_home($1)
  ')
-@@ -2565,6 +2574,7 @@ interface(`userdom_manage_user_home_content_pipes',`
+@@ -2616,6 +2625,7 @@ interface(`userdom_manage_user_home_content_pipes',`
  	')
  
  	manage_fifo_files_pattern($1, user_home_t, user_home_t)
@@ -104,7 +104,7 @@ index de6e0196a..37dde6b12 100644
  	allow $1 user_home_dir_t:dir search_dir_perms;
  	files_search_home($1)
  ')
-@@ -2585,6 +2595,7 @@ interface(`userdom_manage_user_home_content_sockets',`
+@@ -2636,6 +2646,7 @@ interface(`userdom_manage_user_home_content_sockets',`
  		type user_home_dir_t, user_home_t;
  	')
  
@@ -112,7 +112,7 @@ index de6e0196a..37dde6b12 100644
  	allow $1 user_home_dir_t:dir search_dir_perms;
  	manage_sock_files_pattern($1, user_home_t, user_home_t)
  	files_search_home($1)
-@@ -2622,6 +2633,7 @@ interface(`userdom_user_home_dir_filetrans',`
+@@ -2673,6 +2684,7 @@ interface(`userdom_user_home_dir_filetrans',`
  		type user_home_dir_t;
  	')
  
@@ -120,7 +120,7 @@ index de6e0196a..37dde6b12 100644
  	filetrans_pattern($1, user_home_dir_t, $2, $3, $4)
  	files_search_home($1)
  ')
-@@ -2660,6 +2672,7 @@ interface(`userdom_user_home_content_filetrans',`
+@@ -2711,6 +2723,7 @@ interface(`userdom_user_home_content_filetrans',`
  	')
  
  	filetrans_pattern($1, user_home_t, $2, $3, $4)
@@ -128,7 +128,7 @@ index de6e0196a..37dde6b12 100644
  	allow $1 user_home_dir_t:dir search_dir_perms;
  	files_search_home($1)
  ')
-@@ -4431,6 +4444,7 @@ interface(`userdom_search_user_home_content',`
+@@ -4542,6 +4555,7 @@ interface(`userdom_search_user_home_content',`
  	')
  
  	files_list_home($1)
@@ -137,5 +137,5 @@ index de6e0196a..37dde6b12 100644
  ')
  
 -- 
-2.17.1
+2.25.1
 

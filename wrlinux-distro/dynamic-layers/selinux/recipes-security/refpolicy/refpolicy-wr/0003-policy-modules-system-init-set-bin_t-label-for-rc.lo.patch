@@ -1,0 +1,34 @@
+From 272df1dff3049d298ee777c522d446affe49a658 Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Wed, 8 Jul 2020 11:24:43 +0800
+Subject: [PATCH] policy/modules/system/init: set bin_t label for rc.local
+
+Fixes:
+avc:  denied  { execute } for  pid=91 comm="systemd-rc-loca"
+name="rc.local" dev="vda" ino=1063
+scontext=system_u:system_r:systemd_generator_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:etc_t:s0 tclass=file permissive=0
+
+Upstream-Status: Inappropriate [wrlinux specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ policy/modules/system/init.fc | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/policy/modules/system/init.fc b/policy/modules/system/init.fc
+index 7f0b7c699..6397bfeea 100644
+--- a/policy/modules/system/init.fc
++++ b/policy/modules/system/init.fc
+@@ -7,6 +7,8 @@
+ /etc/rc\.d/init\.d/.*	--	gen_context(system_u:object_r:initrc_exec_t,s0)
+ /etc/sysconfig/network-scripts/ifup-ipsec -- gen_context(system_u:object_r:initrc_exec_t,s0)
+ 
++/etc/rc\.local		--	gen_context(system_u:object_r:bin_t,s0)
++
+ /etc/X11/prefdm		--	gen_context(system_u:object_r:initrc_exec_t,s0)
+ 
+ ifdef(`distro_gentoo',`
+-- 
+2.25.1
+

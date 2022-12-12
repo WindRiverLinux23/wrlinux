@@ -1,4 +1,4 @@
-From 903a7316fd0bfa66679743e79546a64b3ba679ef Mon Sep 17 00:00:00 2001
+From d8867f8d09fdc1b5b06b9475500f53df444c1208 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Tue, 1 Nov 2022 12:44:59 +0800
 Subject: [PATCH] policy/modules/system/systemd: fix avc denials for
@@ -30,10 +30,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  3 files changed, 41 insertions(+)
 
 diff --git a/policy/modules/kernel/files.if b/policy/modules/kernel/files.if
-index b308eefd9..093f30d0d 100644
+index 451f302af..9c334cd8e 100644
 --- a/policy/modules/kernel/files.if
 +++ b/policy/modules/kernel/files.if
-@@ -7077,6 +7077,26 @@ interface(`files_rw_runtime_files',`
+@@ -7291,6 +7291,26 @@ interface(`files_rw_runtime_files',`
  	rw_files_pattern($1, var_run_t, var_run_t)
  ')
  
@@ -61,11 +61,11 @@ index b308eefd9..093f30d0d 100644
  ## <summary>
  ##	Delete generic runtime symlinks.
 diff --git a/policy/modules/kernel/kernel.if b/policy/modules/kernel/kernel.if
-index 18002e67d..a8e1dcf39 100644
+index 966e49b65..87166d176 100644
 --- a/policy/modules/kernel/kernel.if
 +++ b/policy/modules/kernel/kernel.if
-@@ -2894,6 +2894,24 @@ interface(`kernel_dontaudit_read_unlabeled_files',`
- 	dontaudit $1 unlabeled_t:file { getattr read };
+@@ -2981,6 +2981,24 @@ interface(`kernel_unlabeled_filetrans',`
+ 	filetrans_pattern($1, unlabeled_t, $2, $3, $4)
  ')
  
 +########################################
@@ -90,29 +90,28 @@ index 18002e67d..a8e1dcf39 100644
  ## <summary>
  ##	Delete unlabeled symbolic links.
 diff --git a/policy/modules/system/systemd.te b/policy/modules/system/systemd.te
-index 218d09352..d91269657 100644
+index 01c4f1bc9..dfe63df81 100644
 --- a/policy/modules/system/systemd.te
 +++ b/policy/modules/system/systemd.te
-@@ -445,9 +445,11 @@ dev_write_sysfs_dirs(systemd_generator_t)
- dev_read_urand(systemd_generator_t)
+@@ -488,8 +488,10 @@ dev_read_urand(systemd_generator_t)
  
  files_read_etc_files(systemd_generator_t)
-+files_create_runtime_files(systemd_generator_t)
  files_search_runtime(systemd_generator_t)
++files_create_runtime_files(systemd_generator_t)
  files_list_boot(systemd_generator_t)
  files_read_boot_files(systemd_generator_t)
 +files_read_default_symlinks(systemd_generator_t)
  files_search_all_mountpoints(systemd_generator_t)
  files_list_usr(systemd_generator_t)
- 
-@@ -475,6 +477,7 @@ kernel_read_kernel_sysctls(systemd_generator_t)
- kernel_dontaudit_getattr_proc(systemd_generator_t)
- kernel_getattr_unlabeled_dirs(systemd_generator_t)
- kernel_read_unlabeled_files(systemd_generator_t)
+ files_dontaudit_getattr_all_dirs(systemd_generator_t)
+@@ -515,6 +517,7 @@ init_read_script_files(systemd_generator_t)
+ kernel_use_fds(systemd_generator_t)
+ kernel_read_system_state(systemd_generator_t)
+ kernel_read_kernel_sysctls(systemd_generator_t)
 +kernel_read_unlabeled_symlinks(systemd_generator_t)
- files_read_boot_symlinks(systemd_generator_t)
- files_check_write_runtime_dirs(systemd_generator_t)
- files_rw_runtime_files(systemd_generator_t)
+ kernel_dontaudit_getattr_proc(systemd_generator_t)
+ # Where an unlabeled mountpoint is encounted:
+ kernel_dontaudit_search_unlabeled(systemd_generator_t)
 -- 
 2.25.1
 

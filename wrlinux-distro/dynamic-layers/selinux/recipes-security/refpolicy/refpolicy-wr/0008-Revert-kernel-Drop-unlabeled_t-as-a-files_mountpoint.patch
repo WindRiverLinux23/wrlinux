@@ -1,4 +1,4 @@
-From 91913ee8fa7311e1e6d8fc96e81b310bc779b3aa Mon Sep 17 00:00:00 2001
+From efa2d9bc820edd30c2e7dc726664421ff4e76fe9 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Thu, 4 Mar 2021 13:46:34 +0800
 Subject: [PATCH] Revert "kernel: Drop unlabeled_t as a files_mountpoint()."
@@ -17,7 +17,7 @@ ls: cannot access '/mnt': Permission denied
 d??????????   ? ?    ?  0     ?            ? mnt
 root@intel-x86-64:~#
 
-Upstream-Status: Pending
+Upstream-Status: Inappropriate [wrlinux specific]
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
@@ -25,10 +25,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/policy/modules/kernel/kernel.te b/policy/modules/kernel/kernel.te
-index 2031576e0..b5abf30d7 100644
+index d08610543..27b028f52 100644
 --- a/policy/modules/kernel/kernel.te
 +++ b/policy/modules/kernel/kernel.te
-@@ -190,6 +190,7 @@ genfscon proc /sys/dev gen_context(system_u:object_r:sysctl_dev_t,s0)
+@@ -202,6 +202,7 @@ genfscon proc /sys/dev gen_context(system_u:object_r:sysctl_dev_t,s0)
  #
  type unlabeled_t;
  kernel_rootfs_mountpoint(unlabeled_t)
@@ -37,5 +37,5 @@ index 2031576e0..b5abf30d7 100644
  sid file gen_context(system_u:object_r:unlabeled_t,s0)
  sid unlabeled gen_context(system_u:object_r:unlabeled_t,mls_systemhigh)
 -- 
-2.17.1
+2.25.1
 

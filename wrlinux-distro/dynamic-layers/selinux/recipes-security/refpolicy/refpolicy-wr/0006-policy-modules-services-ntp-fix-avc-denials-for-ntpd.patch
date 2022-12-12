@@ -1,0 +1,49 @@
+From cc3e33c0914674e0323ce4c0efe39a921fb481f0 Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Sun, 30 Oct 2022 12:09:10 +0800
+Subject: [PATCH] policy/modules/services/ntp: fix avc denials for ntpd_t with
+ MLS policy
+
+* Make ntpd_t domain MLS trusted for reading from files up to its
+  clearance.
+* Make ntpd_t domain MLS trusted for writing to files up to its
+  clearance.
+
+Fixes:
+avc:  denied  { read write } for  pid=218 comm="systemd-timesyn"
+name="clock" dev="sda2" ino=25742 scontext=system_u:system_r:ntpd_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:ntp_drift_t:s15:c0.c1023 tclass=file permissive=0
+
+avc:  denied  { getattr } for  pid=218 comm="systemd-timesyn"
+path="/var/lib/systemd/timesync/clock" dev="sda2" ino=25742
+scontext=system_u:system_r:ntpd_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:ntp_drift_t:s15:c0.c1023 tclass=file permissive=0
+
+avc:  denied  { setattr } for  pid=218 comm="systemd-timesyn"
+name="clock" dev="sda2" ino=25742 scontext=system_u:system_r:ntpd_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:ntp_drift_t:s15:c0.c1023 tclass=file permissive=0
+
+Upstream-Status: Pending
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ policy/modules/services/ntp.te | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/policy/modules/services/ntp.te b/policy/modules/services/ntp.te
+index 16494ba61..0a837626f 100644
+--- a/policy/modules/services/ntp.te
++++ b/policy/modules/services/ntp.te
+@@ -139,6 +139,9 @@ miscfiles_read_localization(ntpd_t)
+ userdom_dontaudit_use_unpriv_user_fds(ntpd_t)
+ userdom_list_user_home_dirs(ntpd_t)
+ 
++mls_file_read_to_clearance(ntpd_t)
++mls_file_write_to_clearance(ntpd_t)
++
+ ifdef(`init_systemd',`
+ 	allow ntpd_t self:process setfscreate;
+ 
+-- 
+2.25.1
+

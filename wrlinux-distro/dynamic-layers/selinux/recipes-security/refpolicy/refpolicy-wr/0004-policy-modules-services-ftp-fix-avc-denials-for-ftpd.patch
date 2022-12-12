@@ -1,4 +1,4 @@
-From 6041f491b26cb7eab080e6b12f441f8762244450 Mon Sep 17 00:00:00 2001
+From 76e2a4be5da0801f17b3751551efecf8249f9ca4 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Mon, 6 Jul 2020 08:52:42 +0800
 Subject: [PATCH] policy/modules/services/ftp: fix avc denials for ftpd_t with
@@ -29,10 +29,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  1 file changed, 3 insertions(+)
 
 diff --git a/policy/modules/services/ftp.te b/policy/modules/services/ftp.te
-index 1721878d1..a638761f9 100644
+index a3ff66feb..4b94ae7e5 100644
 --- a/policy/modules/services/ftp.te
 +++ b/policy/modules/services/ftp.te
-@@ -260,6 +260,9 @@ sysnet_use_ldap(ftpd_t)
+@@ -255,6 +255,9 @@ sysnet_use_ldap(ftpd_t)
  userdom_dontaudit_use_unpriv_user_fds(ftpd_t)
  userdom_dontaudit_search_user_home_dirs(ftpd_t)
  
@@ -43,5 +43,5 @@ index 1721878d1..a638761f9 100644
  	miscfiles_manage_public_files(ftpd_t)
  ')
 -- 
-2.17.1
+2.25.1
 

@@ -1,4 +1,4 @@
-From ada09fa3b963dc71ced9eb1d9b512111b0e6d080 Mon Sep 17 00:00:00 2001
+From c3b8e18c19a615aa3f49d69afd612f98d13beeee Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Tue, 4 Aug 2020 14:51:12 +0800
 Subject: [PATCH] policy/modules/roles/sysadm: allow sysadm_t to read
@@ -10,7 +10,7 @@ dev="devtmpfs" ino=261 scontext=root:sysadm_r:sysadm_t:s0-s15:c0.c1023
 tcontext=system_u:object_r:fixed_disk_device_t:s15:c0.c1023
 tclass=blk_file permissive=0
 
-Upstream-Status: Pending
+Upstream-Status: Inappropriate [wrlinux specific]
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
@@ -18,10 +18,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/policy/modules/roles/sysadm.te b/policy/modules/roles/sysadm.te
-index b9cd7ef78..94af9f336 100644
+index 8c154d474..b9968e865 100644
 --- a/policy/modules/roles/sysadm.te
 +++ b/policy/modules/roles/sysadm.te
-@@ -60,6 +60,8 @@ init_admin(sysadm_t)
+@@ -61,6 +61,8 @@ init_admin(sysadm_t)
  userdom_manage_user_home_dirs(sysadm_t)
  userdom_home_filetrans_user_home_dir(sysadm_t)
  
@@ -31,5 +31,5 @@ index b9cd7ef78..94af9f336 100644
  	optional_policy(`
  		init_run_daemon(sysadm_t, sysadm_r)
 -- 
-2.17.1
+2.25.1
 

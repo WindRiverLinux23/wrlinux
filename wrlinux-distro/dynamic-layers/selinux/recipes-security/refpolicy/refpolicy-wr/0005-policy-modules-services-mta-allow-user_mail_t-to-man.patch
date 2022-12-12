@@ -1,4 +1,4 @@
-From 6104b2a8c6fa1b0a538fb0d8f8fee6a41e33c825 Mon Sep 17 00:00:00 2001
+From e7fc4633f9bb0a5838a426d8525bae865588df7c Mon Sep 17 00:00:00 2001
 From: Wenzong Fan <wenzong.fan@windriver.com>
 Date: Fri, 26 Feb 2016 07:24:57 -0500
 Subject: [PATCH] policy/modules/services/mta: allow user_mail_t to manage
@@ -17,10 +17,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  1 file changed, 7 insertions(+)
 
 diff --git a/policy/modules/services/mta.te b/policy/modules/services/mta.te
-index c51c32083..f55c4b36e 100644
+index 817cbfe49..346e593d0 100644
 --- a/policy/modules/services/mta.te
 +++ b/policy/modules/services/mta.te
-@@ -411,6 +411,13 @@ dev_read_sysfs(user_mail_t)
+@@ -416,6 +416,13 @@ dev_read_sysfs(user_mail_t)
  
  userdom_use_user_terminals(user_mail_t)
  
@@ -35,5 +35,5 @@ index c51c32083..f55c4b36e 100644
  	allow user_mail_t self:capability dac_override;
  
 -- 
-2.17.1
+2.25.1
 

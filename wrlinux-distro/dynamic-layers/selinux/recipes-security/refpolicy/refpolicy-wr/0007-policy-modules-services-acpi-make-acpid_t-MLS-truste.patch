@@ -1,0 +1,34 @@
+From aeec39dead7c221d639b1c568bd493f56cd956ad Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Mon, 31 Oct 2022 16:08:35 +0800
+Subject: [PATCH] policy/modules/services/acpi: make acpid_t MLS trusted for
+ reading from files at all levels
+
+Fixes:
+avc:  denied  { read } for  pid=305 comm="acpid" name="event6"
+dev="devtmpfs" ino=443 scontext=system_u:system_r:acpid_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:event_device_t:s15:c0.c1023 tclass=chr_file permissive=1
+
+Upstream-Status: Pending
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ policy/modules/services/acpi.te | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/policy/modules/services/acpi.te b/policy/modules/services/acpi.te
+index c4ca7f7f6..a1ff381f2 100644
+--- a/policy/modules/services/acpi.te
++++ b/policy/modules/services/acpi.te
+@@ -156,6 +156,8 @@ userdom_dontaudit_use_unpriv_user_fds(acpid_t)
+ userdom_dontaudit_search_user_home_dirs(acpid_t)
+ userdom_dontaudit_search_user_home_content(acpid_t)
+ 
++mls_file_read_all_levels(acpid_t)
++
+ optional_policy(`
+ 	automount_domtrans(acpid_t)
+ ')
+-- 
+2.25.1
+

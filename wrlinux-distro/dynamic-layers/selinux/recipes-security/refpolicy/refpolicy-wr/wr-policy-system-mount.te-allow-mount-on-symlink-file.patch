@@ -1,4 +1,4 @@
-From 4627810c35de9d30c40b25de2d4711a9437c8e29 Mon Sep 17 00:00:00 2001
+From 9481e4e43468796eee955c54dcb37bfee506ac64 Mon Sep 17 00:00:00 2001
 From: Liwei Song <liwei.song@windriver.com>
 Date: Thu, 2 Jan 2020 17:38:13 +0800
 Subject: [PATCH] system/mount.te: allow mount on symlink file
@@ -9,7 +9,7 @@ AVC avc:  denied  { read } for  pid=644 comm="mount" name="mnt"
 dev="sda3" ino=865 scontext=root:sysadm_r:mount_t:s0-s15:c0.c1023
 tcontext=system_u:object_r:default_t:s0 tclass=lnk_file permissive=0
 
-Upstream-Status: Pending
+Upstream-Status: Inappropriate [ostree specific]
 
 Signed-off-by: Liwei Song <liwei.song@windriver.com>
 ---
@@ -17,19 +17,19 @@ Signed-off-by: Liwei Song <liwei.song@windriver.com>
  1 file changed, 3 insertions(+)
 
 diff --git a/policy/modules/system/mount.te b/policy/modules/system/mount.te
-index b4ebe4274..f2ba645f6 100644
+index 97f49e58e..7b462f2d4 100644
 --- a/policy/modules/system/mount.te
 +++ b/policy/modules/system/mount.te
-@@ -98,6 +98,9 @@ files_list_all_mountpoints(mount_t)
+@@ -99,6 +99,9 @@ files_list_all_mountpoints(mount_t)
  files_dontaudit_write_all_mountpoints(mount_t)
  files_dontaudit_setattr_all_mountpoints(mount_t)
  
 +files_read_all_symlinks(mount_t)
 +files_getattr_all_symlinks(mount_t)
 +
- fs_getattr_xattr_fs(mount_t)
- fs_getattr_tmpfs(mount_t)
- fs_getattr_rpc_pipefs(mount_t)
+ fs_getattr_all_fs(mount_t)
+ fs_mount_all_fs(mount_t)
+ fs_unmount_all_fs(mount_t)
 -- 
-2.17.1
+2.25.1
 

@@ -222,6 +222,7 @@ DEPENDS = "\
     tzcode-native \
     u-boot-s32-tools-native \
     u-boot-tools-native \
+    unfs3-native \
     unifdef-native \
     unzip-native \
     update-rc.d-native \

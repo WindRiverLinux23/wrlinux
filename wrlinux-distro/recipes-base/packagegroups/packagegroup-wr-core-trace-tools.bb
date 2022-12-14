@@ -17,6 +17,5 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 ALLOW_EMPTY:${PN} = "1"
 
 RDEPENDS:${PN} = "\
-    diod \
     socat \
 "

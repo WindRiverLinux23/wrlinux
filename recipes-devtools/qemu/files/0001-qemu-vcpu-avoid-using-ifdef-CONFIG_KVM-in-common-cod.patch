@@ -1,4 +1,4 @@
-From 8432156777da703dc2fea9528da9dade938e6744 Mon Sep 17 00:00:00 2001
+From d8a7ecbc26bccb4de1dab9c6aa6d1ad487418461 Mon Sep 17 00:00:00 2001
 From: Paul Gortmaker <paul.gortmaker@windriver.com>
 Date: Thu, 11 Aug 2022 14:14:29 -0400
 Subject: [PATCH] qemu: vcpu: avoid using ifdef CONFIG_KVM in common code.
@@ -17,13 +17,16 @@ we can make use of that and make the common code less "ifdeffy" at
 the same time.
 
 Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
+
+Rebase to v7.1.0
+Signed-off-by: He Zhe <zhe.he@windriver.com>
 ---
  accel/stubs/kvm-stub.c | 5 +++++
  softmmu/vl.c           | 2 --
  2 files changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/accel/stubs/kvm-stub.c b/accel/stubs/kvm-stub.c
-index 3345882d85d5..299b8005947a 100644
+index 2ac5f9c03..7e5cc4ed1 100644
 --- a/accel/stubs/kvm-stub.c
 +++ b/accel/stubs/kvm-stub.c
 @@ -12,6 +12,7 @@
@@ -34,19 +37,19 @@ index 3345882d85d5..299b8005947a 100644
  #include "hw/pci/msi.h"
  
  KVMState *kvm_state;
-@@ -148,3 +149,7 @@ bool kvm_dirty_ring_enabled(void)
+@@ -153,3 +154,7 @@ uint32_t kvm_dirty_ring_size(void)
  {
-     return false;
+     return 0;
  }
 +
 +void vcpu_parse(const char *optarg)
 +{
 +}
 diff --git a/softmmu/vl.c b/softmmu/vl.c
-index 29d178f81245..39c5c4dcc807 100644
+index 4259509be..28194ed84 100644
 --- a/softmmu/vl.c
 +++ b/softmmu/vl.c
-@@ -3411,9 +3411,7 @@ void qemu_init(int argc, char **argv, char **envp)
+@@ -3236,9 +3236,7 @@ void qemu_init(int argc, char **argv, char **envp)
                                             "smp", optarg);
                  break;
              case QEMU_OPTION_vcpu:
@@ -57,5 +60,5 @@ index 29d178f81245..39c5c4dcc807 100644
              case QEMU_OPTION_vnc:
                  vnc_parse(optarg);
 -- 
-2.17.1
+2.32.0
 

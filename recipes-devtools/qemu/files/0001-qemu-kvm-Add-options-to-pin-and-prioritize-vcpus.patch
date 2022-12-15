@@ -1,4 +1,4 @@
-From 9d8b6088b19252997e2153f6c29d9ba2260f04aa Mon Sep 17 00:00:00 2001
+From 4300ad6c8ca405e4cc80dc79dfa1621ae0518579 Mon Sep 17 00:00:00 2001
 From: Thomas Gleixner <tglx@linutronix.de>
 Date: Fri, 21 May 2021 17:33:41 +0800
 Subject: [PATCH] qemu-kvm: Add options to pin and prioritize vcpus
@@ -7,16 +7,17 @@ Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Yang Shi <yang.shi@windriver.com>
 Signed-off-by: Paul Barrette <paul.barrette@windriver.com>
 Signed-off-by: Michael Barabanov <michael.barabanov@windriver.com>
-Rebase to v7.0.0
+Rebase to v7.1.0
 Signed-off-by: He Zhe <zhe.he@windriver.com>
 ---
- accel/kvm/kvm-accel-ops.c     | 144 ++++++++++++++++++++++++++++++++++
- include/sysemu/cpus.h         |   2 +
- qemu-options.hx               |   7 ++
- softmmu/vl.c                  |   5 ++
+ accel/kvm/kvm-accel-ops.c | 144 ++++++++++++++++++++++++++++++++++++++
+ include/sysemu/cpus.h     |   2 +
+ qemu-options.hx           |   7 ++
+ softmmu/vl.c              |   5 ++
+ 4 files changed, 158 insertions(+)
 
 diff --git a/accel/kvm/kvm-accel-ops.c b/accel/kvm/kvm-accel-ops.c
-index c4244a23c651..038d63adfbd0 100644
+index c4244a23c..038d63adf 100644
 --- a/accel/kvm/kvm-accel-ops.c
 +++ b/accel/kvm/kvm-accel-ops.c
 @@ -23,6 +23,148 @@
@@ -178,7 +179,7 @@ index c4244a23c651..038d63adfbd0 100644
      cpu_thread_signal_created(cpu);
      qemu_guest_random_seed_thread_part2(cpu->random_seed);
 diff --git a/include/sysemu/cpus.h b/include/sysemu/cpus.h
-index b5c87d48b3..0f0100e645 100644
+index b5c87d48b..0f0100e64 100644
 --- a/include/sysemu/cpus.h
 +++ b/include/sysemu/cpus.h
 @@ -48,6 +48,8 @@ void cpu_synchronize_all_post_reset(void);
@@ -191,12 +192,12 @@ index b5c87d48b3..0f0100e645 100644
  /* vl.c */
  /* *-user doesn't have configurable SMP topology */
 diff --git a/qemu-options.hx b/qemu-options.hx
-index 796229c433..a5a1c2e61a 100644
+index 31c04f7ee..6f72eab63 100644
 --- a/qemu-options.hx
 +++ b/qemu-options.hx
-@@ -1075,6 +1075,13 @@ DEFHEADING()
+@@ -1118,6 +1118,13 @@ backend describes how QEMU handles the data.
  
- DEFHEADING(Block device options:)
+ ERST
  
 +DEF("vcpu", HAS_ARG, QEMU_OPTION_vcpu,
 +    "-vcpu n[,affinity=cpumask][,prio=prio] Pin and/or prioritize a vcpu\n", QEMU_ARCH_ALL)
@@ -209,10 +210,10 @@ index 796229c433..a5a1c2e61a 100644
      "-fda/-fdb file  use 'file' as floppy disk 0/1 image\n", QEMU_ARCH_ALL)
  DEF("fdb", HAS_ARG, QEMU_OPTION_fdb, "", QEMU_ARCH_ALL)
 diff --git a/softmmu/vl.c b/softmmu/vl.c
-index 488cc4d09e..8b25a421cd 100644
+index 706bd7cff..4259509be 100644
 --- a/softmmu/vl.c
 +++ b/softmmu/vl.c
-@@ -3419,6 +3419,11 @@ void qemu_init(int argc, char **argv, char **envp)
+@@ -3235,6 +3235,11 @@ void qemu_init(int argc, char **argv, char **envp)
                  machine_parse_property_opt(qemu_find_opts("smp-opts"),
                                             "smp", optarg);
                  break;
@@ -225,5 +226,5 @@ index 488cc4d09e..8b25a421cd 100644
                  vnc_parse(optarg);
                  break;
 -- 
-2.25.1
+2.32.0
 

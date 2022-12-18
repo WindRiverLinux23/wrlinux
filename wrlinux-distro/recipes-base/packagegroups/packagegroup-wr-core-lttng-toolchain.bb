@@ -11,8 +11,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
+LTTNG_TOOLS ?= 'lttng-tools'
+LTTNG_TOOLS:riscv32 = ''
+
 RDEPENDS:${PN} = "\
-	lttng-tools \
+	${LTTNG_TOOLS} \
 	babeltrace \
 	lttng-ust \
 "

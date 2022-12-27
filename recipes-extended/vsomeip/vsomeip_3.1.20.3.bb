@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/GENIVI/${BPN}.git;branch=master;protocol=https;name=
            file://0003-Support-boost-1.76.patch \
            file://0004-Add-boost-1.78-support-so-that-vsomeip3-will-compile.patch \
            file://0005-Do-general-cleanup-of-warnings-that-gcc-12.1.1-fired.patch \
-           file://0006-Support-boost-1.80.patch \
+           file://0006-Support-boost-1.81.patch \
           "
 
 SRCREV_vsomeip = "13f9c89ced6ffaeb1faf485152e27e1f40d234cd"

@@ -105,6 +105,7 @@ DEPENDS = "\
     librepo-native \
     librsvg-native \
     libsdl2-native \
+    libslirp-native \
     libsm-native \
     libsolv-native \
     libssh2-native \

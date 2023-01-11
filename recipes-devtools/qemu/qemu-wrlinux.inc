@@ -9,3 +9,5 @@ SRC_URI += " \
         file://0001-qemu-kvm-Add-options-to-pin-and-prioritize-vcpus.patch \
         file://0001-qemu-vcpu-avoid-using-ifdef-CONFIG_KVM-in-common-cod.patch \
 "
+
+PACKAGECONFIG:append:osv-wrlinux = " vhost"

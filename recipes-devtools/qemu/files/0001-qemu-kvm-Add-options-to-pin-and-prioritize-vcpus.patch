@@ -1,4 +1,4 @@
-From 4300ad6c8ca405e4cc80dc79dfa1621ae0518579 Mon Sep 17 00:00:00 2001
+From 3b62d0fa530459ca6800c48c5563815b0a137d1e Mon Sep 17 00:00:00 2001
 From: Thomas Gleixner <tglx@linutronix.de>
 Date: Fri, 21 May 2021 17:33:41 +0800
 Subject: [PATCH] qemu-kvm: Add options to pin and prioritize vcpus
@@ -7,8 +7,9 @@ Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Signed-off-by: Yang Shi <yang.shi@windriver.com>
 Signed-off-by: Paul Barrette <paul.barrette@windriver.com>
 Signed-off-by: Michael Barabanov <michael.barabanov@windriver.com>
-Rebase to v7.1.0
+Rebase to v7.2.0
 Signed-off-by: He Zhe <zhe.he@windriver.com>
+
 ---
  accel/kvm/kvm-accel-ops.c | 144 ++++++++++++++++++++++++++++++++++++++
  include/sysemu/cpus.h     |   2 +
@@ -17,12 +18,12 @@ Signed-off-by: He Zhe <zhe.he@windriver.com>
  4 files changed, 158 insertions(+)
 
 diff --git a/accel/kvm/kvm-accel-ops.c b/accel/kvm/kvm-accel-ops.c
-index c4244a23c..038d63adf 100644
+index fbf4fe349..0b0d741f7 100644
 --- a/accel/kvm/kvm-accel-ops.c
 +++ b/accel/kvm/kvm-accel-ops.c
-@@ -23,6 +23,148 @@
- #include "qapi/error.h"
+@@ -25,6 +25,148 @@
  
+ #include <linux/kvm.h>
  #include "kvm-cpus.h"
 +#include <sched.h>
 +
@@ -169,7 +170,7 @@ index c4244a23c..038d63adf 100644
  
  static void *kvm_vcpu_thread_fn(void *arg)
  {
-@@ -40,6 +182,8 @@ static void *kvm_vcpu_thread_fn(void *arg)
+@@ -42,6 +184,8 @@ static void *kvm_vcpu_thread_fn(void *arg)
      r = kvm_init_vcpu(cpu, &error_fatal);
      kvm_init_cpu_signals(cpu);
  
@@ -179,10 +180,10 @@ index c4244a23c..038d63adf 100644
      cpu_thread_signal_created(cpu);
      qemu_guest_random_seed_thread_part2(cpu->random_seed);
 diff --git a/include/sysemu/cpus.h b/include/sysemu/cpus.h
-index b5c87d48b..0f0100e64 100644
+index 1bace3379..65e2cbbe6 100644
 --- a/include/sysemu/cpus.h
 +++ b/include/sysemu/cpus.h
-@@ -48,6 +48,8 @@ void cpu_synchronize_all_post_reset(void);
+@@ -51,6 +51,8 @@ void cpu_synchronize_all_post_reset(void);
  void cpu_synchronize_all_post_init(void);
  void cpu_synchronize_all_pre_loadvm(void);
  
@@ -192,10 +193,10 @@ index b5c87d48b..0f0100e64 100644
  /* vl.c */
  /* *-user doesn't have configurable SMP topology */
 diff --git a/qemu-options.hx b/qemu-options.hx
-index 31c04f7ee..6f72eab63 100644
+index 7f99d15b2..dea93dad5 100644
 --- a/qemu-options.hx
 +++ b/qemu-options.hx
-@@ -1118,6 +1118,13 @@ backend describes how QEMU handles the data.
+@@ -1147,6 +1147,13 @@ backend describes how QEMU handles the data.
  
  ERST
  
@@ -210,10 +211,10 @@ index 31c04f7ee..6f72eab63 100644
      "-fda/-fdb file  use 'file' as floppy disk 0/1 image\n", QEMU_ARCH_ALL)
  DEF("fdb", HAS_ARG, QEMU_OPTION_fdb, "", QEMU_ARCH_ALL)
 diff --git a/softmmu/vl.c b/softmmu/vl.c
-index 706bd7cff..4259509be 100644
+index 5115221ef..b112e9e39 100644
 --- a/softmmu/vl.c
 +++ b/softmmu/vl.c
-@@ -3235,6 +3235,11 @@ void qemu_init(int argc, char **argv, char **envp)
+@@ -3252,6 +3252,11 @@ void qemu_init(int argc, char **argv)
                  machine_parse_property_opt(qemu_find_opts("smp-opts"),
                                             "smp", optarg);
                  break;
@@ -225,6 +226,3 @@ index 706bd7cff..4259509be 100644
              case QEMU_OPTION_vnc:
                  vnc_parse(optarg);
                  break;
--- 
-2.32.0
-

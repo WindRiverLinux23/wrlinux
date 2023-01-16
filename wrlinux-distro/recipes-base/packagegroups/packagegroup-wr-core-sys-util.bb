@@ -40,7 +40,6 @@ RDEPENDS:${PN} = " \
     ${STRACE} \
     usbutils \
     watchdog \
-    crda \
     wireless-regdb-static \
     ${@bb.utils.contains('INCOMPATIBLE_LICENSE', 'GPL-3.0-or-later', '', 'parted', d)} \
     "

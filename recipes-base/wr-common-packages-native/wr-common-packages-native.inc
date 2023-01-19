@@ -178,7 +178,6 @@ DEPENDS = "\
     python3-iniparse-native \
     python3-installer-native \
     python3-jinja2-native \
-    python3-m2crypto-native \
     python3-mako-native \
     python3-markupsafe-native \
     python3-native \

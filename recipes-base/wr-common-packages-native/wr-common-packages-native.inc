@@ -171,6 +171,7 @@ DEPENDS = "\
     popt-native \
     postfix-native \
     pseudo-native \
+    python3-build-native \
     python3-cffi-native \
     python3-cryptography-native \
     python3-docutils-native \
@@ -182,12 +183,12 @@ DEPENDS = "\
     python3-markupsafe-native \
     python3-native \
     python3-packaging-native \
-    python3-picobuild-native \
     python3-pip-native \
     python3-pycparser-native \
     python3-pyelftools-native \
     python3-pygments-native \
     python3-pyparsing-native \
+    python3-pyproject-hooks-native \
     python3-semantic-version-native \
     python3-setuptools-native \
     python3-setuptools-rust-native \

@@ -122,7 +122,11 @@ python recipelist_noprovider_handler() {
             # Override DISTRO_FEATURES_NATIVE and DISTRO_FEATURES_NATIVESDK
             # since virtualfn2realfn is called.
             localdata.setVar('DISTRO_FEATURES', saved_distro_features)
-            bb.cache.parse_recipe(localdata, bbfile, appends)
+            bbfile_loc = os.path.abspath(os.path.dirname(bbfile))
+            bb.parse.cached_mtime_noerror(bbfile_loc)
+            if appends:
+                localdata.setVar('__BBAPPEND', " ".join(appends))
+            bb.parse.handle(bbfile, localdata)
             bb.data.expandKeys(localdata)
             depends = localdata.getVar('DEPENDS')
             packages = localdata.getVar('PACKAGES')

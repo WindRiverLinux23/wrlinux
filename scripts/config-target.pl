@@ -1581,8 +1581,7 @@ sub qemu_start {
     exit 1;
   }
 
-  if ($tgt_vars{'TARGET_BOARD'} eq "qemuarm" ||
-	  $tgt_vars{'TARGET_BOARD'} eq "qemuarma9") {
+  if ($tgt_vars{'TARGET_BOARD'} eq "qemuarm") {
     $cmd = "QEMU_AUDIO_DRV='none' $cmd";
   }
 

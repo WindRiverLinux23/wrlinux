@@ -44,13 +44,13 @@ Example: extending a BSP to support the standard kernel
 Create the following layer, and configure it into the build (or add it
 to conf/bblayers.conf):
 
-   my-qemuarma9/
+   my-qemuarm/
    ├── conf
    │   └── layer.conf
    └── recipes-kernel
        └── linux
 	   ├── linux-yocto
-	   │   └── myqemuarma9.scc
+	   │   └── myqemuarm.scc
 	   └── linux-yocto_4.12.bbappend
 
 The contents of layer.conf are:
@@ -81,18 +81,18 @@ And the contents of linux-yocto_4.12.bbappend are:
 
    FILESEXTRAPATHS := "${THISDIR}/${PN}"
 
-   SRC_URI += "file://myqemuarma9.scc"
+   SRC_URI += "file://myqemuarm.scc"
 
-And finally, the contents of myqemuarma9.scc are:
+And finally, the contents of myqemuarm.scc are:
 
-   define KMACHINE qemuarma9
+   define KMACHINE qemuarm
    define KTYPE standard
    define KARCH arm
 
    include ktypes/standard/standard.scc
-   branch myqemuarma9
+   branch myqemuarm
 
-   kconf hardware bsp/qemuarma9/qemuarma9.cfg
+   kconf hardware bsp/qemuarm/qemuarm.cfg
 
 The first two files are build system constructs, while the final file is
 a top level board definition that will be found during the the kernel
@@ -100,24 +100,24 @@ patch and configuration phases to fully describe the kernel type extension.
 
 The first block of lines:
 
-   define KMACHINE qemuarma9
+   define KMACHINE qemuarm
    define KTYPE standard
    define KARCH arm
 
 Are use by the build system to identify the .scc file as describing a standard
-definition for the qemuarma9 board, and is a mandatory part of any board
+definition for the qemuarm board, and is a mandatory part of any board
 description.
 
 The second block of lines:
 
    include ktypes/standard/standard.scc
-   branch myqemuarma9
+   branch myqemuarm
 
 Includes the base kernel type and creates a new board specific branch.
 
 The third block:
 
-   kconf hardware bsp/qemuarma9/qemuarma9.cfg
+   kconf hardware bsp/qemuarm/qemuarm.cfg
 
 includes the base BSP configuration and applies it after the kernel type
 configuration options.

@@ -1,0 +1,106 @@
+From 20200bee7252d4c9c2a748a9e90fba33f2da9734 Mon Sep 17 00:00:00 2001
+From: Paul Gortmaker <paul.gortmaker@windriver.com>
+Date: Thu, 9 Feb 2023 21:42:25 -0500
+Subject: [PATCH] drm/i915/gt: don't use preempt_disable/enable around reset
+ call
+
+It turns out that a relatively recent commit breaks PM-suspend
+operations on preempt-rt, on multiple versions, due to all the
+linux-stable backports, including this v5.15 one:
+
+  commit 0ee5874dad61d2b154a9e3db196fc33e8208ce1b
+  Author: Chris Wilson <chris@chris-wilson.co.uk>
+  Date:   Tue Jul 12 16:21:32 2022 +0100
+
+    drm/i915/gt: Serialize GRDOM access between multiple engine resets
+
+    [ Upstream commit b24dcf1dc507f69ed3b5c66c2b6a0209ae80d4d4 ]
+
+Below is an example of the regression on v5.15-rt, with backport:
+
+  BUG: sleeping function called from invalid context at kernel/locking/spinlock_rt.c:46
+  in_atomic(): 1, irqs_disabled(): 0, non_block: 0, pid: 45092, name: kworker/u8:4
+  preempt_count: 1, expected: 0
+  RCU nest depth: 0, expected: 0
+  INFO: lockdep is turned off.
+  Preemption disabled at:
+  [<ffffffffc0636522>] __intel_gt_reset+0x92/0x100 [i915]
+  CPU: 3 PID: 45092 Comm: kworker/u8:4 Tainted: G        W  O      5.15.59-rt48-preempt-rt #1
+  Hardware name: Intel(R) Client Systems NUC7i5DNKE/NUC7i5DNB, BIOS DNKBLi5v.86A.0064.2019.0523.1933 05/23/2019
+  Workqueue: events_unbound async_run_entry_fn
+  Call Trace:
+   <TASK>
+   show_stack+0x52/0x5c
+   dump_stack_lvl+0x5b/0x86
+   dump_stack+0x10/0x16
+   __might_resched.cold+0xf7/0x12f
+   ? __gen6_reset_engines.constprop.0+0x80/0x80 [i915]
+   rt_spin_lock+0x4e/0xf0
+   ? gen8_reset_engines+0x2e/0x1e0 [i915]
+   gen8_reset_engines+0x2e/0x1e0 [i915]
+   ? __gen6_reset_engines.constprop.0+0x80/0x80 [i915]
+   __intel_gt_reset+0x9d/0x100 [i915]
+   gt_sanitize+0x16c/0x190 [i915]
+   intel_gt_suspend_late+0x3d/0xc0 [i915]
+   i915_gem_suspend_late+0x57/0x130 [i915]
+   i915_drm_suspend_late+0x38/0x110 [i915]
+   i915_pm_suspend_late+0x1d/0x30 [i915]
+   pm_generic_suspend_late+0x28/0x40
+   pci_pm_suspend_late+0x37/0x50
+   ? pci_pm_poweroff_late+0x50/0x50
+   dpm_run_callback.cold+0x3c/0xa8
+   __device_suspend_late+0xa4/0x1e0
+   async_suspend_late+0x20/0xa0
+   async_run_entry_fn+0x28/0xc0
+   process_one_work+0x239/0x6c0
+   worker_thread+0x58/0x3e0
+   kthread+0x1a9/0x1d0
+   ? process_one_work+0x6c0/0x6c0
+   ? set_kthread_struct+0x50/0x50
+   ret_from_fork+0x1f/0x30
+   </TASK>
+  PM: late suspend of devices complete after 26.497 msecs
+
+This happens, because the reset code now takes uncore->lock and that reacts
+badly with commit ade8a0f59844 ("drm/i915: Make all GPU resets atomic")
+
+Specifically this part, called out above with "Preemption disabled at:"
+
++         preempt_disable();
++         ret = reset(i915, engine_mask, retry);
++         preempt_enable();
+
+A conversion to raw lock was considered independently in:
+
+https://lore.kernel.org/all/20211006164628.s2mtsdd2jdbfyf7g@linutronix.de/
+
+...but was ruled out for latency reasons.  However I believe there is a
+more simple solution, at least for this recent regression.  If we now have
+the uncore->lock now wrapping the reset functions from b24dcf1dc507 (and
+backports) then we aren't in any way relying on the added calls to
+preempt_dis/enable() above to ensure non-conflicting resets or similar.
+
+Hence we can "downgrade" them to migrate_dis/enable() so the reset
+functions can run as-is, without any raw lock conversions or similar.
+
+Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
+
+diff --git a/drivers/gpu/drm/i915/gt/intel_reset.c b/drivers/gpu/drm/i915/gt/intel_reset.c
+index 9dc244b70ce4..341833c364fe 100644
+--- a/drivers/gpu/drm/i915/gt/intel_reset.c
++++ b/drivers/gpu/drm/i915/gt/intel_reset.c
+@@ -736,9 +736,9 @@ int __intel_gt_reset(struct intel_gt *gt, intel_engine_mask_t engine_mask)
+ 	intel_uncore_forcewake_get(gt->uncore, FORCEWAKE_ALL);
+ 	for (retry = 0; ret == -ETIMEDOUT && retry < retries; retry++) {
+ 		GT_TRACE(gt, "engine_mask=%x\n", engine_mask);
+-		preempt_disable();
++		migrate_disable();
+ 		ret = reset(gt, engine_mask, retry);
+-		preempt_enable();
++		migrate_enable();
+ 	}
+ 	intel_uncore_forcewake_put(gt->uncore, FORCEWAKE_ALL);
+ 
+-- 
+2.17.1
+

@@ -9,6 +9,7 @@ DEPENDS = "\
     autoconf-native \
     automake-native \
     bc-native \
+    binutils-native \
     bison-native \
     bmap-tools-native \
     boost-build-native \
@@ -19,6 +20,7 @@ DEPENDS = "\
     cargo-native \
     cdrtools-native \
     chrpath-native \
+    clang-native \
     cmake-native \
     coreutils-native \
     cpio-native \
@@ -84,6 +86,7 @@ DEPENDS = "\
     libcomps-native \
     libdnf-native \
     libdrm-native \
+    libedit-native \
     libepoxy-native \
     libffi-native \
     libfontenc-native \

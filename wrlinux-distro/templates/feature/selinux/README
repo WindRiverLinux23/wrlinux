@@ -11,3 +11,7 @@ In your local.conf file you need to set the preferred policy, such as:
   PREFERRED_PROVIDER_virtual/refpolicy = "refpolicy-standard"
 
 By default, the refpolicy-mls will be used.
+
+By default, the selinux contexts of system will be labeled on first boot
+via autorelabel service. To enable labeling selinux contexts at build
+time, set FIRST_BOOT_RELABEL = "0" in your local.conf.

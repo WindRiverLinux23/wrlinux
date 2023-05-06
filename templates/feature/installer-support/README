@@ -283,7 +283,7 @@ Building the target installer
          The PXELinux Boot Loader File pxelinux.0 located in syslinux package,
          you could directly copy it to the tftp download dir.
 
-         Copy kernel (bzImage) to tftp download dir. In ISO, it named vmlinuz.
+         Copy kernel (bzImage) to tftp download dir.
 
     10.2 initrd boot
          Use recipe wrlinux-image-installer-initramfs to support initrd boot,
@@ -356,7 +356,7 @@ Building the target installer
     $ bitbake grub-efi -cmkpxeimage
 
     3 Copy UEFI-base PXE image to tftp download dir
-    $ cp tmp-glibc/deploy/images/qemux86-64/bootx64.efi /srv/tftpboot/boot
+    $ cp tmp-glibc/deploy/images/qemux86-64/bootx64-pxe.efi /srv/tftpboot/boot
 
     4. Update the DHCP server config
     $ vi /etc/dhcp/dhcpd.conf

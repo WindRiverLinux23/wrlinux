@@ -4,10 +4,10 @@ Limitation
    is i.86|x86_64
    (Set MACHINE = "qemux86-64|qemux86|intel-x86-64" in the build)
 
-2) The target installer based on fedora 34, so it requires:
+2) The target installer based on fedora 37, so it requires:
    - systemd as init manager
    - python3
-   - dnf2/rpm4 pakcage management
+   - dnf2/rpm4 package management
    - gobject-introspection which requires qemu-usermode
      in MACHINE_FEATURES
 
@@ -142,7 +142,7 @@ Building the target installer
 
    4.3 Use virtualbox for testing
        4.3.1 Prepare virtualbox
-             Take Ubuntu 14.04 for example, the virtualbox is 4.3.10
+             Take Ubuntu 22.04 for example, the virtualbox is 6.1.38
              sudo apt-get install virtualbox
 
        4.3.2 Create virtual machine
@@ -294,7 +294,7 @@ Building the target installer
 
     10.3 initrd boot with kickstart
          Based on 10.2 initrd boot, we should prepare a kickstart file on
-         web server, and add param "ks=http://webserver_ip/anaconda-ks.cfg"
+         web server, and add param "inst.ks=http://webserver_ip/anaconda-ks.cfg"
          to PXE config file.
 
     10.4 nfs boot
@@ -315,10 +315,10 @@ Building the target installer
     we could make use of "%pre" section with invoking shell to do that)
 
 12. How to authenticate while downloading kickstart from web server
-    12.1 We add boot options 'ksuser' and 'kspasswd'(listed in /proc/cmdline)
+    12.1 We add boot options 'inst.ksuser' and 'inst.kspasswd'(listed in /proc/cmdline)
          to support authentication while downloading kickstart from web server.
          You could integrate them to installer image by set APPEND:append =
-         " ks=<url-ks> ksuser=<username> kspasswd=<password>" in local.conf
+         " inst.ks=<url-ks> inst.ksuser=<username> inst.kspasswd=<password>" in local.conf
 
     12.2 Currently, we support basic/digest authentication, which decided by
          your web server.
@@ -348,7 +348,7 @@ Building the target installer
        1.1 If you are familiar with PXE and grub, set PXE_UEFI_GRUB_CONF to
            point your own grub.cfg, you could customize it as you wish.
 
-       1.2 Or set APPEND:append = " ks=<url-ks>" in local.conf, it configures a
+       1.2 Or set APPEND:append = " inst.ks=<url-ks>" in local.conf, it configures a
            default grub.cfg which tells PXE image where to download the kickstart
            file.
 
@@ -391,7 +391,7 @@ Building the target installer
 
 License
 -------
-Copyright (C) 2013-2018 Wind River Systems, Inc.
+Copyright (C) 2013-2023 Wind River Systems, Inc.
 
 Source code included in the tree for individual recipes is under the LICENSE
 stated in the associated recipe (.bb file) unless otherwise stated.

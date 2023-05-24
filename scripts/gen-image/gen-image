@@ -196,8 +196,8 @@ class GenImage(object):
         parser.add_argument('-n', '--dry-run',
             default=False,
             help="Don't do the build, only go through the steps, this is useful for debug.", action="store_true")
-        parser.add_argument('-p', '--product', choices=['lincd', 'lts-21', 'lts-22'], required=False,
-            default='lincd',
+        parser.add_argument('-p', '--product', choices=['lincd', 'lts-21', 'lts-22', 'lts-23'], required=False,
+            default='lts-23',
             help='Specify the product', action="store")
         parser.add_argument('-e', '--extra-patches',
             default=None,
@@ -249,6 +249,8 @@ class GenImage(object):
             self.handoff_name = 'WRLinux-lts-21-Images'
         elif self.args.product == 'lts-22':
             self.handoff_name = 'WRLinux-lts-22-Images'
+        elif self.args.product == 'lts-23':
+            self.handoff_name = 'WRLinux-lts-23-Images'
         else:
             self.handoff_name = self.args.product
 

@@ -7,7 +7,7 @@ PV = "0.1.62"
 
 SRC_URI = "https://github.com/ComplianceAsCode/content/releases/download/v${PV}/${BP}.tar.bz2 \
            file://0001-Add-product-WRLinux-LTS23.patch \
-           file://0002-Add-prodtype-wrlinuxlts22-to-rules.patch \
+           file://0002-Add-prodtype-wrlinuxlts23-to-rules.patch \
            file://0003-Set-correct-package-names-for-wrlinuxlts22.patch \
            file://0004-Fix-path-of-systemctl-for-service_enable-service_dis.patch \
            file://0005-Fix-accounts_passwords_pam_faillock_deny.patch \

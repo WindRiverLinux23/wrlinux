@@ -1,3 +1,7 @@
+Add prodtype wrlinuxlts23 to rules based on wrlinuxlts22.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+
 From 5846cbf7c448268224e03acbf308a22692a84567 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Fri, 7 Jan 2022 14:16:00 +0800
@@ -155,9 +159,9 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  .../permissions/mounting/service_autofs_disabled/rule.yml   | 2 +-
  .../partitions/mount_option_boot_noauto/rule.yml            | 2 +-
  .../partitions/mount_option_boot_noexec/rule.yml            | 2 +-
- .../partitions/mount_option_dev_shm_nodev/rule.yml          | 6 ++++++
- .../partitions/mount_option_dev_shm_noexec/rule.yml         | 6 ++++++
- .../partitions/mount_option_dev_shm_nosuid/rule.yml         | 6 ++++++
+ .../partitions/mount_option_dev_shm_nodev/rule.yml          | 9 +++++++++
+ .../partitions/mount_option_dev_shm_noexec/rule.yml         | 9 +++++++++
+ .../partitions/mount_option_dev_shm_nosuid/rule.yml         | 9 +++++++++
  .../partitions/mount_option_home_noexec/rule.yml            | 2 +-
  .../partitions/mount_option_home_nosuid/rule.yml            | 2 +-
  .../mount_option_nosuid_removable_partitions/rule.yml       | 2 +-
@@ -176,7 +180,7 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  .../rpm_verification/rpm_verify_hashes/rule.yml             | 2 +-
  .../rpm_verification/rpm_verify_permissions/rule.yml        | 2 +-
  .../updating/ensure_gpgcheck_local_packages/rule.yml        | 2 +-
- 169 files changed, 184 insertions(+), 166 deletions(-)
+ 169 files changed, 193 insertions(+), 166 deletions(-)
 
 diff --git a/linux_os/guide/services/base/service_kdump_disabled/rule.yml b/linux_os/guide/services/base/service_kdump_disabled/rule.yml
 index f7481b1daf..67d26e3e9e 100644
@@ -186,7 +190,7 @@ index f7481b1daf..67d26e3e9e 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Disable KDump Kernel Crash Analyzer (kdump)'
  
@@ -198,7 +202,7 @@ index 77066c6cff..45b2d29ec7 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Verify Group Who Owns /etc/cron.allow file'
  
@@ -210,7 +214,7 @@ index 3d4f999616..5729934d64 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Verify User Who Owns /etc/cron.allow file'
  
@@ -222,7 +226,7 @@ index 800adbcb80..3ca542156a 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Uninstall vsftpd Package'
  
@@ -234,7 +238,7 @@ index 5ccf6ffc6b..efa4850d97 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Prevent Unrestricted Mail Relaying'
  
@@ -246,7 +250,7 @@ index 65bcba60c2..2653a37944 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Mount Remote Filesystems with Kerberos Security'
  
@@ -258,7 +262,7 @@ index 940b1eb80a..95c41eb8a6 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Mount Remote Filesystems with noexec'
  
@@ -270,7 +274,7 @@ index 2d1fd79f5c..28fe683910 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Mount Remote Filesystems with nosuid'
  
@@ -282,7 +286,7 @@ index 4356c29d2e..a2a1ef2d32 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure Time Service Maxpoll Interval'
  
@@ -294,7 +298,7 @@ index d1b116a6fb..6555be08a5 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Uninstall ypserv Package'
  
@@ -306,7 +310,7 @@ index b2cd780be7..d807126e96 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Remove Host-Based Authentication Files'
  
@@ -318,7 +322,7 @@ index 79b85c1bd2..8710e7c23a 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Remove User Host-Based Authentication Files'
  
@@ -330,7 +334,7 @@ index 8a1f7ba936..2351693b20 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Uninstall rsh-server Package'
  
@@ -342,7 +346,7 @@ index ea679e6a2c..50531f2b8c 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Uninstall telnet-server Package'
  
@@ -354,7 +358,7 @@ index 10f44352ff..2f3d190c97 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Uninstall tftp-server Package'
  
@@ -366,7 +370,7 @@ index fb348632dd..9363012d63 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure tftp Daemon Uses Secure Mode'
  
@@ -378,7 +382,7 @@ index bd32b57051..da90a2f65c 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Uninstall net-snmp Package'
  
@@ -390,7 +394,7 @@ index 4bfec9ffca..73a28ca316 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhel7,rhel8,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhel7,rhel8,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhel7,rhel8,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure Default SNMP Password Is Not Used'
  
@@ -402,7 +406,7 @@ index 6e459a612a..64b88a22ff 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Enable the OpenSSH Service'
  
@@ -414,7 +418,7 @@ index 35828fcf59..2f9b4797fa 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Enable SSH Server firewalld Firewall Exception'
  
@@ -426,7 +430,7 @@ index 01a2cdb1e8..97241452ae 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure SSSD LDAP Backend Client CA Certificate'
  
@@ -438,7 +442,7 @@ index 430f0e65f7..90bc7d8a8c 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure SSSD LDAP Backend Client CA Certificate Location'
  
@@ -450,7 +454,7 @@ index 4b9636fb58..d92066afae 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure SSSD LDAP Backend Client to Demand a Valid Certificate from the Server'
  
@@ -462,7 +466,7 @@ index 1f48dc7e9d..d1b8c84d01 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure SSSD LDAP Backend to Use TLS For All Transactions'
  
@@ -474,7 +478,7 @@ index a2d2e4e40d..7dacdc0c3c 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Modify the System Login Banner'
  
@@ -486,7 +490,7 @@ index d8d116b5ea..977acb68d7 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Modify the System Message of the Day Banner'
  
@@ -498,7 +502,7 @@ index 856b447730..52b806019b 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Verify Group Ownership of System Login Banner'
  
@@ -510,7 +514,7 @@ index 67ded67350..e26b25608c 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Verify Group Ownership of Message of the Day Banner'
  
@@ -522,7 +526,7 @@ index 2ff9b03ee7..6b4c6f564c 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Verify ownership of System Login Banner'
  
@@ -534,7 +538,7 @@ index 279fad532e..a5eef6491e 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Verify ownership of Message of the Day Banner'
  
@@ -546,7 +550,7 @@ index 7e833828af..cd9db2db82 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Verify permissions on System Login Banner'
  
@@ -558,7 +562,7 @@ index 71c9d5b042..a4de7b133b 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Verify permissions on Message of the Day Banner'
  
@@ -570,7 +574,7 @@ index 42b6a2619a..ddfda0c85f 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Limit Password Reuse: password-auth'
  
@@ -582,7 +586,7 @@ index 330df19699..abce929d00 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Limit Password Reuse: system-auth'
  
@@ -594,7 +598,7 @@ index 56f58810c2..663849477e 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Limit Password Reuse'
  
@@ -606,7 +610,7 @@ index 5e67e51f18..f66384801b 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Lock Accounts After Failed Password Attempts'
  
@@ -618,7 +622,7 @@ index 1fa39483a2..ab9fe80ddd 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure the root Account for Failed Password Attempts'
  
@@ -630,7 +634,7 @@ index 3978f09f1b..7b17d52764 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure PAM Enforces Password Requirements - Minimum Digit Characters'
  
@@ -642,7 +646,7 @@ index aaa02175af..778b16a810 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure PAM Enforces Password Requirements - Minimum Different Characters'
  
@@ -654,7 +658,7 @@ index 2d68a88e11..f80a0d480a 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure PAM Enforces Password Requirements - Minimum Lowercase Characters'
  
@@ -666,7 +670,7 @@ index d18896289f..a5891d9510 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure PAM Enforces Password Requirements - Maximum Consecutive Repeating Characters from Same Character Class'
  
@@ -678,7 +682,7 @@ index 6d83ae3c4f..b7320dfb26 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Set Password Maximum Consecutive Repeating Characters'
  
@@ -690,7 +694,7 @@ index def17ba8a7..28b880183b 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure PAM Enforces Password Requirements - Minimum Different Categories'
  
@@ -702,7 +706,7 @@ index e4648856b0..c3694d6b82 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure PAM Enforces Password Requirements - Minimum Length'
  
@@ -714,7 +718,7 @@ index e6e00aa504..3961e6a9ef 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure PAM Enforces Password Requirements - Minimum Special Characters'
  
@@ -726,7 +730,7 @@ index 0fc5c0c6b2..0e7fd68e49 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure PAM Enforces Password Requirements - Authentication Retry Prompts Permitted Per-Session'
  
@@ -738,7 +742,7 @@ index 2c18a1189e..d33318b1e4 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure PAM Enforces Password Requirements - Minimum Uppercase Characters'
  
@@ -750,7 +754,7 @@ index f0899c7f90..c390dea8f9 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Set Password Hashing Algorithm in /etc/libuser.conf'
  
@@ -762,7 +766,7 @@ index d48e98b9f4..a1d5a36b60 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Set Password Hashing Algorithm in /etc/login.defs'
  
@@ -774,7 +778,7 @@ index e8f5eca41b..e2bc43cd00 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: "Set PAM's Password Hashing Algorithm"
  
@@ -786,7 +790,7 @@ index 0d909090cf..afbcac5b79 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Disable Ctrl-Alt-Del Reboot Activation'
  
@@ -798,7 +802,7 @@ index 8d7a4fa7b7..49c5ec6598 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Require Authentication for Single User Mode'
  
@@ -810,7 +814,7 @@ index 7918554ba6..acb5e11f96 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,rhel7,wrlinux1019
-+prodtype: fedora,ol7,rhel7,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,rhel7,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Install the screen Package'
  
@@ -822,7 +826,7 @@ index 9dbe86638d..bf04f10777 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Set Account Expiration Following Inactivity'
  
@@ -834,7 +838,7 @@ index 8656619b43..9ba322c9f5 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Set Existing Passwords Maximum Age'
  
@@ -846,7 +850,7 @@ index ed8475ff18..23c8198898 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Set Existing Passwords Minimum Age'
  
@@ -858,7 +862,7 @@ index 0587c51efd..594dce8d2b 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure Home Directories are Created for New Users'
  
@@ -870,7 +874,7 @@ index b970972aff..3cc90e0b44 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Set Interactive Session Timeout'
  
@@ -882,7 +886,7 @@ index e7d83f84d8..cd3ef4b830 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'User Initialization Files Must Be Group-Owned By The Primary User'
  
@@ -894,7 +898,7 @@ index 94a8b35862..1c03dba64f 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'User Initialization Files Must Not Run World-Writable Programs'
  
@@ -906,7 +910,7 @@ index 33bb0f5183..eb3ac85575 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhv4,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhv4,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhv4,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'User Initialization Files Must Be Owned By the Primary User'
  
@@ -918,7 +922,7 @@ index 350d2cc585..befbb357f9 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure that Users Path Contains Only Local Directories'
  
@@ -930,7 +934,7 @@ index a666d82f79..524e56e86c 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'All Interactive Users Must Have A Home Directory Defined'
  
@@ -942,7 +946,7 @@ index 5bca914993..03b041e1b0 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'All Interactive Users Home Directories Must Exist'
  
@@ -954,7 +958,7 @@ index b5d629a48f..77f7f7e568 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'All User Files and Directories In The Home Directory Must Be Group-Owned By The Primary User'
  
@@ -966,7 +970,7 @@ index 00f5f0b9fd..1d2150953a 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'All User Files and Directories In The Home Directory Must Have a Valid Owner'
  
@@ -978,7 +982,7 @@ index 4777f8a354..74892752ee 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'All User Files and Directories In The Home Directory Must Have Mode 0750 Or Less Permissive'
  
@@ -990,7 +994,7 @@ index 0d99f9aad2..60ce78608a 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'All Interactive User Home Directories Must Be Group-Owned By The Primary User'
  
@@ -1002,7 +1006,7 @@ index 754dd064d8..47ac8894dc 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'All Interactive User Home Directories Must Be Owned By The Primary User'
  
@@ -1014,7 +1018,7 @@ index e33c068fdd..571b2a1a57 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure All User Initialization Files Have Mode 0740 Or Less Permissive'
  
@@ -1026,7 +1030,7 @@ index e8211cb507..928a569d98 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'All Interactive User Home Directories Must Have mode 0750 Or Less Permissive'
  
@@ -1038,7 +1042,7 @@ index 9219e5782d..e811c4565b 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure the Default Umask is Set Correctly For Interactive Users'
  
@@ -1051,7 +1055,7 @@ index 00fbf3b9a9..60b3daa6a8 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Any Attempts to Run chcon'
  
@@ -1064,7 +1068,7 @@ index 6f5dfe5fb4..776a1b9d05 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Any Attempts to Run semanage'
  
@@ -1077,7 +1081,7 @@ index 68f7b3dc9e..2e66832639 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Any Attempts to Run setsebool'
  
@@ -1089,7 +1093,7 @@ index 49a0f94ab7..f99fdb049a 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects File Deletion Events by User'
  
@@ -1101,7 +1105,7 @@ index 15d3230379..96b7001f56 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Unauthorized Access Attempts to Files (unsuccessful)'
  
@@ -1113,7 +1117,7 @@ index 5f71ab2287..d4e5ff0877 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Unsuccessful Access Attempts to Files - creat'
  
@@ -1125,7 +1129,7 @@ index f70e54a22d..f23655eead 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Unsuccessful Access Attempts to Files - ftruncate'
  
@@ -1137,7 +1141,7 @@ index 595a847ccf..139f2fdb25 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Unsuccessful Access Attempts to Files - open'
  
@@ -1149,7 +1153,7 @@ index fc732f62e4..fee4f3ad57 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Unsuccessful Access Attempts to Files - open_by_handle_at'
  
@@ -1161,7 +1165,7 @@ index 2e37ec1f0f..e007ce5833 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Unsuccessful Access Attempts to Files - openat'
  
@@ -1173,7 +1177,7 @@ index 29ebb56e5b..e8fd4d99ed 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Unsuccessful Access Attempts to Files - truncate'
  
@@ -1185,7 +1189,7 @@ index e7a2df969d..62f8741a67 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on Kernel Module Loading and Unloading'
  
@@ -1197,7 +1201,7 @@ index 409e1794af..5a08ea20c3 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on Kernel Module Unloading - delete_module'
  
@@ -1209,7 +1213,7 @@ index 023bd5d651..72db3cb553 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on Kernel Module Loading and Unloading - finit_module'
  
@@ -1221,7 +1225,7 @@ index 27afe49252..522858bc09 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on Kernel Module Loading - init_module'
  
@@ -1233,7 +1237,7 @@ index 858affea4d..54376826e3 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Attempts to Alter Logon and Logout Events'
  
@@ -1245,7 +1249,7 @@ index 1131e92c2e..63397fe41c 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Attempts to Alter Logon and Logout Events - faillock'
  
@@ -1257,7 +1261,7 @@ index 1f0a183b87..0b92de1d2a 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Attempts to Alter Logon and Logout Events - lastlog'
  
@@ -1269,7 +1273,7 @@ index e506ceb546..e9dc92f9f5 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Attempts to Alter Logon and Logout Events - tallylog'
  
@@ -1282,7 +1286,7 @@ index b81115833f..a1008844d0 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on the Use of Privileged Commands - chage'
  
@@ -1295,7 +1299,7 @@ index b155d8e0ff..d27bbcd4c6 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on the Use of Privileged Commands - chsh'
  
@@ -1308,7 +1312,7 @@ index 872e7c442e..e2623e70aa 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on the Use of Privileged Commands - crontab'
  
@@ -1321,7 +1325,7 @@ index 4ee68cd029..5942bef712 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on the Use of Privileged Commands - gpasswd'
  
@@ -1334,7 +1338,7 @@ index 7cb8a9154e..f24b396479 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on the Use of Privileged Commands - pam_timestamp_check'
  
@@ -1347,7 +1351,7 @@ index 077e33b0ff..42945b9df5 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on the Use of Privileged Commands - passwd'
  
@@ -1360,7 +1364,7 @@ index c1089532b9..1fb28ad50a 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on the Use of Privileged Commands - postdrop'
  
@@ -1373,7 +1377,7 @@ index 287c3fe0c0..36fda8fd90 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on the Use of Privileged Commands - postqueue'
  
@@ -1386,7 +1390,7 @@ index 959edfe9e5..219f7e3a57 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on the Use of Privileged Commands - ssh-keysign'
  
@@ -1399,7 +1403,7 @@ index 804343edb8..29b6bb44cd 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on the Use of Privileged Commands - su'
  
@@ -1412,7 +1416,7 @@ index 053302d994..eee51cd83d 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on the Use of Privileged Commands - sudo'
  
@@ -1425,7 +1429,7 @@ index 3f2a260177..562b269e90 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on the Use of Privileged Commands - umount'
  
@@ -1438,7 +1442,7 @@ index 119361de38..b21d646f84 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure auditd Collects Information on the Use of Privileged Commands - unix_chkpwd'
  
@@ -1450,7 +1454,7 @@ index 8cfe8ad47f..de2fd54fb4 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Shutdown System When Auditing Failures Occur'
  
@@ -1462,7 +1466,7 @@ index 5941183579..a0a1fac3fe 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Events that Modify User/Group Information - /etc/group'
  
@@ -1474,7 +1478,7 @@ index ad8df7aef7..71a73c2c85 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Events that Modify User/Group Information - /etc/gshadow'
  
@@ -1486,7 +1490,7 @@ index d57c0b268a..36278de802 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Events that Modify User/Group Information - /etc/security/opasswd'
  
@@ -1498,7 +1502,7 @@ index e8c33451c1..569cfa0685 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Events that Modify User/Group Information - /etc/passwd'
  
@@ -1510,7 +1514,7 @@ index 530ba17796..871481ab26 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Record Events that Modify User/Group Information - /etc/shadow'
  
@@ -1522,7 +1526,7 @@ index 814f868f29..e1dc4cc314 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure audispd Plugin To Send Logs To Remote Server'
  
@@ -1534,7 +1538,7 @@ index e5c338384c..9ff4bedf73 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure audispd''s Plugin disk_full_action When Disk Is Full'
  
@@ -1546,7 +1550,7 @@ index 9c3f34e24c..c7a193f514 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Encrypt Audit Records Sent With audispd Plugin'
  
@@ -1558,7 +1562,7 @@ index 08d2794f36..7260ab1217 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure audispd''s Plugin network_failure_action On Network Failure'
  
@@ -1570,7 +1574,7 @@ index 04042fa140..e5b65d3ace 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure auditd space_left on Low Disk Space'
  
@@ -1582,7 +1586,7 @@ index a43d5fcc03..40ea7148f3 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Set the Boot Loader Admin Username to a Non-Default Value'
  
@@ -1594,7 +1598,7 @@ index c2b738aa01..98ac396884 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhv4,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Boot Loader Is Not Installed On Removeable Media'
  
@@ -1606,7 +1610,7 @@ index ad515a65ee..ba0413b561 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Set Boot Loader Password in grub2'
  
@@ -1618,7 +1622,7 @@ index 17b4918c5f..2c6e391227 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Set the UEFI Boot Loader Admin Username to a Non-Default Value'
  
@@ -1630,7 +1634,7 @@ index 4579b1ff2e..4448a4c675 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Set the UEFI Boot Loader Password'
  
@@ -1642,7 +1646,7 @@ index 076bda6687..d299e74ae3 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure cron Is Logging To Rsyslog'
  
@@ -1654,7 +1658,7 @@ index c73b2fb094..e03b55e4cf 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure rsyslog Does Not Accept Remote Messages Unless Acting As Log Server'
  
@@ -1666,7 +1670,7 @@ index b3beb526a2..63581446ed 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Verify firewalld Enabled'
  
@@ -1678,7 +1682,7 @@ index 1f3cecd632..2770ce19ff 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure the Firewalld Ports'
  
@@ -1691,7 +1695,7 @@ index 9f087f10b7..0c84b6e7a5 100644
  
  # todo: the remediation is broken on rhel8
 -prodtype: ol7,rhel7,wrlinux1019
-+prodtype: ol7,rhel7,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,rhel7,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure firewalld To Rate Limit Connections'
  
@@ -1703,7 +1707,7 @@ index f93fa581a8..3f3b99ec54 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Disable Kernel Parameter for Accepting Source-Routed Packets on all IPv6 Interfaces'
  
@@ -1715,7 +1719,7 @@ index 9393044bec..e9a9bf0079 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Disable Accepting ICMP Redirects for All IPv4 Interfaces'
  
@@ -1727,7 +1731,7 @@ index e0dae613df..a1fbf3c0e6 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Disable Kernel Parameter for Accepting Source-Routed Packets on all IPv4 Interfaces'
  
@@ -1739,7 +1743,7 @@ index 3fab05c8d6..053cb7fea7 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Disable Kernel Parameter for Accepting Source-Routed Packets on IPv4 Interfaces by Default'
  
@@ -1751,7 +1755,7 @@ index f6dcc9c2a6..1b21cff5ad 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Enable Kernel Parameter to Ignore ICMP Broadcast Echo Requests on IPv4 Interfaces'
  
@@ -1763,7 +1767,7 @@ index cda5d43fc7..e8f5141d65 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure Kernel to Rate Limit Sending of Duplicate TCP Acknowledgments'
  
@@ -1775,7 +1779,7 @@ index 59f736c08a..b8e4f3f55c 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Disable Kernel Parameter for Sending ICMP Redirects on all IPv4 Interfaces'
  
@@ -1787,7 +1791,7 @@ index 0936f826fa..c8ed18c485 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Disable Kernel Parameter for Sending ICMP Redirects on all IPv4 Interfaces by Default'
  
@@ -1799,7 +1803,7 @@ index 7306b7ccbf..a82fb93057 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Disable Kernel Parameter for IP Forwarding on IPv4 Interfaces'
  
@@ -1811,7 +1815,7 @@ index a020559395..842a307397 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Disable DCCP Support'
  
@@ -1823,7 +1827,7 @@ index abe9d6a4ba..9d2141d9ad 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure Multiple DNS Servers in /etc/resolv.conf'
  
@@ -1835,7 +1839,7 @@ index 66d6758467..c3175d2425 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure System is Not Acting as a Network Sniffer'
  
@@ -1847,7 +1851,7 @@ index 9a30770995..135a732410 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure All World-Writable Directories Are Owned by root user'
  
@@ -1859,7 +1863,7 @@ index 85746cc566..b9f2a9c0cb 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure All World-Writable Directories Are Owned by a System Account'
  
@@ -1871,7 +1875,7 @@ index d545e98301..29cef8bebe 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhv4,sle12,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure All World-Writable Directories Are Group Owned by a System Account'
  
@@ -1884,7 +1888,7 @@ index f5c3027e38..0fe4a7b456 100644
  title: 'Ensure All SGID Executables Are Authorized'
  
 -prodtype: fedora,ol7,ol8,ol9,rhel7,rhel8,rhel9,sle15,wrlinux1019,wrlinux8
-+prodtype: fedora,ol7,ol8,ol9,rhel7,rhel8,rhel9,sle15,wrlinux1019,wrlinux8,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhel7,rhel8,rhel9,sle15,wrlinux1019,wrlinux8,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  description: |-
      The SGID (set group id) bit should be set only on files that were
@@ -1897,7 +1901,7 @@ index 62852716d4..a60cca6cdf 100644
  title: 'Ensure All SUID Executables Are Authorized'
  
 -prodtype: fedora,ol7,ol8,ol9,rhel7,rhel8,rhel9,sle15,wrlinux1019,wrlinux8
-+prodtype: fedora,ol7,ol8,ol9,rhel7,rhel8,rhel9,sle15,wrlinux1019,wrlinux8,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhel7,rhel8,rhel9,sle15,wrlinux1019,wrlinux8,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  description: |-
      The SUID (set user id) bit should be set only on files that were
@@ -1909,7 +1913,7 @@ index 2dab2757f3..d473e0d35d 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure All Files Are Owned by a Group'
  
@@ -1921,7 +1925,7 @@ index 92351d166a..ffa6d85e7a 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure All Files Are Owned by a User'
  
@@ -1933,7 +1937,7 @@ index fc411ebede..0d542554b0 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Disable Modprobe Loading of USB Storage Driver'
  
@@ -1945,7 +1949,7 @@ index c9ece47d5f..81beffcf52 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu1804,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu1804,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu1804,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Disable the Automounter'
  
@@ -1957,7 +1961,7 @@ index da7833ee96..a0017e0d77 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Add noauto Option to /boot'
  
@@ -1969,7 +1973,7 @@ index e6f8d28413..8f44be57eb 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Add noexec Option to /boot'
  
@@ -1977,22 +1981,25 @@ diff --git a/linux_os/guide/system/permissions/partitions/mount_option_dev_shm_n
 index b7dd01052a..c34af7dd67 100644
 --- a/linux_os/guide/system/permissions/partitions/mount_option_dev_shm_nodev/rule.yml
 +++ b/linux_os/guide/system/permissions/partitions/mount_option_dev_shm_nodev/rule.yml
-@@ -57,12 +57,18 @@ template:
+@@ -57,12 +57,21 @@ template:
          mount_has_to_exist@sle12: 'yes'
          mount_has_to_exist@wrlinux8: 'yes'
          mount_has_to_exist@wrlinux1019: 'yes'
 +        mount_has_to_exist@wrlinuxlts21: 'yes'
 +        mount_has_to_exist@wrlinuxlts22: 'yes'
++        mount_has_to_exist@wrlinuxlts23: 'yes'
          filesystem@sle12: ''
          filesystem@wrlinux8: ''
          filesystem@wrlinux1019: ''
 +        filesystem@wrlinuxlts21: ''
 +        filesystem@wrlinuxlts22: ''
++        filesystem@wrlinuxlts23: ''
          type@sle12: ''
          type@wrlinux8: ''
          type@wrlinux1019: ''
 +        type@wrlinuxlts21: ''
 +        type@wrlinuxlts22: ''
++        type@wrlinuxlts23: ''
      backends:
          anaconda: 'off'
  
@@ -2000,44 +2007,50 @@ diff --git a/linux_os/guide/system/permissions/partitions/mount_option_dev_shm_n
 index 1c20512a2f..c7a7a11055 100644
 --- a/linux_os/guide/system/permissions/partitions/mount_option_dev_shm_noexec/rule.yml
 +++ b/linux_os/guide/system/permissions/partitions/mount_option_dev_shm_noexec/rule.yml
-@@ -60,11 +60,17 @@ template:
+@@ -60,11 +60,20 @@ template:
          mount_has_to_exist@sle12: 'yes'
          mount_has_to_exist@wrlinux8: 'yes'
          mount_has_to_exist@wrlinux1019: 'yes'
 +        mount_has_to_exist@wrlinuxlts21: 'yes'
 +        mount_has_to_exist@wrlinuxlts22: 'yes'
++        mount_has_to_exist@wrlinuxlts23: 'yes'
          filesystem@sle12: ''
          filesystem@wrlinux8: ''
          filesystem@wrlinux1019: ''
 +        filesystem@wrlinuxlts21: ''
 +        filesystem@wrlinuxlts22: ''
++        filesystem@wrlinuxlts23: ''
          type@sle12: ''
          type@wrlinux8: ''
          type@wrlinux1019: ''
 +        type@wrlinuxlts21: ''
 +        type@wrlinuxlts22: ''
++        type@wrlinuxlts23: ''
      backends:
          anaconda: 'off'
 diff --git a/linux_os/guide/system/permissions/partitions/mount_option_dev_shm_nosuid/rule.yml b/linux_os/guide/system/permissions/partitions/mount_option_dev_shm_nosuid/rule.yml
 index 57d35b56d4..fc5cac5697 100644
 --- a/linux_os/guide/system/permissions/partitions/mount_option_dev_shm_nosuid/rule.yml
 +++ b/linux_os/guide/system/permissions/partitions/mount_option_dev_shm_nosuid/rule.yml
-@@ -57,12 +57,18 @@ template:
+@@ -57,12 +57,21 @@ template:
          mount_has_to_exist@sle12: 'yes'
          mount_has_to_exist@wrlinux8: 'yes'
          mount_has_to_exist@wrlinux1019: 'yes'
 +        mount_has_to_exist@wrlinuxlts21: 'yes'
 +        mount_has_to_exist@wrlinuxlts22: 'yes'
++        mount_has_to_exist@wrlinuxlts23: 'yes'
          filesystem@sle12: ''
          filesystem@wrlinux8: ''
          filesystem@wrlinux1019: ''
 +        filesystem@wrlinuxlts21: ''
 +        filesystem@wrlinuxlts22: ''
++        filesystem@wrlinuxlts23: ''
          type@sle12: ''
          type@wrlinux8: ''
          type@wrlinux1019: ''
 +        type@wrlinuxlts21: ''
 +        type@wrlinuxlts22: ''
++        type@wrlinuxlts23: ''
      backends:
          anaconda: 'off'
  
@@ -2049,7 +2062,7 @@ index 17fd025011..e0eeff44d0 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Add noexec Option to /home'
  
@@ -2061,7 +2074,7 @@ index af2f91b594..fa4c6ff28f 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Add nosuid Option to /home'
  
@@ -2073,7 +2086,7 @@ index aacc7fc859..d00595bdb2 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu1804,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu1804,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu1804,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Add nosuid Option to Removable Media Partitions'
  
@@ -2085,7 +2098,7 @@ index b67d96ba8d..cbd685c2f3 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Add nosuid Option to /opt'
  
@@ -2097,7 +2110,7 @@ index 022dee6db9..b8e25e85ed 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Add nosuid Option to /srv'
  
@@ -2109,7 +2122,7 @@ index 7119419eb6..13c963f3b1 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Add noexec Option to /var'
  
@@ -2121,7 +2134,7 @@ index 8bd4a37a91..3aa6467c10 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure SELinux Policy'
  
@@ -2133,7 +2146,7 @@ index 8cf3c25c89..9d445981cd 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Map System Users To The Appropriate SELinux Role'
  
@@ -2145,7 +2158,7 @@ index f941e95346..cd91e76ca3 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'The Installed Operating System Is Vendor Supported'
  
@@ -2157,7 +2170,7 @@ index 8d3e141681..97194769df 100644
  documentation_complete: true
  
 -prodtype: ol7,rhcos4,rhel7,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: ol7,rhcos4,rhel7,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,rhcos4,rhel7,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Disable Prelinking'
  
@@ -2169,7 +2182,7 @@ index add3db09ba..468ec41b4f 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: Ensure '/etc/system-fips' exists
  
@@ -2181,7 +2194,7 @@ index 9b97e01571..a07a8670e4 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Build and Test AIDE Database'
  
@@ -2193,7 +2206,7 @@ index 1d81d0e00d..083594cad1 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure Periodic Execution of AIDE'
  
@@ -2205,7 +2218,7 @@ index 9c69dd1e71..6b651bb3c3 100644
  documentation_complete: true
  
 -prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,wrlinux1019
-+prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle12,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Configure Notification of Post-AIDE Scan Details'
  
@@ -2217,7 +2230,7 @@ index 7e8c3b1ea8..71fa2e6758 100644
  documentation_complete: true
  
 -prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019
-+prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: debian10,debian11,debian9,fedora,ol7,ol8,rhcos4,rhel7,rhel8,rhel9,rhv4,sle12,sle15,ubuntu2004,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Install AIDE'
  
@@ -2229,7 +2242,7 @@ index 36139fdd2d..e23b29319e 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,ol9,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,ol9,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Verify File Hashes with RPM'
  
@@ -2241,7 +2254,7 @@ index 435cf92eee..2043ead14b 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,ol9,rhcos4,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Verify and Correct File Permissions with RPM'
  
@@ -2253,7 +2266,7 @@ index 4fe2b994fb..db9f91e456 100644
  documentation_complete: true
  
 -prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019
-+prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22
++prodtype: fedora,ol7,ol8,rhel7,rhel8,rhel9,rhv4,sle15,wrlinux1019,wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
  
  title: 'Ensure gpgcheck Enabled for Local Packages'
  

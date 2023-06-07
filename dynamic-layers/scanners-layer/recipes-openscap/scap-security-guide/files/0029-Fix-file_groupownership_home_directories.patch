@@ -1,3 +1,7 @@
+Add support for LTS23.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+
 From 01895d14fa2999dbeb1ac3ecffde6467643e07d7 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Fri, 3 Feb 2023 14:49:58 +0800
@@ -93,7 +97,7 @@ index fc3ab0be7b..2d1b32abad 100644
  #}}
  {{%- if product in ["rhel7", "ol7"] %}}
    {{%- set user_list="(nobody|nfsnobody)" %}}
-+{{%- elif product in ["wrlinuxlts21", "wrlinuxlts22"] %}}
++{{%- elif product in ["wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
 +  {{%- set user_list="(nobody|bin)" %}}
  {{%- else %}}
    {{%- set user_list="nobody" %}}

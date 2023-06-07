@@ -1,3 +1,7 @@
+Add support for LTS23.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+
 From 020bc8ebfef6d4f485950ab5d4cf28492770e3ed Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Sat, 12 Nov 2022 00:47:50 +0800
@@ -10,7 +14,8 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  .../services/ntp/chronyd_or_ntpd_set_maxpoll/bash/shared.sh     | 2 +-
  products/wrlinuxlts21/profiles/draft_stig_wrlinuxlts21.profile  | 1 +
  products/wrlinuxlts22/profiles/draft_stig_wrlinuxlts22.profile  | 1 +
- 3 files changed, 3 insertions(+), 1 deletion(-)
+ products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile  | 1 +
+ 4 files changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/linux_os/guide/services/ntp/chronyd_or_ntpd_set_maxpoll/bash/shared.sh b/linux_os/guide/services/ntp/chronyd_or_ntpd_set_maxpoll/bash/shared.sh
 index 239b191889..f4ff5ef868 100644
@@ -21,7 +26,7 @@ index 239b191889..f4ff5ef868 100644
  
  
 -{{% if 'ubuntu' not in product %}}
-+{{% if product not in [ "ubuntu", "wrlinuxlts21", "wrlinuxlts22" ] %}}
++{{% if product not in [ "ubuntu", "wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
  pof="/usr/sbin/pidof"
  {{% else %}}
  pof="/bin/pidof"
@@ -41,6 +46,18 @@ diff --git a/products/wrlinuxlts22/profiles/draft_stig_wrlinuxlts22.profile b/pr
 index ae68003fd0..b0a211194d 100644
 --- a/products/wrlinuxlts22/profiles/draft_stig_wrlinuxlts22.profile
 +++ b/products/wrlinuxlts22/profiles/draft_stig_wrlinuxlts22.profile
+@@ -43,6 +43,7 @@ selections:
+     - var_selinux_policy_name=wr-mls
+     - var_selinux_state=enforcing
+     - var_sshd_set_keepalive=0
++    - var_time_service_set_maxpoll=18_hours
+     - account_disable_post_pw_expiration
+     - accounts_have_homedir_login_defs
+     - accounts_logon_fail_delay
+diff --git a/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile b/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile
+index 02e43bb..43fcadc 100644
+--- a/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile
++++ b/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile
 @@ -43,6 +43,7 @@ selections:
      - var_selinux_policy_name=wr-mls
      - var_selinux_state=enforcing

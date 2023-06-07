@@ -1,3 +1,7 @@
+Add support for LTS23 based on LTS22.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+
 From 185eba02ec9fc6abb188f7cb967dc871a4bab564 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Wed, 9 Nov 2022 10:36:32 +0800
@@ -23,7 +27,7 @@ index 3960d89c9a..f05e49c45d 100644
  #}}
  {{%- if init_system == "systemd" -%}}
    {{%- if service_state == "disable" -%}}
-+    {{% if product in ['wrlinuxlts21', 'wrlinuxlts22'] %}}
++    {{% if product in ['wrlinuxlts21', 'wrlinuxlts22', 'wrlinuxlts23'] %}}
 +/bin/systemctl stop "{{{ service }}}"
 +/bin/systemctl disable "{{{ service }}}"
 +    {{%- else -%}}
@@ -31,7 +35,7 @@ index 3960d89c9a..f05e49c45d 100644
  /usr/bin/systemctl disable "{{{ service }}}"
 +    {{%- endif %}}
    {{%- else -%}}
-+    {{% if product in ['wrlinuxlts21', 'wrlinuxlts22'] %}}
++    {{% if product in ['wrlinuxlts21', 'wrlinuxlts22', 'wrlinuxlts23'] %}}
 +/bin/systemctl enable "{{{ service }}}"
 +/bin/systemctl start "{{{ service }}}"
 +    {{%- else -%}}
@@ -42,7 +46,7 @@ index 3960d89c9a..f05e49c45d 100644
  # The service may not be running because it has been started and failed,
  # so let's reset the state so OVAL checks pass.
  # Service should be 'inactive', not 'failed' after reboot though.
-+  {{% if product in ['wrlinuxlts21', 'wrlinuxlts22'] %}}
++  {{% if product in ['wrlinuxlts21', 'wrlinuxlts22', 'wrlinuxlts23'] %}}
 +/bin/systemctl reset-failed "{{{ service }}}"
 +  {{%- else -%}}
  /usr/bin/systemctl reset-failed "{{{ service }}}"
@@ -64,7 +68,7 @@ index b9bf1b5bd8..cabb678040 100644
  {{%- if init_system == "systemd" %}}
  
  
-+{{% if product in ["wrlinuxlts21", "wrlinuxlts22"] %}}
++{{% if product in ["wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
 +SYSTEMCTL_EXEC='/bin/systemctl'
 +{{% else %}}
  SYSTEMCTL_EXEC='/usr/bin/systemctl'
@@ -86,7 +90,7 @@ index 5571989ab8..a705ba7256 100644
  # disruption = low
  {{%- if init_system == "systemd" %}}
  
-+{{% if product in ["wrlinuxlts21", "wrlinuxlts22"] %}}
++{{% if product in ["wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
 +SYSTEMCTL_EXEC='/bin/systemctl'
 +{{% else %}}
  SYSTEMCTL_EXEC='/usr/bin/systemctl'

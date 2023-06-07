@@ -1,3 +1,7 @@
+Add support for LTS23.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+
 From b82334149ae8e56ec0438a9357719fa634c36909 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Thu, 27 Jan 2022 15:23:59 +0800
@@ -7,26 +11,28 @@ Upstream-Status: Inappropriate [WRLinux specific]
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../services/ssh/package_openssh-server_installed/rule.yml    | 2 ++
- .../services/ssh/package_openssh-server_removed/rule.yml      | 2 ++
- linux_os/guide/services/ssh/service_sshd_disabled/rule.yml    | 2 ++
- linux_os/guide/services/ssh/service_sshd_enabled/rule.yml     | 2 ++
+ .../services/ssh/package_openssh-server_installed/rule.yml    | 3 +++
+ .../services/ssh/package_openssh-server_removed/rule.yml      | 3 +++
+ linux_os/guide/services/ssh/service_sshd_disabled/rule.yml    | 3 +++
+ linux_os/guide/services/ssh/service_sshd_enabled/rule.yml     | 3 +++
  .../ssh/ssh_server/sshd_set_idle_timeout/oval/shared.xml      | 2 +-
  .../wrlinuxlts21/profiles/draft_stig_wrlinuxlts21.profile     | 1 +
  .../wrlinuxlts22/profiles/draft_stig_wrlinuxlts22.profile     | 1 +
+ .../wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile     | 1 +
  shared/checks/oval/sshd_version_higher_than_74.xml            | 4 ++++
- 8 files changed, 15 insertions(+), 1 deletion(-)
+ 9 files changed, 20 insertions(+), 1 deletion(-)
 
 diff --git a/linux_os/guide/services/ssh/package_openssh-server_installed/rule.yml b/linux_os/guide/services/ssh/package_openssh-server_installed/rule.yml
 index 12ebcf8dd3..aea94d1fa5 100644
 --- a/linux_os/guide/services/ssh/package_openssh-server_installed/rule.yml
 +++ b/linux_os/guide/services/ssh/package_openssh-server_installed/rule.yml
-@@ -42,6 +42,8 @@ template:
+@@ -42,6 +42,9 @@ template:
      name: package_installed
      vars:
          pkgname: openssh-server
 +        pkgname@wrlinuxlts21: openssh-sshd
 +        pkgname@wrlinuxlts22: openssh-sshd
++        pkgname@wrlinuxlts23: openssh-sshd
  
  fixtext: |-
      {{{ describe_package_install(package="openssh-server") }}}
@@ -34,22 +40,24 @@ diff --git a/linux_os/guide/services/ssh/package_openssh-server_removed/rule.yml
 index 15f29deeee..a65b6f5f5c 100644
 --- a/linux_os/guide/services/ssh/package_openssh-server_removed/rule.yml
 +++ b/linux_os/guide/services/ssh/package_openssh-server_removed/rule.yml
-@@ -21,3 +21,5 @@ template:
+@@ -21,3 +21,6 @@ template:
      name: package_removed
      vars:
          pkgname: openssh-server
 +        pkgname@wrlinuxlts21: openssh-sshd
 +        pkgname@wrlinuxlts22: openssh-sshd
++        pkgname@wrlinuxlts23: openssh-sshd
 diff --git a/linux_os/guide/services/ssh/service_sshd_disabled/rule.yml b/linux_os/guide/services/ssh/service_sshd_disabled/rule.yml
 index aaf93a7568..79b932eb77 100644
 --- a/linux_os/guide/services/ssh/service_sshd_disabled/rule.yml
 +++ b/linux_os/guide/services/ssh/service_sshd_disabled/rule.yml
-@@ -30,6 +30,8 @@ template:
+@@ -30,6 +30,9 @@ template:
          packagename: openssh-server
          packagename@opensuse: openssh
          packagename@sle12: openssh
 +        packagename@wrlinuxlts21: openssh-sshd
 +        packagename@wrlinuxlts22: openssh-sshd
++        packagename@wrlinuxlts23: openssh-sshd
          daemonname@debian9: ssh
          daemonname@debian10: ssh
          daemonname@debian11: ssh
@@ -57,12 +65,13 @@ diff --git a/linux_os/guide/services/ssh/service_sshd_enabled/rule.yml b/linux_o
 index 64b88a22ff..7372dfa0bd 100644
 --- a/linux_os/guide/services/ssh/service_sshd_enabled/rule.yml
 +++ b/linux_os/guide/services/ssh/service_sshd_enabled/rule.yml
-@@ -61,6 +61,8 @@ template:
+@@ -61,6 +61,9 @@ template:
          packagename: openssh-server
          packagename@sle12: openssh
          packagename@sle15: openssh
 +        packagename@wrlinuxlts21: openssh-sshd
 +        packagename@wrlinuxlts22: openssh-sshd
++        packagename@wrlinuxlts23: openssh-sshd
  
  fixtext: |-
      {{{ fixtext_service_enabled("sshd") }}}
@@ -75,7 +84,7 @@ index 9b767f5a99..58fd5fdce0 100644
            {{%- endif %}}
          </criteria>
 -        {{%- if product not in ["ol8", "rhel8", "rhel9"] %}}
-+        {{%- if product not in ["ol8", "rhel8", "rhel9", "wrlinuxlts21", "wrlinuxlts22"] %}}
++        {{%- if product not in ["ol8", "rhel8", "rhel9", "wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
          <extend_definition comment="The SSH ClientAliveCountMax is set to zero" definition_ref="sshd_set_keepalive" />
          {{% endif %}}
        </criteria>
@@ -103,6 +112,18 @@ index d2cfc0b42f..ae68003fd0 100644
      - sshd_print_last_log
      - sshd_set_idle_timeout
      - sshd_set_keepalive_0
+diff --git a/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile b/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile
+index 6e160da..02e43bb 100644
+--- a/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile
++++ b/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile
+@@ -220,6 +220,7 @@ selections:
+     - sshd_enable_strictmodes
+     - sshd_enable_warning_banner
+     - sshd_enable_x11_forwarding
++    - sshd_idle_timeout_value=10_minutes
+     - sshd_print_last_log
+     - sshd_set_idle_timeout
+     - sshd_set_keepalive_0
 diff --git a/shared/checks/oval/sshd_version_higher_than_74.xml b/shared/checks/oval/sshd_version_higher_than_74.xml
 index 0e598f8421..aca49e7618 100644
 --- a/shared/checks/oval/sshd_version_higher_than_74.xml
@@ -111,7 +132,7 @@ index 0e598f8421..aca49e7618 100644
      <linux:state state_ref="state_openssh-server_version" />
    </linux:rpminfo_test>
    <linux:rpminfo_object id="obj_openssh-server_version" version="1">
-+    {{%- if product in ["wrlinuxlts21", "wrlinuxlts22"] -%}}
++    {{%- if product in ["wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] -%}}
 +    <linux:name>openssh-sshd</linux:name>
 +    {{%- else -%}}
      <linux:name>openssh-server</linux:name>

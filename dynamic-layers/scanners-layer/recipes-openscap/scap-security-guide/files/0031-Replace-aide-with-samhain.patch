@@ -20,7 +20,8 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  .../samhain_scan_notification/rule.yml        | 59 ++++++++++++++++++
  .../profiles/draft_stig_wrlinuxlts21.profile  |  5 +-
  .../profiles/draft_stig_wrlinuxlts22.profile  |  5 +-
- 13 files changed, 410 insertions(+), 4 deletions(-)
+ .../profiles/draft_stig_wrlinuxlts23.profile  |  5 +-
+ 14 files changed, 413 insertions(+), 6 deletions(-)
  create mode 100644 linux_os/guide/system/software/integrity/software-integrity/samhain/group.yml
  create mode 100644 linux_os/guide/system/software/integrity/software-integrity/samhain/package_samhain_installed/rule.yml
  create mode 100644 linux_os/guide/system/software/integrity/software-integrity/samhain/samhain_build_database/bash/wrlinux.sh
@@ -56,7 +57,7 @@ index 0000000000..ae1956f7bd
 @@ -0,0 +1,22 @@
 +documentation_complete: true
 +
-+prodtype: wrlinuxlts21,wrlinuxlts22
++prodtype: wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
 +
 +title: 'Install Samhain'
 +
@@ -163,7 +164,7 @@ index 0000000000..00eca6e8e7
 @@ -0,0 +1,51 @@
 +documentation_complete: true
 +
-+prodtype: wrlinuxlts21,wrlinuxlts22
++prodtype: wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
 +
 +title: 'Build and Test Samhain Database'
 +
@@ -304,7 +305,7 @@ index 0000000000..1f206e15d0
 @@ -0,0 +1,61 @@
 +documentation_complete: true
 +
-+prodtype: wrlinuxlts21,wrlinuxlts22
++prodtype: wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
 +
 +title: 'Configure Periodic Execution of Samhain'
 +
@@ -446,7 +447,7 @@ index 0000000000..331aa648a9
 @@ -0,0 +1,59 @@
 +documentation_complete: true
 +
-+prodtype: wrlinuxlts21,wrlinuxlts22
++prodtype: wrlinuxlts21,wrlinuxlts22,wrlinuxlts23
 +
 +title: 'Configure Notification of Post-Samhain Scan Details'
 +
@@ -555,6 +556,36 @@ index efd61f9465..a1c9d1e3ba 100644
      - package_telnet-server_removed
      - package_tftp-server_removed
 @@ -196,6 +195,8 @@ selections:
+     - rsyslog_cron_logging
+     - rsyslog_nolisten
+     - rsyslog_remote_loghost
++    - samhain_periodic_cron_checking
++    - samhain_scan_notification
+     - selinux_policytype
+     - selinux_state
+     - selinux_user_login_roles
+diff --git a/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile b/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile
+index 0735821..52b7c98 100644
+--- a/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile
++++ b/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile
+@@ -61,8 +61,6 @@ selections:
+     - accounts_users_home_files_groupownership
+     - accounts_users_home_files_ownership
+     - accounts_users_home_files_permissions
+-    - aide_periodic_cron_checking
+-    - aide_scan_notification
+     - auditd_audispd_configure_remote_server
+     - auditd_audispd_disk_full_action
+     - auditd_audispd_encrypt_sent_records
+@@ -162,6 +160,7 @@ selections:
+     - no_user_host_based_files
+     - package_openssh-server_installed
+     - package_rsh-server_removed
++    - package_samhain_installed
+     - package_screen_installed
+     - package_telnet-server_removed
+     - package_tftp-server_removed
+@@ -178,6 +177,8 @@ selections:
      - rsyslog_cron_logging
      - rsyslog_nolisten
      - rsyslog_remote_loghost

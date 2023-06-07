@@ -1,3 +1,7 @@
+Add support for LTS23.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+
 From c6e139341bd0d2e9c981797d7d8f59ec9b703488 Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Fri, 2 Sep 2022 10:20:22 +0800
@@ -9,7 +13,8 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
  products/wrlinuxlts21/profiles/draft_stig_wrlinuxlts21.profile | 1 +
  products/wrlinuxlts22/profiles/draft_stig_wrlinuxlts22.profile | 1 +
- 2 files changed, 2 insertions(+)
+ products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile | 1 +
+ 3 files changed, 3 insertions(+)
 
 diff --git a/products/wrlinuxlts21/profiles/draft_stig_wrlinuxlts21.profile b/products/wrlinuxlts21/profiles/draft_stig_wrlinuxlts21.profile
 index d43734c5c0..de51233d61 100644
@@ -27,6 +32,18 @@ diff --git a/products/wrlinuxlts22/profiles/draft_stig_wrlinuxlts22.profile b/pr
 index 9e2d2e7278..d04fd3df18 100644
 --- a/products/wrlinuxlts22/profiles/draft_stig_wrlinuxlts22.profile
 +++ b/products/wrlinuxlts22/profiles/draft_stig_wrlinuxlts22.profile
+@@ -166,6 +166,7 @@ selections:
+     - installed_OS_is_vendor_supported
+     - kernel_module_dccp_disabled
+     - kernel_module_usb-storage_disabled
++    - login_banner_text=dod_banners
+     - mount_option_home_nosuid
+     - mount_option_krb_sec_remote_filesystems
+     - mount_option_noexec_remote_filesystems
+diff --git a/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile b/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile
+index c7749e4..6a4a518 100644
+--- a/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile
++++ b/products/wrlinuxlts23/profiles/draft_stig_wrlinuxlts23.profile
 @@ -166,6 +166,7 @@ selections:
      - installed_OS_is_vendor_supported
      - kernel_module_dccp_disabled

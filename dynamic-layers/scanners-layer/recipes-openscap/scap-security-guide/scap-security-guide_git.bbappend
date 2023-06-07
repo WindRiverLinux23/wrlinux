@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=9bfa86579213cb4c6adaffface6b2820"
 PV = "0.1.62"
 
 SRC_URI = "https://github.com/ComplianceAsCode/content/releases/download/v${PV}/${BP}.tar.bz2 \
-           file://0001-Add-product-WRLinux-LTS22.patch \
+           file://0001-Add-product-WRLinux-LTS23.patch \
            file://0002-Add-prodtype-wrlinuxlts22-to-rules.patch \
            file://0003-Set-correct-package-names-for-wrlinuxlts22.patch \
            file://0004-Fix-path-of-systemctl-for-service_enable-service_dis.patch \
@@ -44,4 +44,5 @@ SRC_URI[sha256sum] = "6d3398716bb0c7d2c01526af89f8cf42c0581ee10771e1dfbad98434d1
 S = "${WORKDIR}/scap-security-guide-${PV}"
 
 EXTRA_OECMAKE += "-DSSG_PRODUCT_DEFAULT=OFF \
+                  -DSSG_PRODUCT_WRLINUXLTS23=ON \
                   "

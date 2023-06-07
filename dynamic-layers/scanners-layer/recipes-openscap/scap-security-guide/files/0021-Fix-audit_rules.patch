@@ -1,3 +1,7 @@
+Add support for LTS23.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+
 From 4f0abad8d2bf2b0fba5e3503191bc62078e6249c Mon Sep 17 00:00:00 2001
 From: Yi Zhao <yi.zhao@windriver.com>
 Date: Wed, 26 Jan 2022 16:00:55 +0800
@@ -33,7 +37,7 @@ index 8d53a83d8a..e735275887 100644
  {{{ bash_instantiate_variables("var_audispd_remote_server") }}}
  
 -{{% if product in ["rhel8", "fedora", "ol8", "rhv4"] %}}
-+{{% if product in ["rhel8", "fedora", "ol8", "rhv4", "wrlinuxlts21", "wrlinuxlts22"] %}}
++{{% if product in ["rhel8", "fedora", "ol8", "rhv4", "wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
  AUDITCONFIG=/etc/audit/audisp-remote.conf
  {{% else %}}
  AUDITCONFIG=/etc/audisp/audisp-remote.conf
@@ -43,7 +47,7 @@ index a19f62d3ca..b6ad381b99 100644
 +++ b/linux_os/guide/system/auditing/configure_auditd_data_retention/auditd_audispd_configure_remote_server/oval/shared.xml
 @@ -1,4 +1,4 @@
 -{{% if product in ["rhel8", "fedora", "ol8", "rhv4"] %}}
-+{{% if product in ["rhel8", "fedora", "ol8", "rhv4", "wrlinuxlts21", "wrlinuxlts22"] %}}
++{{% if product in ["rhel8", "fedora", "ol8", "rhv4", "wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
  {{% set audisp_config_file_path = "/etc/audit/audisp-remote.conf" %}}
  {{% else %}}
  {{% set audisp_config_file_path = "/etc/audisp/audisp-remote.conf" %}}
@@ -56,7 +60,7 @@ index e1dc4cc314..98ff0cced5 100644
  {{% endif %}}
      Set the <tt>remote_server</tt> option in <pre>
 -{{%- if product in ["rhel8", "fedora", "ol8", "rhv4"] -%}}
-+{{%- if product in ["rhel8", "fedora", "ol8", "rhv4", "wrlinuxlts21", "wrlinuxlts22"] -%}}
++{{%- if product in ["rhel8", "fedora", "ol8", "rhv4", "wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] -%}}
      /etc/audit/audisp-remote.conf
  {{%- else -%}}
      /etc/audisp/audisp-remote.conf
@@ -65,7 +69,7 @@ index e1dc4cc314..98ff0cced5 100644
      To verify the audispd plugin off-loads audit records onto a different system or
      media from the system being audited, run the following command:
 -{{% if product in ["rhel8", "fedora", "ol8", "rhv4"] %}}
-+{{% if product in ["rhel8", "fedora", "ol8", "rhv4", "wrlinuxlts21", "wrlinuxlts22"] %}}
++{{% if product in ["rhel8", "fedora", "ol8", "rhv4", "wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
      <pre>$ sudo grep -i remote_server /etc/audit/audisp-remote.conf</pre>
  {{% else %}}
      <pre>$ sudo grep -i remote_server /etc/audisp/audisp-remote.conf</pre>
@@ -77,7 +81,7 @@ index 121619ff57..c74820af0c 100644
  AUDISP_REMOTE_CONFIG="/etc/audit/audisp-remote.conf"
  option="^transport"
  value="KRB5"
-+{{% elif product in ["wrlinuxlts21", "wrlinuxlts22"] %}}
++{{% elif product in ["wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
 +AUDISP_REMOTE_CONFIG="/etc/audit/audisp-remote.conf"
 +option="^enable_krb5"
 +value="yes"
@@ -92,7 +96,7 @@ index 1e21e071ae..d66135d26b 100644
    <definition class="compliance" id="auditd_audispd_encrypt_sent_records" version="1">
      {{% if product in ["rhel8", "fedora", "ol8", "rhv4"] %}}
      {{{ oval_metadata("transport setting in /etc/audit/audisp-remote.conf is set to 'KRB5'") }}}
-+    {{% elif product in ["wrlinuxlts21", "wrlinuxlts22"] %}}
++    {{% elif product in ["wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
 +    {{{ oval_metadata("enable_krb5 setting in /etc/audit/audisp-remote.conf is set to 'yes'") }}}
      {{% else %}}
      {{{ oval_metadata("enable_krb5 setting in /etc/audisp/audisp-remote.conf is set to 'yes'") }}}
@@ -102,7 +106,7 @@ index 1e21e071ae..d66135d26b 100644
  
    <ind:textfilecontent54_object id="object_auditd_audispd_encrypt_sent_records" version="1">
 -{{% if product in ["rhel8", "fedora", "ol8", "rhv4"] %}}
-+{{% if product in ["rhel8", "fedora", "ol8", "rhv4", "wrlinuxlts21", "wrlinuxlts22"] %}}
++{{% if product in ["rhel8", "fedora", "ol8", "rhv4", "wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
      <ind:filepath>/etc/audit/audisp-remote.conf</ind:filepath>
  {{% else %}}
      <ind:filepath>/etc/audisp/audisp-remote.conf</ind:filepath>
@@ -114,7 +118,7 @@ index c7a193f514..dcb740eaa3 100644
  {{% if product in ["rhel8", "fedora", "ol8", "rhv4"] %}}
      Set the <tt>transport</tt> option in <pre>/etc/audit/audisp-remote.conf</pre>
      to <tt>KRB5</tt>.
-+{{% elif product in ["wrlinuxlts21", "wrlinuxlts22"] %}}
++{{% elif product in ["wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
 +    Uncomment the <tt>enable_krb5</tt> option in <pre>/etc/audit/audisp-remote.conf</pre>,
 +    and set it with the following line:
 +    <pre>enable_krb5 = yes</pre>
@@ -125,7 +129,7 @@ index c7a193f514..dcb740eaa3 100644
      <pre>$ sudo grep -i transport /etc/audit/audisp-remote.conf</pre>
      The output should return the following:
      <pre>transport = KRB5</pre>
-+{{% elif product in ["wrlinuxlts21", "wrlinuxlts22"] %}}
++{{% elif product in ["wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
 +    <pre>$ sudo grep -i enable_krb5 /etc/audit/audisp-remote.conf</pre>
 +    The output should return the following:
 +    <pre>enable_krb5 = yes</pre>
@@ -141,7 +145,7 @@ index 269344ccaf..b436579076 100644
    </ind:textfilecontent54_test>
    <ind:textfilecontent54_object id="object_audit_rules_auditctl" version="1">
 -    <ind:filepath>/usr/lib/systemd/system/auditd.service</ind:filepath>
-+    {{% if product in ["wrlinuxlts21", "wrlinuxlts22"] %}}
++    {{% if product in ["wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
 +      <ind:filepath>/lib/systemd/system/auditd.service</ind:filepath>
 +    {{% else %}}
 +      <ind:filepath>/usr/lib/systemd/system/auditd.service</ind:filepath>
@@ -158,7 +162,7 @@ index 9943a34c00..d7a8e78cac 100644
  {{% if init_system == "systemd" %}}
    <ind:textfilecontent54_object id="object_audit_rules_augenrules" version="1">
 -    <ind:filepath>/usr/lib/systemd/system/auditd.service</ind:filepath>
-+    {{% if product in ["wrlinuxlts21", "wrlinuxlts22"] %}}
++    {{% if product in ["wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
 +      <ind:filepath>/lib/systemd/system/auditd.service</ind:filepath>
 +    {{% else %}}
 +      <ind:filepath>/usr/lib/systemd/system/auditd.service</ind:filepath>
@@ -202,7 +206,7 @@ index 7e4b02f764..ddba3a9b4e 100644
 +++ b/shared/templates/audit_rules_privileged_commands/bash.template
 @@ -1,7 +1,7 @@
 -{{%- if product in ["fedora", "ol8", "rhel8", "rhel9", "sle12", "sle15", "ubuntu2004"] %}}
-+{{%- if product in ["fedora", "ol8", "rhel8", "rhel9", "sle12", "sle15", "ubuntu2004", "wrlinuxlts21", "wrlinuxlts22"] %}}
++{{%- if product in ["fedora", "ol8", "rhel8", "rhel9", "sle12", "sle15", "ubuntu2004", "wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
    {{%- set perm_x=" -F perm=x" %}}
  {{%- endif %}}
 -# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu
@@ -216,7 +220,7 @@ index c240a73635..75e6991f9b 100644
 +++ b/shared/templates/audit_rules_privileged_commands/oval.template
 @@ -1,4 +1,4 @@
 -{{%- if product in ["fedora", "ol8", "rhel8", "rhel9", "sle12", "sle15", "ubuntu2004"] %}}
-+{{%- if product in ["fedora", "ol8", "rhel8", "rhel9", "sle12", "sle15", "ubuntu2004", "wrlinuxlts21", "wrlinuxlts22"] %}}
++{{%- if product in ["fedora", "ol8", "rhel8", "rhel9", "sle12", "sle15", "ubuntu2004", "wrlinuxlts21", "wrlinuxlts22", "wrlinuxlts23"] %}}
    {{%- set perm_x="(?:[\s]+-F[\s]+perm=x)" %}}
  {{%- endif %}}
  <def-group>

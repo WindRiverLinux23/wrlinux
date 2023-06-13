@@ -742,7 +742,7 @@ class GenImage(object):
             basename = '%s-%s' % (image, self.machine)
             ustart_images = ['ustart.img.bmap']
             if self.machine == 'nxp-s32g':
-                ustart_images += ['evb3.ustart.img.gz', 'rdb3.ustart.img.gz']
+                ustart_images += ['evb3.ustart.img.gz', 'rdb3.ustart.img.gz', 'rdb2.ustart.img.gz']
             elif self.machine == 'intel-socfpga-64':
                 ustart_images = ['stratix10.ustart.img.bmap', 'stratix10.ustart.img.gz']
             else:

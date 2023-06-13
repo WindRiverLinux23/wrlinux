@@ -5,6 +5,8 @@
                     CPU: NXP S32G399A rev. 1.0
 - NXP S32G399A-RDB3: Board: S32G399A-VNP-RDB3 (SCH-53060 REV E1, 700-53060 REV X2)
                      CPU: NXP S32G399A rev. 1.0
+- NXP S32G274A-RDB2: Board: S32G274A-VNP-RDB2 (SCH-47440 REV C1, 700-47440 REV X2)
+                     CPU: NXP S32G274A rev. 2.1.0
 
 ## How to install/boot binary image
 

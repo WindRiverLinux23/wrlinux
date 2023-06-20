@@ -18,6 +18,9 @@ IMAGE_INSTALL += "\
     packagegroup-wr-core-interactive \
     "
 
+# Full Disk Encrypt
+IMAGE_INSTALL:append:intel-x86 = " packagegroup-luks"
+
 # Remove debug-tweaks
 IMAGE_FEATURES:remove = "debug-tweaks"
 

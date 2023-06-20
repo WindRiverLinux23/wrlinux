@@ -25,6 +25,9 @@ IMAGE_INSTALL = "\
     ca-certificates \
 "
 
+# Full Disk Encrypt
+IMAGE_INSTALL:append:intel-x86 = " packagegroup-luks"
+
 # - No packagegroup-core-base-utils which corresponds to busybox
 #   function since it is busybox based.
 # - The ostree are not needed for container image.

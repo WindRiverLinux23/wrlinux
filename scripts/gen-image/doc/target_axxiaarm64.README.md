@@ -8,7 +8,7 @@
     NOTE: The following u-boot.img is from WRLinux LAB, it isn't integrated into
     WRLinux because of the license issue. Here is the steps to create:
     $ mkdir path_to_your_project && cd path_to_your_project
-    $ git clone --branch WRLINUX_10_22_BASE --single-branch  https://github.com/WindRiver-Labs/wrlinux-x.git
+    $ git clone --branch WRLINUX_10_23_BASE --single-branch https://github.com/WindRiverLinux23/wrlinux-x.git
     $ ./wrlinux-x/setup.sh --machines=axxiaarm64 --accept-eula=yes
     $ . ./environment-setup-x86_64-wrlinuxsdk-linux
     $ . ./oe-init-build-env

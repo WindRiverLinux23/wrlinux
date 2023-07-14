@@ -36,9 +36,8 @@ BOOT_TF_UPLOAD ??= ""
 do_install() {
     install -d ${D}${bindir}
     install -m 0755 ${WORKDIR}/boot-tf ${D}${bindir}
-    install -m 0755 ${WORKDIR}/bootlogConst.py ${D}${bindir}
     install -d ${D}${PYTHON_SITEPACKAGES_DIR}
-    install -m 0644 ${WORKDIR}/bootlogParser.py ${D}${PYTHON_SITEPACKAGES_DIR}
+    install -m 0644 ${WORKDIR}/bootlog*.py ${D}${PYTHON_SITEPACKAGES_DIR}
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/boot-tf.service ${D}${systemd_system_unitdir}
     sed -i -e 's,@BINDIR@,${bindir},g' ${D}${systemd_system_unitdir}/boot-tf.service

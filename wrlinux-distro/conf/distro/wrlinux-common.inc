@@ -96,6 +96,11 @@ WARN_TO_ERROR_QA ?= "already-stripped compile-host-path install-host-path \
 WARN_QA:remove = "${WARN_TO_ERROR_QA}"
 ERROR_QA:append = " ${WARN_TO_ERROR_QA}"
 
+# Disable QA buildpaths
+WRL_SKIP_QA_CHECK ?= "buildpaths"
+WARN_QA:remove = "${WRL_SKIP_QA_CHECK}"
+ERROR_QA:remove = "${WRL_SKIP_QA_CHECK}"
+
 # Allow dangling .bbappends for now
 BB_DANGLINGAPPENDS_WARNONLY = "1"
 

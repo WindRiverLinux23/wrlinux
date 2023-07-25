@@ -79,7 +79,8 @@ fi
 readarray data <${container_info}
 names=(${data[0]})
 prios=(${data[1]})
-container_dir="${data[2]}"
+# use echo to strip the trailing new line
+container_dir="$(echo ${data[2]})"
 
 columns=`mktemp /tmp/columns-XXXXXX`
 sorted=`mktemp /tmp/sorted-XXXXXX`

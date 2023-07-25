@@ -33,6 +33,7 @@ check_container_config[eventmask] = "bb.event.ConfigParsed"
 python () {
     if d.getVar('BB_CURRENT_MC') == 'wr-container':
         d.appendVar('IMAGE_FSTYPES', ' tar.gz')
+        d.appendVar('ROOTFS_POSTPROCESS_COMMAND', ' container_rootfs_postfun;')
         return
 
     pn = d.getVar('PN')
@@ -45,6 +46,13 @@ python () {
         d.appendVarFlag('do_rootfs', 'mcdepends', ' '.join(['multiconfig:wr-host:wr-container:%s:do_image_complete' % c for c in containers]))
 
         d.appendVar('ROOTFS_POSTPROCESS_COMMAND', ' rootfs_install_container;')
+}
+
+container_rootfs_postfun () {
+    # mask serial-getty@.service manually
+    if [ -d ${IMAGE_ROOTFS}/etc/systemd/system ]; then
+        ln -sf /dev/null ${IMAGE_ROOTFS}/etc/systemd/system/serial-getty@.service
+    fi
 }
 
 rootfs_install_container () {

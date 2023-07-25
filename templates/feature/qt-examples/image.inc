@@ -10,7 +10,6 @@ IMAGE_INSTALL += "\
     qtdatavis3d-examples \
     qtdeviceutilities-examples \
     qtgraphs-examples \
-    qtgrpc-examples \
     qthttpserver-examples \
     qtinterfaceframework-examples \
     qtlocation-examples \

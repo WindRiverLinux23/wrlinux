@@ -34,3 +34,5 @@ IMAGE_FEATURES += " \
     wr-core-mail \
     wr-bsps \
     "
+
+QB_MEM:qemuppc64 = "-m 512"

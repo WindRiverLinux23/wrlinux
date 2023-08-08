@@ -9,4 +9,4 @@
 # INTERFACE_REGEXES="eth.* pfe.*"
 #
 # If none of them is specified, dhcpcd runs against all supported interfaces
-INTERFACE_REGEXES="eth.* pfe.*"
+INTERFACE_REGEXES="en[psx].* eth.* pfe.*"

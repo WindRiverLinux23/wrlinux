@@ -1,0 +1,27 @@
+
+This template enables the Yocto default handling of network interface naming
+and the configuration of network interfaces that have no explicit configuration.
+
+It requires systemd as the init manager.  It will have no effect if sysvinit is used.
+
+Historically, Wind River Linux creates links to /dev/null in
+/etc/systemd/network/80-wired.network and /etc/udev/rules.d/80-net-setup-link.rules.
+This overrides the default files which are in /lib/systemd/net and /lib/udev/rules.d.
+
+The default 80-net-setup-link.rules renames network interfaces with "predictable" names
+based on their physical characteristics.  The default 80-wired.network configures all
+"wired" network interfaces not previously configured to use DHCP to obtain IP assignments.
+
+This means the default Wind River Linux behavior has been to require specifying IP information
+on the boot command line, or to force the user to create *.network files for interfaces he
+wishes configured by systemd.  In addition, the kernel assigned interface names will be
+retained.  Specifying IP configuration on the boot command line, or using an nfs root
+filesystem will disable 80-wired.network actions and cause renaming by 80-net-setup-link.rules
+to fail.
+
+To invoke this template, include
+
+WRTEMPLATE:append = " feature/predictable-netif-names"
+
+in local.conf before building.
+

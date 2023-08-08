@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 Wind River Systems, Inc.
+# Copyright (C) 2014-2023 Wind River Systems, Inc.
 #
 # LOCAL REV: add WR specific scripts
 #
@@ -7,7 +7,9 @@
 DEPENDS += "systemd-systemctl-native"
 
 pkg_postinst:udev:append() {
-	ln -sf /dev/null $D${sysconfdir}/udev/rules.d/80-net-setup-link.rules
+        if ! ${@bb.utils.contains('DISTRO_FEATURES','wr-allow-netifnames','true','false',d)}; then
+		ln -sf /dev/null $D${sysconfdir}/udev/rules.d/80-net-setup-link.rules
+	fi
 }
 
 do_install:append() {

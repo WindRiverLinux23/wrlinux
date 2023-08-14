@@ -68,30 +68,15 @@ KVM HOST preparation
    BSP, also enable the template feature/libvirt.  See the product documentation for
    the steps to do this.
 
-   2. Acknowledge the non-free license status of the 'netperf' package.
-
-      Add the setting of the LICENSE_FLAGS variable in the netperf
-      bitbake recipe at:
-
-       meta-openembedded/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-
-      to the LICENSE_FLAGS_ACCEPTED variable in the local.conf file.
-
-      For example, if LICENSE_FLAGS = "non-commercial", set
-
-       LICENSE_FLAGS_ACCEPTED += "non-commercial"
-
-      in the local.conf file.
-
-   3. Turn on CONFIG_MACVLAN and CONFIG_MACVTAP
+   2. Turn on CONFIG_MACVLAN and CONFIG_MACVTAP
       To use MacVTap for networking. Make sure these two options are 
       enabled in host kernel. If they are modules, please load them.
 
-   4. Build the KVM HOST bsp:
+   3. Build the KVM HOST bsp:
 
       $ bitbake wrlinux-image-std
 
-   5. Deploy the kernel and rootfs to your target.
+   4. Deploy the kernel and rootfs to your target.
 
       Details of this process will depend on the particular target
       hardware and network configuration and are beyond the scope of
@@ -103,22 +88,7 @@ KVM GUEST preparation
    enable the template feature/libvirt.  See the product documentation for
    the steps to do this.
 
-   2. Acknowledge the non-free license status of the 'netperf' package.
-
-      Add the setting of the LICENSE_FLAGS variable in the netperf
-      bitbake recipe at:
-
-      meta-openembedded/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
-
-      to the LICENSE_FLAGS_ACCEPTED variable in the local.conf file.
-
-      For example, if LICENSE_FLAGS = "non-commercial", set
-
-       LICENSE_FLAGS_ACCEPTED += "non-commercial"
-
-      in the local.conf file.
-
-   3. Add the following package to the BSP:
+   2. Add the following package to the BSP:
 
       netperf (provided by the meta-networking layer)
 
@@ -126,13 +96,12 @@ KVM GUEST preparation
       directly to add:
 
 	  IMAGE_INSTALL += "netperf"
-	  WRL_RECIPES_networking-layer:append = " netperf "
 
-   4. Build the KVM GUEST bsp:
+   3. Build the KVM GUEST bsp:
 
       $ bitbake wrlinux-image-std
 
-   5. Copy bzImage and wrlinux-image-std-x86-64-kvm-guest.ext4
+   4. Copy bzImage and wrlinux-image-std-x86-64-kvm-guest.ext4
       to /root directory on the KVM HOST.
 
 Demonstration

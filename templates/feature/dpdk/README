@@ -182,7 +182,7 @@ Take the l2fwd as example:
  <1>. Bind Ethernet devices to "vfio-pci" driver.
 	This script enables two Ethernet devices to be used by DPDK applications by binding them to "vfio_pci" driver.
 	These devices on box are labeled as "1G MAC0" and "1G SWP0".
-	# cd /usr/local/dpdk/enetc/
+	# cd /usr/share/dpdk/enetc
 	# ./dpdk_configure_1028ardb.sh
 
  <2>. Run the layer 2 forwarding application:

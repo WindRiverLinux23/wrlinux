@@ -16,6 +16,7 @@ IMAGE_INSTALL += "\
     openssh \
     ca-certificates \
     packagegroup-wr-core-interactive \
+    libxcrypt-compat \
     "
 
 # Full Disk Encrypt

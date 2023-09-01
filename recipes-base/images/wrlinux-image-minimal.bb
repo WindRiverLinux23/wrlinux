@@ -23,6 +23,7 @@ IMAGE_INSTALL = "\
     busybox-syslog \
     openssh \
     ca-certificates \
+    libxcrypt-compat \
 "
 
 # Full Disk Encrypt

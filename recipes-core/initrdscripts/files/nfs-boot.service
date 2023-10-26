@@ -1,0 +1,16 @@
+[Unit]
+Description= Mount real rootfs through NFS connection
+ConditionPathExists=/etc/initrd-release
+OnFailure=emergency.target
+After=network-online.target
+Before=sysroot.mount initrd-root-fs.target
+Requires=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=no
+ExecStart=/init-nfs.sh
+StandardOutput=journal+console
+
+[Install]
+WantedBy=initrd-root-device.target

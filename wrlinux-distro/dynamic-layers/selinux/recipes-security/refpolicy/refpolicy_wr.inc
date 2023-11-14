@@ -16,6 +16,7 @@ SRC_URI += "\
         file://0007-policy-modules-services-acpi-make-acpid_t-MLS-truste.patch \
         file://0008-Revert-kernel-Drop-unlabeled_t-as-a-files_mountpoint.patch \
         file://0009-policy-modules-roles-sysadm-allow-sysadm_t-to-read-f.patch \
+        file://0010-locallogin-allow-bin-login-to-read-etc-shadow.patch \
         "
 
 OSTREE_POLICY_PATCHES = "\

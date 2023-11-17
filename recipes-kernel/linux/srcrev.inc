@@ -51,6 +51,8 @@ SRCREV_machine:kb-v6.1-standard-preempt-rt-cn-sdkv5.15-octeon ?= "16c4bac36653b3
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-cn-sdkv5.15-octeon = "6.1.61"
 SRCREV_machine:kb-v6.1-standard-preempt-rt-intel-sdk-6.1-intel-socfpga ?= "432e88b69c3e959bfb2e4d946d19ae1831385d51"
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-intel-sdk-6.1-intel-socfpga = "6.1.61"
+SRCREV_machine:kb-v6.1-standard-preempt-rt-microchip-polarfire-soc ?= "6ab02f0aa985d86f584a27a9660fec6e0165e3e4"
+LINUX_VERSION:kb-v6.1-standard-preempt-rt-microchip-polarfire-soc = "6.1.61"
 SRCREV_machine:kb-v6.1-standard-preempt-rt-nxp-sdk-5.15-nxp-s32g ?= "49ad24df889970ce953c6dea56b483c32ded6227"
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-nxp-sdk-5.15-nxp-s32g = "6.1.61"
 SRCREV_machine:kb-v6.1-standard-preempt-rt-nxp-sdk-6.1-nxp-soc ?= "f2272a738b920498d4b3e86ce18da9608c1656d3"
@@ -94,4 +96,4 @@ LINUX_VERSION:kb-v6.1-standard-xilinx-zynqmp = "6.1.61"
 
 # yocto-kernel-cache entries
 KERNEL_CACHE_BRANCH_6.1 = "yocto-6.1"
-SRCREV_meta_6.1 = "e8796cdaa2fba1978d549498bb6455e55a8408a0"
+SRCREV_meta_6.1 = "b75747891353c56df9a57b5ee64a54daac5a2c51"

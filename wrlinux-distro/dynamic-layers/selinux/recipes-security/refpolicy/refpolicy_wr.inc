@@ -17,6 +17,7 @@ SRC_URI += "\
         file://0008-Revert-kernel-Drop-unlabeled_t-as-a-files_mountpoint.patch \
         file://0009-policy-modules-roles-sysadm-allow-sysadm_t-to-read-f.patch \
         file://0010-locallogin-allow-bin-login-to-read-etc-shadow.patch \
+        file://0011-selinuxutil-allow-newrole-to-read-etc-shadow.patch \
         "
 
 OSTREE_POLICY_PATCHES = "\

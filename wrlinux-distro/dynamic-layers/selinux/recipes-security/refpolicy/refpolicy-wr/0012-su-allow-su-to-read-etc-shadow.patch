@@ -1,0 +1,53 @@
+From ab620f283d014b07c38442fb4ccbda16a860ee61 Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Wed, 29 Nov 2023 13:22:38 +0800
+Subject: [PATCH] su: allow su to read /etc/shadow
+
+Fix su error after enabling systemd DynamicUser:
+
+avc:  denied  { read } for  pid=487 comm="su" name="shadow" dev="sda2"
+ino=26314 scontext=staff_u:sysadm_r:sysadm_su_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:shadow_t:s0 tclass=file permissive=1
+
+avc:  denied  { open } for  pid=487 comm="su" path="/etc/shadow"
+dev="sda2" ino=26314
+scontext=staff_u:sysadm_r:sysadm_su_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:shadow_t:s0 tclass=file permissive=1
+
+avc:  denied  { getattr } for  pid=487 comm="su" path="/etc/shadow"
+dev="sda2" ino=26314
+scontext=staff_u:sysadm_r:sysadm_su_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:shadow_t:s0 tclass=file permissive=1
+
+Upstream-Status: Inappropriate [wrlinux specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ policy/modules/admin/su.if | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/policy/modules/admin/su.if b/policy/modules/admin/su.if
+index cd34cd9dd..b867f58b9 100644
+--- a/policy/modules/admin/su.if
++++ b/policy/modules/admin/su.if
+@@ -75,7 +75,7 @@ template(`su_restricted_domain_template', `
+ 	selinux_compute_access_vector($1_su_t)
+ 
+ 	auth_domtrans_chk_passwd($1_su_t)
+-	auth_dontaudit_read_shadow($1_su_t)
++	auth_read_shadow($1_su_t)
+ 	auth_use_nsswitch($1_su_t)
+ 	auth_rw_faillog($1_su_t)
+ 
+@@ -176,7 +176,7 @@ template(`su_role_template',`
+ 	selinux_use_status_page($1_su_t)
+ 
+ 	auth_domtrans_chk_passwd($1_su_t)
+-	auth_dontaudit_read_shadow($1_su_t)
++	auth_read_shadow($1_su_t)
+ 	auth_use_nsswitch($1_su_t)
+ 	auth_rw_faillog($1_su_t)
+ 
+-- 
+2.25.1
+

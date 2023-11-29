@@ -1,0 +1,59 @@
+From 3ec85d1cc06be22f5c1489c40b49fbf4037ed20e Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Wed, 29 Nov 2023 12:46:47 +0800
+Subject: [PATCH] authlogin: allow login and sshd to read /etc/shadow
+
+Allow domains using PAM to read /etc/shadow to fix login errors after
+enabling systemd DynamicUser.
+
+Fixes:
+avc:  denied  { read } for  pid=434 comm="login" name="shadow"
+dev="sda2" ino=26314
+scontext=system_u:system_r:local_login_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:shadow_t:s0 tclass=file permissive=1
+
+avc:  denied  { open } for  pid=434 comm="login" path="/etc/shadow"
+dev="sda2" ino=26314
+scontext=system_u:system_r:local_login_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:shadow_t:s0 tclass=file permissive=1
+
+avc:  denied  { getattr } for  pid=434 comm="login" path="/etc/shadow"
+dev="sda2" ino=26314
+scontext=system_u:system_r:local_login_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:shadow_t:s0 tclass=file permissive=1
+
+avc:  denied  { read } for  pid=457 comm="sshd" name="shadow" dev="sda2"
+ino=26314 scontext=system_u:system_r:sshd_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:shadow_t:s0 tclass=file permissive=1
+
+avc:  denied  { open } for  pid=457 comm="sshd" path="/etc/shadow"
+dev="sda2" ino=26314 scontext=system_u:system_r:sshd_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:shadow_t:s0 tclass=file permissive=1
+
+avc:  denied  { getattr } for  pid=457 comm="sshd" path="/etc/shadow"
+dev="sda2" ino=26314 scontext=system_u:system_r:sshd_t:s0-s15:c0.c1023
+tcontext=system_u:object_r:shadow_t:s0 tclass=file permissive=1
+
+Upstream-Status: Inappropriate [wrlinux specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ policy/modules/system/authlogin.te | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/policy/modules/system/authlogin.te b/policy/modules/system/authlogin.te
+index ab15b40d6..384aaf2c7 100644
+--- a/policy/modules/system/authlogin.te
++++ b/policy/modules/system/authlogin.te
+@@ -10,7 +10,7 @@ policy_module(authlogin)
+ ## Allow PAM usage.  If disabled, read access /etc/shadow is allowed for domains that normally use PAM.
+ ## </p>
+ ## </desc>
+-gen_tunable(authlogin_pam, true)
++gen_tunable(authlogin_pam, false)
+ 
+ ## <desc>
+ ## <p>
+-- 
+2.25.1
+

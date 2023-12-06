@@ -65,7 +65,7 @@ SRCREV_machine:kb-v6.1-standard-preempt-rt-sdkv6.1-xlnx-soc ?= "32271a7613e020e7
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-sdkv6.1-xlnx-soc = "6.1.65"
 SRCREV_machine:kb-v6.1-standard-preempt-rt-ti-sdk-5.10-ti-j7xxx ?= "4c017608982f28064fd5773c9895704a00f259f3"
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-ti-sdk-5.10-ti-j7xxx = "6.1.65"
-SRCREV_machine:kb-v6.1-standard-preempt-rt-ti-sdk-6.1-ti-j7xxx ?= "6174c12cdb9301da6de7e3dfe39e5c4a8675e9ac"
+SRCREV_machine:kb-v6.1-standard-preempt-rt-ti-sdk-6.1-ti-j7xxx ?= "550f1a5ab99ddeaf99bb27751ec9e57329d15e13"
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-ti-sdk-6.1-ti-j7xxx = "6.1.65"
 SRCREV_machine:kb-v6.1-standard-preempt-rt-x86 ?= "37392124b6e6429a6a133c764023fa7076524c51"
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-x86 = "6.1.65"
@@ -81,7 +81,7 @@ SRCREV_machine:kb-v6.1-standard-ti-am335x ?= "e083231c43f3773e5ca1f6d46411e1fda1
 LINUX_VERSION:kb-v6.1-standard-ti-am335x = "6.1.65"
 SRCREV_machine:kb-v6.1-standard-ti-sdk-5.10-ti-j7xxx ?= "149b10a00caac14104f202177e66ca7604b0ee2b"
 LINUX_VERSION:kb-v6.1-standard-ti-sdk-5.10-ti-j7xxx = "6.1.65"
-SRCREV_machine:kb-v6.1-standard-ti-sdk-6.1-ti-j7xxx ?= "81d3dcbd42aea8534c558ddcbd4358ae52edd37f"
+SRCREV_machine:kb-v6.1-standard-ti-sdk-6.1-ti-j7xxx ?= "f6ee909c97c4c3294688e5f080631792f55aef7c"
 LINUX_VERSION:kb-v6.1-standard-ti-sdk-6.1-ti-j7xxx = "6.1.65"
 SRCREV_machine:kb-v6.1-standard-tiny-arm-versatile-926ejs ?= "0afcb069769e10be3d6e307fceafcec1e01435bb"
 LINUX_VERSION:kb-v6.1-standard-tiny-arm-versatile-926ejs = "6.1.65"
@@ -98,4 +98,4 @@ LINUX_VERSION:kb-v6.1-standard-xilinx-zynqmp = "6.1.65"
 
 # yocto-kernel-cache entries
 KERNEL_CACHE_BRANCH_6.1 = "yocto-6.1"
-SRCREV_meta_6.1 = "5f331d55d0900030f5bc9b139c815f3f01a8ffd4"
+SRCREV_meta_6.1 = "c5b4dd4dc469548ca1f7129c5c131f8d6cf5ff94"

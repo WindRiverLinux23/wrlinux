@@ -3,3 +3,7 @@ kconf non-hardware rt-tune-host.cfg
 if [ "$KARCH" = "x86_64" ]; then
 	kconf non-hardware rt-tune-host-x86_64.cfg
 fi
+
+if [ "$KMACHINE" != "ti-j78xx" ]; then
+	kconf non-hardware rt-tune-additional.cfg
+fi

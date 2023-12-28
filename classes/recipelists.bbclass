@@ -32,6 +32,9 @@ RECIPE_LIST_REASON_ADDON ?= "You may also have to add: BB_NO_NETWORK = '0'"
 python() {
     from pathlib import Path
 
+    if d.getVar('RECIPE_LIST_LAYERS') == '':
+        return
+
     layer = bb.utils.get_file_layer(d.getVar('FILE'), d)
     if layer:
         cache_dir = d.getVar('CACHE')

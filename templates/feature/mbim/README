@@ -1,0 +1,17 @@
+This template adds libmbim to the filesystem.
+
+The Mobile Broadband Interface Model (MBIM) is a standard created by the
+USB Implementers Forum for high-speed mobile broadband modem devices.
+This standard defines a new USB networking subclass for communication
+between the host system and the modem device.
+
+libmbim is a glib-based library for talking to WWAN modems and devices
+which speak the Mobile Broadband Interface Model (MBIM) protocol.
+
+To use this template, add the following to your setup line:
+
+    --templates feature/mbim
+
+#@TYPE: Wrtemplate
+#@NAME: mbim
+#@DESCRIPTION: Add libmbim to the image

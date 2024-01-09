@@ -23,7 +23,7 @@ SRCREV_machine:kb-v6.1-standard-bcm-2xxx-rpi ?= "d1f7bb307e6333ea721e7d1073f2037
 LINUX_VERSION:kb-v6.1-standard-bcm-2xxx-rpi = "6.1.70"
 SRCREV_machine:kb-v6.1-standard-beaglebone ?= "7d183bf1b0b8ded0b2a8a352aa75729a37293b1e"
 LINUX_VERSION:kb-v6.1-standard-beaglebone = "6.1.70"
-SRCREV_machine:kb-v6.1-standard-cn-sdkv5.15-octeon ?= "85675a982b45af594a8b7066ec345d9ce9253b3a"
+SRCREV_machine:kb-v6.1-standard-cn-sdkv5.15-octeon ?= "341bc92efd79b66c100f15002982b0d14bb9c28f"
 LINUX_VERSION:kb-v6.1-standard-cn-sdkv5.15-octeon = "6.1.70"
 SRCREV_machine:kb-v6.1-standard-edgerouter ?= "7d183bf1b0b8ded0b2a8a352aa75729a37293b1e"
 LINUX_VERSION:kb-v6.1-standard-edgerouter = "6.1.70"
@@ -49,7 +49,7 @@ SRCREV_machine:kb-v6.1-standard-preempt-rt-base ?= "8655c0e62288b3db0da7f43d3b7c
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-base = "6.1.70"
 SRCREV_machine:kb-v6.1-standard-preempt-rt-bcm-2xxx-rpi ?= "dc80869898e047907943ce449b585f7ddfae8140"
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-bcm-2xxx-rpi = "6.1.70"
-SRCREV_machine:kb-v6.1-standard-preempt-rt-cn-sdkv5.15-octeon ?= "8595347e8ebc08e646dea866d5cd20073a2d4dd0"
+SRCREV_machine:kb-v6.1-standard-preempt-rt-cn-sdkv5.15-octeon ?= "e8b2173b4a1a72105ac4c9910f654883087acbbf"
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-cn-sdkv5.15-octeon = "6.1.70"
 SRCREV_machine:kb-v6.1-standard-preempt-rt-intel-sdk-6.1-intel-socfpga ?= "8b8c47952d73be97b8a07e97d17c9ef6b83573e3"
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-intel-sdk-6.1-intel-socfpga = "6.1.70"
@@ -98,4 +98,4 @@ LINUX_VERSION:kb-v6.1-standard-xilinx-zynqmp = "6.1.70"
 
 # yocto-kernel-cache entries
 KERNEL_CACHE_BRANCH_6.1 = "yocto-6.1"
-SRCREV_meta_6.1 = "4fe5dc52631f3b990aefbb3f97330137c4ebb288"
+SRCREV_meta_6.1 = "3218c57daddcd062c8f7c6c42483e938a6d6412a"

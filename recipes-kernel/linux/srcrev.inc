@@ -98,4 +98,4 @@ LINUX_VERSION:kb-v6.1-standard-xilinx-zynqmp = "6.1.76"
 
 # yocto-kernel-cache entries
 KERNEL_CACHE_BRANCH_6.1 = "yocto-6.1"
-SRCREV_meta_6.1 = "588e74f05dee53eea774dca74d7c4891b6a26f76"
+SRCREV_meta_6.1 = "43d1723dbe0ce7b341cf32feeb35ecbe6b0ce29a"

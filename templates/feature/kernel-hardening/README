@@ -174,26 +174,13 @@ procedures for accessing user-space memory.
 
 7.1 x86 features
 
-Supervisor Mode Access Prevention (SMAP) is a feature of some CPU
-implementations such as the Intel Broadwell microarchitecture that allows
-supervisor mode programs to optionally set user-space memory mappings so that
-access to those mappings from supervisor mode will cause a trap. This makes it
-harder for malicious programs to "trick" the kernel into using instructions or
-data from a user-space program.
-
 Supervisor Mode Access Prevention is designed to complement Supervisor Mode
 Execution Prevention (SMEP), which was introduced earlier. SMEP can be used to
 prevent supervisor-mode code from unintentionally executing user-space code.
 SMAP extends this protection to reads and writes.
 
 To make sure if current CPU supports the features, run:
-cat /proc/cpuinfo |egrep 'smap|smep'
-
-SMAP is controlled by kconfig option CONFIG_X86_SMAP(enabled by default)
-and can be disabled via kernel boot parameter "nosmap". As mentioned in
-kernel source arch/x86/Kconfig, there is a small performance cost if this
-is enabled and turned on; There is also a small increase in the kernel size
-if this is enabled.
+cat /proc/cpuinfo |egrep 'smep'
 
 SMEP is enabled by default where hardware is available and can be disabled
 via kernel boot parameter "nosmep". There is no apparent performance cost

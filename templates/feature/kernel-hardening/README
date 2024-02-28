@@ -64,12 +64,6 @@ object, span multiple separately allocates pages, are not on the process stack,
 or are part of the kernel text. This kills entire classes of heap overflow
 exploits and similar kernel memory exposures.
 
-CONFIG_HARDENED_USERCOPY_PAGESPAN extends the check of CONFIG_HARDENED_USERCOPY.
-When a multi-page allocation is done without __GFP_COMP, hardened usercopy will
-reject attempts to copy it. There are, however, several cases of this in the
-kernel that have not all been removed. This config is intended to be used only
-while trying to find such users.
-
 CONFIG_SLAB_FREELIST_RANDOM randomizes the freelist order used on creating new
 pages. This security feature reduces the predictability of the kernel slab
 allocator against heap overflows.
@@ -91,15 +85,6 @@ used even with newer programs if set to N.
 
 Disabling this option saves about 7K of kernel size and possibly 4K of additional
 runtime pagetable memory.
-
-CONFIG_LEGACY_VSYSCALL_EMULATE - x86 only
-The kernel traps and emulates calls into the fixed vsyscall address mapping.
-This makes the mapping non-executable, but it still contains readable known
-contents, which could be used in certain rare security vulnerability exploits.
-This configuration is recommended when using legacy userspace that still uses
-vsyscalls along with legacy binary instrumentation tools that require code to
-be readable. This option is purposely disabled to remove a possible target,
-since modern libc no longer needs a fixed-position mapping in userspace.
 
 CONFIG_LEGACY_VSYSCALL_NONE - x86 only
 There will be no vsyscall mapping at all. This will eliminate any risk of ASLR

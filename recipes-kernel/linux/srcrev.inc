@@ -65,7 +65,7 @@ SRCREV_machine:kb-v6.1-standard-preempt-rt-nxp-sdk-6.1-nxp-soc ?= "3df1dee453723
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-nxp-sdk-6.1-nxp-soc = "6.1.97"
 SRCREV_machine:kb-v6.1-standard-preempt-rt-sdkv5.10-axxia ?= "da15945fb99521edbaf256d6f15f0867e266cb43"
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-sdkv5.10-axxia = "6.1.97"
-SRCREV_machine:kb-v6.1-standard-preempt-rt-sdkv6.1-xlnx-soc ?= "6cd7635c31481544b39cf7c42e57f5f8be25b226"
+SRCREV_machine:kb-v6.1-standard-preempt-rt-sdkv6.1-xlnx-soc ?= "a8e4881804101f4f2e9a1b5fc5f4831b3ba6a347"
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-sdkv6.1-xlnx-soc = "6.1.97"
 SRCREV_machine:kb-v6.1-standard-preempt-rt-ti-sdk-5.10-ti-j7xxx ?= "49fc5da100abbe637379da54dab6c2988756bbca"
 LINUX_VERSION:kb-v6.1-standard-preempt-rt-ti-sdk-5.10-ti-j7xxx = "6.1.97"
@@ -79,7 +79,7 @@ SRCREV_machine:kb-v6.1-standard-qemuppc ?= "399bf9aba0aba6128e0bd49bb28c6c91eb3f
 LINUX_VERSION:kb-v6.1-standard-qemuppc = "6.1.97"
 SRCREV_machine:kb-v6.1-standard-sdkv5.10-axxia ?= "c720dc4003f749732ccaff4ed11942e4e1441a36"
 LINUX_VERSION:kb-v6.1-standard-sdkv5.10-axxia = "6.1.97"
-SRCREV_machine:kb-v6.1-standard-sdkv6.1-xlnx-soc ?= "94676df45f3259f9b7fcfae3b5309aadc56b560b"
+SRCREV_machine:kb-v6.1-standard-sdkv6.1-xlnx-soc ?= "16a71bc6155b22e2f0efd6c4ed6ebce45ec3bac8"
 LINUX_VERSION:kb-v6.1-standard-sdkv6.1-xlnx-soc = "6.1.97"
 SRCREV_machine:kb-v6.1-standard-ti-am335x ?= "073e588f9f20dc878b607c22e60bffd0cc85676b"
 LINUX_VERSION:kb-v6.1-standard-ti-am335x = "6.1.97"
@@ -102,4 +102,4 @@ LINUX_VERSION:kb-v6.1-standard-xilinx-zynqmp = "6.1.97"
 
 # yocto-kernel-cache entries
 KERNEL_CACHE_BRANCH_6.1 = "yocto-6.1"
-SRCREV_meta_6.1 = "445bbf540ff832d340bde8b3d43200166f231388"
+SRCREV_meta_6.1 = "071a527af617f821a09421e54dad58ba2dde1351"

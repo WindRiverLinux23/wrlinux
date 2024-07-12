@@ -126,7 +126,7 @@ DISTRO_FEATURES_BACKFILL_CONSIDERED += "x11"
 
 # Multilib configuration
 MULTILIBS ?= ""
-MULTILIB_CONF = "${@'conf/multilib.conf' if d.getVar('MULTILIBS') else ''}"
+MULTILIB_CONF = "${@'conf/multilib.conf' if d.getVar('MULTILIBS') and d.getVar('PACKAGE_CLASSES').split()[0] != 'package_deb' else ''}"
 require ${MULTILIB_CONF}
 
 # dnsmasq and named (provided by bind) use the same default port 53:
